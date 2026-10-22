@@ -1,7 +1,261 @@
 {
   "artist": "BABYMONSTER",
   "platform": "Spotify",
-  "updated_at": "Pendiente",
-  "note": "Datos pendientes de actualización automática",
-  "tracks": []
+  "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html",
+  "updated_at": "2026-10-22 19:01 UTC",
+  "note": "Streams reportados por Kworb; no son puestos oficiales del Top 200.",
+  "tracks": [
+    {
+      "title": "SHEESH",
+      "streams": 432600812,
+      "daily": 209323,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "DRIP",
+      "streams": 320290633,
+      "daily": 268230,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "FOREVER",
+      "streams": 238436701,
+      "daily": 142147,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "LIKE THAT",
+      "streams": 226041586,
+      "daily": 182407,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "WE GO UP",
+      "streams": 120948199,
+      "daily": 191993,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "PSYCHO",
+      "streams": 110537447,
+      "daily": 195831,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "BILLIONAIRE",
+      "streams": 96868896,
+      "daily": 96476,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "CHOOM",
+      "streams": 91354369,
+      "daily": 311056,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "CLIK CLAK",
+      "streams": 90641224,
+      "daily": 74866,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "HOT SAUCE",
+      "streams": 83811073,
+      "daily": 98632,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "Really Like You",
+      "streams": 82409720,
+      "daily": 97211,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "DREAM",
+      "streams": 68323489,
+      "daily": 74619,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "Stuck In The Middle",
+      "streams": 61855221,
+      "daily": 35379,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "Love In My Heart",
+      "streams": 53520231,
+      "daily": 60806,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "SUGAR HONEY ICE TEA",
+      "streams": 44927365,
+      "daily": 220553,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "SUPA DUPA LUV",
+      "streams": 38790996,
+      "daily": 56709,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "MONSTERS (Intro)",
+      "streams": 37560624,
+      "daily": 35034,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "Woke Up In Tokyo (RUKA & ASA)",
+      "streams": 33508617,
+      "daily": 28294,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "Love, Maybe",
+      "streams": 32208865,
+      "daily": 28660,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "BATTER UP (7 ver.)",
+      "streams": 30721025,
+      "daily": 18071,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "MOON",
+      "streams": 28667904,
+      "daily": 162117,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "Ghost",
+      "streams": 24836466,
+      "daily": 39974,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "I LIKE IT",
+      "streams": 24230887,
+      "daily": 108834,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "Stuck In The Middle (Remix)",
+      "streams": 24007224,
+      "daily": 12837,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "Stuck In The Middle (7 ver.)",
+      "streams": 21528494,
+      "daily": 13450,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "WILD",
+      "streams": 21294741,
+      "daily": 40895,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "BATTER UP (Remix) - Bonus Track",
+      "streams": 14228800,
+      "daily": 15642,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "LOCKED IN",
+      "streams": 13291945,
+      "daily": 46453,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "BATTER UP -JP Ver.",
+      "streams": 11304540,
+      "daily": 21095,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "DRIP (Remix) - Live Version",
+      "streams": 2601288,
+      "daily": 5287,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "CLAP YOUR HANDS ～ Go Away (2NE1 Cover) - Live Version",
+      "streams": 2182467,
+      "daily": 6779,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "BATTER UP - Live Version",
+      "streams": 2057677,
+      "daily": 4679,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "SHEESH - Live Version",
+      "streams": 1876442,
+      "daily": 4531,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "CLIK CLAK - Live Version",
+      "streams": 1837236,
+      "daily": 3578,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "LIKE THAT - Live Version",
+      "streams": 1746496,
+      "daily": 4073,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "BILLIONAIRE - Live Version",
+      "streams": 1545497,
+      "daily": 3241,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "Really Like You - Live Version",
+      "streams": 1491206,
+      "daily": 3131,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "Love In My Heart - Live Version",
+      "streams": 1439119,
+      "daily": 3502,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "FOREVER - Live Version",
+      "streams": 1412831,
+      "daily": 3068,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "DREAM - Live Version",
+      "streams": 1400159,
+      "daily": 3267,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "Woke Up In Tokyo (RUKA & ASA) - Live Version",
+      "streams": 1296742,
+      "daily": 2578,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    },
+    {
+      "title": "Love, Maybe - Live Version",
+      "streams": 1165065,
+      "daily": 2404,
+      "source": "https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+    }
+  ]
 }
