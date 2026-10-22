@@ -4,14 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0c0a10">
-<meta name="description" content="MONSTIE CHARTS: seguimiento de BABYMONSTER, streams diarios, estadísticas y charts musicales.">
-<title>MONSTIE CHARTS — BABYMONSTER</title>
+<meta name="description" content="BABYMONSTER CHARTS: streams, estadísticas y seguimiento de charts musicales de BABYMONSTER.">
+<title>BABYMONSTER CHARTS</title>
 
 <style>
 :root {
   --bg:#0c0a10;
   --panel:#15121b;
-  --panel2:#201927;
   --pink:#ff75c8;
   --purple:#b8a0ff;
   --muted:#aaa1b5;
@@ -31,29 +30,24 @@ body {
   font:15px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
 }
 a {color:#e9d8ff}
-a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible {
+a:focus-visible,input:focus-visible,select:focus-visible {
   outline:2px solid var(--pink);
   outline-offset:3px;
 }
 .wrap {max-width:1120px;margin:auto;padding:24px}
 header {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:16px;
-  border-bottom:1px solid var(--line);
-  padding:8px 0 22px;
+  display:flex;justify-content:space-between;align-items:center;
+  gap:16px;border-bottom:1px solid var(--line);padding:8px 0 22px;
 }
 .brand {display:flex;gap:13px;align-items:center;min-width:0}
 .logo {
   width:49px;height:49px;flex-shrink:0;
-  display:grid;place-items:center;
-  border-radius:16px;
+  display:grid;place-items:center;border-radius:16px;
   background:linear-gradient(135deg,var(--pink),var(--purple));
   color:#180d1b;font-weight:1000;font-size:23px;
   box-shadow:0 0 28px #ff75c82c;
 }
-.brand strong {letter-spacing:.07em;font-size:16px}
+.brand strong {letter-spacing:.05em;font-size:16px}
 .brand small {
   display:block;color:var(--muted);font-size:10px;
   letter-spacing:.15em;
@@ -71,18 +65,16 @@ header {
   gap:24px;align-items:center;
 }
 .eyebrow {
-  color:var(--pink);font-size:11px;
-  font-weight:850;letter-spacing:.2em;
+  color:var(--pink);font-size:11px;font-weight:850;
+  letter-spacing:.2em;
 }
 .hero h1 {
-  font-size:clamp(38px,7vw,70px);
-  line-height:.99;letter-spacing:-.055em;
-  margin:14px 0 20px;
+  font-size:clamp(38px,7vw,70px);line-height:.99;
+  letter-spacing:-.055em;margin:14px 0 20px;
 }
 .hero h1 span {
   background:linear-gradient(100deg,var(--pink),var(--purple));
-  -webkit-background-clip:text;background-clip:text;
-  color:transparent;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
 }
 p {color:#c7becf}
 .hero p {max-width:600px;font-size:15px}
@@ -93,28 +85,22 @@ p {color:#c7becf}
   box-shadow:0 14px 50px #00000020;
 }
 .hero-card:after {
-  content:"M";position:absolute;right:-5px;bottom:-47px;
-  font-size:150px;font-weight:1000;
-  color:#ff75c80a;pointer-events:none;
+  content:"BM";position:absolute;right:-8px;bottom:-30px;
+  font-size:100px;font-weight:1000;color:#ff75c80a;
+  pointer-events:none;
 }
 .hero-card strong {
   font-size:29px;line-height:1.15;
   display:block;margin-top:12px;position:relative;z-index:1;
 }
 .hero-card p {font-size:12px;margin-bottom:0;position:relative;z-index:1}
-.credit-handle {
-  color:var(--pink);font-weight:750;
-  text-decoration:none;
-}
-.credit-handle:hover {text-decoration:underline}
 .notice {
-  border:1px solid #59482d;background:#211b13;
-  color:#f3d9a7;padding:13px 15px;
-  border-radius:13px;font-size:12px;margin:8px 0 24px;
-  overflow-wrap:anywhere;
+  border:1px solid #59482d;background:#211b13;color:#f3d9a7;
+  padding:13px 15px;border-radius:13px;
+  font-size:12px;margin:8px 0 24px;overflow-wrap:anywhere;
 }
 .stats {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
-.stat,.panel,.source-card {
+.stat,.source-card {
   background:linear-gradient(145deg,#191520,#131018);
   border:1px solid var(--line);border-radius:17px;padding:19px;
 }
@@ -124,7 +110,9 @@ p {color:#c7becf}
   display:block;color:var(--muted);font-size:10px;
   text-transform:uppercase;letter-spacing:.12em;
 }
-.stat strong {font-size:22px;display:block;margin-top:7px;overflow-wrap:anywhere}
+.stat strong {
+  font-size:22px;display:block;margin-top:7px;overflow-wrap:anywhere;
+}
 .section-head {
   display:flex;justify-content:space-between;align-items:end;
   gap:12px;margin:36px 0 16px;
@@ -140,39 +128,29 @@ p {color:#c7becf}
 .controls input {flex:1;min-width:180px}
 .controls input::placeholder {color:#92889d}
 .controls select {max-width:100%}
-.table-hint {
-  display:none;color:var(--muted);font-size:11px;
-  margin:0 0 9px;
-}
+.table-hint {display:none;color:var(--muted);font-size:11px;margin:0 0 9px}
 .table-wrap {
   overflow-x:auto;overscroll-behavior-x:contain;
   border:1px solid var(--line);border-radius:15px;
-  background:var(--panel);
-  scrollbar-color:#76506f #17131e;
+  background:var(--panel);scrollbar-color:#76506f #17131e;
   -webkit-overflow-scrolling:touch;
 }
-table {
-  border-collapse:collapse;width:100%;
-  min-width:650px;text-align:left;
-}
+table {border-collapse:collapse;width:100%;min-width:650px;text-align:left}
 th,td {padding:14px 16px;border-bottom:1px solid var(--line)}
 th {
-  font-size:10px;color:var(--muted);
-  text-transform:uppercase;letter-spacing:.1em;
-  background:#1c1724;white-space:nowrap;
+  font-size:10px;color:var(--muted);text-transform:uppercase;
+  letter-spacing:.1em;background:#1c1724;white-space:nowrap;
 }
 td {font-size:13px;white-space:nowrap}
 tbody tr {transition:background .15s}
 tbody tr:hover {background:#ffffff06}
 tbody tr:last-child td {border-bottom:0}
 .rank {font-weight:900;color:var(--pink);width:42px}
-td strong {font-weight:700}
 .num {font-variant-numeric:tabular-nums;font-weight:700}
 .daily {color:var(--green)}
 .source {
-  display:inline-block;text-decoration:none;
-  border:1px solid #594568;border-radius:8px;
-  padding:5px 9px;font-size:11px;white-space:nowrap;
+  display:inline-block;text-decoration:none;border:1px solid #594568;
+  border-radius:8px;padding:5px 9px;font-size:11px;white-space:nowrap;
   transition:background .2s,border-color .2s;
 }
 .source:hover {background:#34233c;border-color:var(--pink)}
@@ -181,12 +159,10 @@ td strong {font-weight:700}
 .source-card:hover {border-color:#775071}
 .source-card h3 {margin:0 0 7px;font-size:15px}
 .source-card p {font-size:12px;color:var(--muted);margin:0 0 15px}
-.source-card .source {margin-top:auto}
 footer {
-  margin-top:42px;padding:23px 0 12px;
-  border-top:1px solid var(--line);color:var(--muted);
-  font-size:11px;display:flex;justify-content:space-between;
-  gap:18px;flex-wrap:wrap;
+  margin-top:42px;padding:23px 0 12px;border-top:1px solid var(--line);
+  color:var(--muted);font-size:11px;
+  display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;
 }
 .footer-credit {display:flex;flex-direction:column;gap:5px}
 .footer-credit strong {color:var(--white);font-size:13px}
@@ -196,7 +172,7 @@ footer {
 @media(max-width:720px) {
   .wrap {padding:16px}
   header {align-items:flex-start;flex-wrap:wrap}
-  .brand strong {font-size:14px}
+  .brand strong {font-size:13px}
   .brand small {font-size:9px}
   .pill {font-size:9px;padding:6px 9px}
   .hero {grid-template-columns:1fr;padding:35px 0 24px;gap:19px}
@@ -225,10 +201,10 @@ footer {
 
 <header>
   <div class="brand">
-    <div class="logo">M</div>
+    <div class="logo">B</div>
     <div>
-      <strong>MONSTIE CHARTS</strong>
-      <small>BABYMONSTER CHART TRACKER</small>
+      <strong>BABYMONSTER CHARTS</strong>
+      <small>STREAMING &amp; CHART TRACKER</small>
     </div>
   </div>
   <span class="pill">FAN PROJECT · GRATIS</span>
@@ -239,19 +215,15 @@ footer {
     <div class="eyebrow">TU CENTRO DE CHARTS</div>
     <h1>Track the<br><span>MONSTERS.</span></h1>
     <p>
-      Tu espacio para seguir los streams y las estadísticas musicales
-      de BABYMONSTER. Charts, datos y fuentes en un solo lugar.
+      Sigue los streams y las estadísticas musicales de BABYMONSTER.
+      Charts, datos y fuentes en un solo lugar.
     </p>
   </div>
 
   <div class="hero-card">
-    <div class="eyebrow">CREADO POR UN FAN</div>
-    <strong>Para MONSTIE.<br>Con pasión. ♡</strong>
-    <p>
-      Un proyecto independiente creado por
-      <a class="credit-handle" href="https://x.com/cryforasa"
-         target="_blank" rel="noopener noreferrer">Luis Sequeira</a>.
-    </p>
+    <div class="eyebrow">BABYMONSTER</div>
+    <strong>Every chart.<br>Every stream.</strong>
+    <p>Estadísticas y seguimiento musical de BABYMONSTER.</p>
   </div>
 </section>
 
@@ -284,8 +256,7 @@ footer {
   </div>
 
   <div class="controls">
-    <input id="search" type="search" placeholder="⌕  Buscar canción…"
-           aria-label="Buscar canción">
+    <input id="search" type="search" placeholder="⌕  Buscar canción…" aria-label="Buscar canción">
     <select id="sort" aria-label="Ordenar canciones">
       <option value="daily">Mayor actividad diaria</option>
       <option value="streams">Más streams totales</option>
@@ -295,8 +266,7 @@ footer {
 
   <p class="table-hint">↔ Desliza la tabla hacia los lados para ver todas las columnas.</p>
 
-  <div class="table-wrap" tabindex="0" role="region"
-       aria-label="Tabla de estadísticas de Spotify; desplazable horizontalmente">
+  <div class="table-wrap" tabindex="0" role="region" aria-label="Tabla de estadísticas de Spotify; desplazable horizontalmente">
     <table>
       <thead>
         <tr>
@@ -326,35 +296,28 @@ footer {
     <div class="source-card">
       <h3>Spotify · Kworb</h3>
       <p>Estadísticas de canciones, streams diarios e históricos cuando estén disponibles.</p>
-      <a class="source"
-         href="https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
-         target="_blank" rel="noopener noreferrer">Consultar fuente ↗</a>
+      <a class="source" href="https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html" target="_blank" rel="noopener noreferrer">Consultar fuente ↗</a>
     </div>
 
     <div class="source-card">
       <h3>iTunes · Kworb</h3>
       <p>Consulta charts de iTunes y otros rankings disponibles por país.</p>
-      <a class="source"
-         href="https://kworb.net/itunes/artist/babymonster.html"
-         target="_blank" rel="noopener noreferrer">Consultar fuente ↗</a>
+      <a class="source" href="https://kworb.net/itunes/artist/babymonster.html" target="_blank" rel="noopener noreferrer">Consultar fuente ↗</a>
     </div>
 
     <div class="source-card">
       <h3>YouTube Charts</h3>
       <p>Explora rankings oficiales de música y vídeos de YouTube.</p>
-      <a class="source"
-         href="https://charts.youtube.com/"
-         target="_blank" rel="noopener noreferrer">Consultar fuente ↗</a>
+      <a class="source" href="https://charts.youtube.com/" target="_blank" rel="noopener noreferrer">Consultar fuente ↗</a>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="footer-credit">
-    <span>MONSTIE CHARTS</span>
+    <span>BABYMONSTER CHARTS</span>
     <strong>Sitio creado por Luis Sequeira</strong>
-    <a href="https://x.com/cryforasa"
-       target="_blank" rel="noopener noreferrer">𝕏 @cryforasa ↗</a>
+    <a href="https://x.com/cryforasa" target="_blank" rel="noopener noreferrer">𝕏 @cryforasa ↗</a>
   </div>
 
   <div class="footer-note">
@@ -446,4 +409,4 @@ fetch('./data/spotify-songs.json')
   });
 </script>
 </body>
-  </html>
+</html>
