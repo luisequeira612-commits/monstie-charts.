@@ -1,10 +1,11 @@
+
 <!doctype html>
 <html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0c0a10">
-<meta name="description" content="BABYMONSTER CHARTS: streams, estadísticas y seguimiento de charts musicales de BABYMONSTER.">
+<meta name="description" content="BABYMONSTER CHARTS: estadísticas de Spotify, vistas de YouTube y seguimiento musical de BABYMONSTER.">
 <title>BABYMONSTER CHARTS</title>
 
 <style>
@@ -18,8 +19,8 @@
   --white:#fffaff;
   --green:#9ff0cb;
 }
-* {box-sizing:border-box}
-html {scroll-behavior:smooth}
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
 body {
   margin:0;
   background:
@@ -29,169 +30,200 @@ body {
   color:var(--white);
   font:15px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
 }
-a {color:#e9d8ff}
+a { color:#e9d8ff; }
 a:focus-visible,input:focus-visible,select:focus-visible {
   outline:2px solid var(--pink);
   outline-offset:3px;
 }
-.wrap {max-width:1120px;margin:auto;padding:24px}
+.wrap { max-width:1120px; margin:auto; padding:24px; }
 header {
-  display:flex;justify-content:space-between;align-items:center;
-  gap:16px;border-bottom:1px solid var(--line);padding:8px 0 22px;
+  display:flex; justify-content:space-between; align-items:center;
+  gap:16px; border-bottom:1px solid var(--line); padding:8px 0 22px;
 }
-.brand {display:flex;gap:13px;align-items:center;min-width:0}
+.brand { display:flex; gap:13px; align-items:center; min-width:0; }
 .logo {
-  width:49px;height:49px;flex-shrink:0;
-  display:grid;place-items:center;border-radius:16px;
+  width:49px; height:49px; flex-shrink:0;
+  display:grid; place-items:center; border-radius:16px;
   background:linear-gradient(135deg,var(--pink),var(--purple));
-  color:#180d1b;font-weight:1000;font-size:23px;
+  color:#180d1b; font-weight:1000; font-size:23px;
   box-shadow:0 0 28px #ff75c82c;
 }
-.brand strong {letter-spacing:.05em;font-size:16px}
+.brand strong { letter-spacing:.05em; font-size:16px; }
 .brand small {
-  display:block;color:var(--muted);font-size:10px;
+  display:block; color:var(--muted); font-size:10px;
   letter-spacing:.15em;
 }
 .pill {
-  display:inline-flex;align-items:center;
-  border:1px solid #60415e;background:#251629;
-  border-radius:999px;padding:7px 12px;
-  color:#ffc4e6;font-size:10px;font-weight:750;
-  letter-spacing:.06em;white-space:nowrap;
+  display:inline-flex; align-items:center;
+  border:1px solid #60415e; background:#251629;
+  border-radius:999px; padding:7px 12px;
+  color:#ffc4e6; font-size:10px; font-weight:750;
+  letter-spacing:.06em; white-space:nowrap;
 }
 .hero {
   padding:52px 0 30px;
-  display:grid;grid-template-columns:1.4fr .6fr;
-  gap:24px;align-items:center;
+  display:grid; grid-template-columns:1.4fr .6fr;
+  gap:24px; align-items:center;
 }
 .eyebrow {
-  color:var(--pink);font-size:11px;font-weight:850;
+  color:var(--pink); font-size:11px; font-weight:850;
   letter-spacing:.2em;
 }
 .hero h1 {
-  font-size:clamp(38px,7vw,70px);line-height:.99;
-  letter-spacing:-.055em;margin:14px 0 20px;
+  font-size:clamp(38px,7vw,70px); line-height:.99;
+  letter-spacing:-.055em; margin:14px 0 20px;
 }
 .hero h1 span {
   background:linear-gradient(100deg,var(--pink),var(--purple));
-  -webkit-background-clip:text;background-clip:text;color:transparent;
+  -webkit-background-clip:text; background-clip:text; color:transparent;
 }
-p {color:#c7becf}
-.hero p {max-width:600px;font-size:15px}
+p { color:#c7becf; }
+.hero p { max-width:600px; font-size:15px; }
 .hero-card {
   background:linear-gradient(145deg,#2b1b32,#17131e 75%);
-  border:1px solid #60405e;border-radius:23px;
-  padding:25px;position:relative;overflow:hidden;
+  border:1px solid #60405e; border-radius:23px;
+  padding:25px; position:relative; overflow:hidden;
   box-shadow:0 14px 50px #00000020;
 }
 .hero-card:after {
-  content:"BM";position:absolute;right:-8px;bottom:-30px;
-  font-size:100px;font-weight:1000;color:#ff75c80a;
+  content:"BM"; position:absolute; right:-8px; bottom:-30px;
+  font-size:100px; font-weight:1000; color:#ff75c80a;
   pointer-events:none;
 }
 .hero-card strong {
-  font-size:29px;line-height:1.15;
-  display:block;margin-top:12px;position:relative;z-index:1;
+  font-size:29px; line-height:1.15;
+  display:block; margin-top:12px; position:relative; z-index:1;
 }
-.hero-card p {font-size:12px;margin-bottom:0;position:relative;z-index:1}
+.hero-card p { font-size:12px; margin-bottom:0; position:relative; z-index:1; }
 .notice {
-  border:1px solid #59482d;background:#211b13;color:#f3d9a7;
-  padding:13px 15px;border-radius:13px;
-  font-size:12px;margin:8px 0 24px;overflow-wrap:anywhere;
+  border:1px solid #59482d; background:#211b13; color:#f3d9a7;
+  padding:13px 15px; border-radius:13px;
+  font-size:12px; margin:8px 0 24px; overflow-wrap:anywhere;
 }
-.stats {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.notice.ok { border-color:#315943; background:#132219; color:#baf4d3; }
+.notice.error { border-color:#70404e; background:#26141d; color:#ffc1d3; }
+.stats { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:13px; }
 .stat,.source-card {
   background:linear-gradient(145deg,#191520,#131018);
-  border:1px solid var(--line);border-radius:17px;padding:19px;
+  border:1px solid var(--line); border-radius:17px; padding:19px;
 }
-.stat {transition:border-color .2s,transform .2s}
-.stat:hover {border-color:#775071;transform:translateY(-2px)}
+.stat { transition:border-color .2s,transform .2s; }
+.stat:hover { border-color:#775071; transform:translateY(-2px); }
 .stat small {
-  display:block;color:var(--muted);font-size:10px;
-  text-transform:uppercase;letter-spacing:.12em;
+  display:block; color:var(--muted); font-size:10px;
+  text-transform:uppercase; letter-spacing:.12em;
 }
 .stat strong {
-  font-size:22px;display:block;margin-top:7px;overflow-wrap:anywhere;
+  font-size:22px; display:block; margin-top:7px; overflow-wrap:anywhere;
 }
 .section-head {
-  display:flex;justify-content:space-between;align-items:end;
-  gap:12px;margin:36px 0 16px;
+  display:flex; justify-content:space-between; align-items:end;
+  gap:12px; margin:36px 0 16px;
 }
-.section-head h2 {margin:0;font-size:21px;letter-spacing:-.025em}
-.section-head p {margin:4px 0 0;color:var(--muted);font-size:12px}
-.controls {display:flex;flex-wrap:wrap;gap:10px;margin:15px 0}
+.section-head h2 { margin:0; font-size:21px; letter-spacing:-.025em; }
+.section-head p { margin:4px 0 0; color:var(--muted); font-size:12px; }
+.controls { display:flex; flex-wrap:wrap; gap:10px; margin:15px 0; }
 .controls input,.controls select {
-  background:var(--panel);border:1px solid var(--line);
-  color:var(--white);border-radius:11px;
-  padding:12px;font:inherit;min-height:44px;
+  background:var(--panel); border:1px solid var(--line);
+  color:var(--white); border-radius:11px;
+  padding:12px; font:inherit; min-height:44px;
 }
-.controls input {flex:1;min-width:180px}
-.controls input::placeholder {color:#92889d}
-.controls select {max-width:100%}
-.table-hint {display:none;color:var(--muted);font-size:11px;margin:0 0 9px}
+.controls input { flex:1; min-width:180px; }
+.controls input::placeholder { color:#92889d; }
+.controls select { max-width:100%; }
+.table-hint { display:none; color:var(--muted); font-size:11px; margin:0 0 9px; }
 .table-wrap {
-  overflow-x:auto;overscroll-behavior-x:contain;
-  border:1px solid var(--line);border-radius:15px;
-  background:var(--panel);scrollbar-color:#76506f #17131e;
+  overflow-x:auto; overscroll-behavior-x:contain;
+  border:1px solid var(--line); border-radius:15px;
+  background:var(--panel); scrollbar-color:#76506f #17131e;
   -webkit-overflow-scrolling:touch;
 }
-table {border-collapse:collapse;width:100%;min-width:650px;text-align:left}
-th,td {padding:14px 16px;border-bottom:1px solid var(--line)}
+table { border-collapse:collapse; width:100%; min-width:650px; text-align:left; }
+th,td { padding:14px 16px; border-bottom:1px solid var(--line); }
 th {
-  font-size:10px;color:var(--muted);text-transform:uppercase;
-  letter-spacing:.1em;background:#1c1724;white-space:nowrap;
+  font-size:10px; color:var(--muted); text-transform:uppercase;
+  letter-spacing:.1em; background:#1c1724; white-space:nowrap;
 }
-td {font-size:13px;white-space:nowrap}
-tbody tr {transition:background .15s}
-tbody tr:hover {background:#ffffff06}
-tbody tr:last-child td {border-bottom:0}
-.rank {font-weight:900;color:var(--pink);width:42px}
-.num {font-variant-numeric:tabular-nums;font-weight:700}
-.daily {color:var(--green)}
+td { font-size:13px; white-space:nowrap; }
+tbody tr { transition:background .15s; }
+tbody tr:hover { background:#ffffff06; }
+tbody tr:last-child td { border-bottom:0; }
+.rank { font-weight:900; color:var(--pink); width:42px; }
+.num { font-variant-numeric:tabular-nums; font-weight:700; }
+.daily { color:var(--green); }
 .source {
-  display:inline-block;text-decoration:none;border:1px solid #594568;
-  border-radius:8px;padding:5px 9px;font-size:11px;white-space:nowrap;
+  display:inline-block; text-decoration:none; border:1px solid #594568;
+  border-radius:8px; padding:5px 9px; font-size:11px; white-space:nowrap;
   transition:background .2s,border-color .2s;
 }
-.source:hover {background:#34233c;border-color:var(--pink)}
-.sources {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
-.source-card {transition:border-color .2s}
-.source-card:hover {border-color:#775071}
-.source-card h3 {margin:0 0 7px;font-size:15px}
-.source-card p {font-size:12px;color:var(--muted);margin:0 0 15px}
-footer {
-  margin-top:42px;padding:23px 0 12px;border-top:1px solid var(--line);
-  color:var(--muted);font-size:11px;
-  display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;
+.source:hover { background:#34233c; border-color:var(--pink); }
+.sources { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:13px; }
+.source-card { transition:border-color .2s; }
+.source-card:hover { border-color:#775071; }
+.source-card h3 { margin:0 0 7px; font-size:15px; }
+.source-card p { font-size:12px; color:var(--muted); margin:0 0 15px; }
+
+.youtube-summary {
+  display:grid; grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:13px; margin:16px 0;
 }
-.footer-credit {display:flex;flex-direction:column;gap:5px}
-.footer-credit strong {color:var(--white);font-size:13px}
-.footer-credit a {color:var(--pink);text-decoration:none;font-weight:750}
-.footer-credit a:hover {text-decoration:underline}
-.footer-note {max-width:440px}
+.youtube-list {
+  background:var(--panel); border:1px solid var(--line);
+  border-radius:15px; overflow:hidden;
+}
+.youtube-video {
+  display:flex; justify-content:space-between; align-items:center;
+  gap:15px; padding:16px; border-bottom:1px solid var(--line);
+}
+.youtube-video:last-child { border-bottom:0; }
+.youtube-video strong { display:block; overflow-wrap:anywhere; }
+.youtube-video small { color:var(--muted); font-size:11px; display:block; }
+.youtube-video a { text-decoration:none; }
+.youtube-video a:hover { color:var(--pink); }
+.youtube-views {
+  color:var(--pink); font-weight:850;
+  font-variant-numeric:tabular-nums; white-space:nowrap;
+  font-size:13px;
+}
+.youtube-empty { padding:18px; color:var(--muted); font-size:13px; }
+.youtube-video .rank { min-width:28px; width:28px; }
+footer {
+  margin-top:42px; padding:23px 0 12px; border-top:1px solid var(--line);
+  color:var(--muted); font-size:11px;
+  display:flex; justify-content:space-between; gap:18px; flex-wrap:wrap;
+}
+.footer-credit { display:flex; flex-direction:column; gap:5px; }
+.footer-credit strong { color:var(--white); font-size:13px; }
+.footer-credit a { color:var(--pink); text-decoration:none; font-weight:750; }
+.footer-credit a:hover { text-decoration:underline; }
+.footer-note { max-width:440px; }
+
 @media(max-width:720px) {
-  .wrap {padding:16px}
-  header {align-items:flex-start;flex-wrap:wrap}
-  .brand strong {font-size:13px}
-  .brand small {font-size:9px}
-  .pill {font-size:9px;padding:6px 9px}
-  .hero {grid-template-columns:1fr;padding:35px 0 24px;gap:19px}
-  .hero h1 {font-size:clamp(39px,11vw,59px)}
-  .hero-card {padding:21px}
-  .stats {grid-template-columns:1fr;gap:10px}
-  .stat {padding:15px 17px}
-  .stat strong {font-size:20px}
-  .section-head {align-items:flex-start;flex-direction:column;margin-top:31px}
-  .section-head h2 {font-size:19px}
-  .controls {display:grid;grid-template-columns:1fr}
-  .controls input,.controls select {width:100%;min-width:0}
-  .table-hint {display:block}
-  .sources {grid-template-columns:1fr}
-  .source-card {padding:18px}
-  footer {flex-direction:column;gap:15px}
+  .wrap { padding:16px; }
+  header { align-items:flex-start; flex-wrap:wrap; }
+  .brand strong { font-size:13px; }
+  .brand small { font-size:9px; }
+  .pill { font-size:9px; padding:6px 9px; }
+  .hero { grid-template-columns:1fr; padding:35px 0 24px; gap:19px; }
+  .hero h1 { font-size:clamp(39px,11vw,59px); }
+  .hero-card { padding:21px; }
+  .stats { grid-template-columns:1fr; gap:10px; }
+  .stat { padding:15px 17px; }
+  .stat strong { font-size:20px; }
+  .section-head { align-items:flex-start; flex-direction:column; margin-top:31px; }
+  .section-head h2 { font-size:19px; }
+  .controls { display:grid; grid-template-columns:1fr; }
+  .controls input,.controls select { width:100%; min-width:0; }
+  .table-hint { display:block; }
+  .sources { grid-template-columns:1fr; }
+  .source-card { padding:18px; }
+  .youtube-summary { grid-template-columns:1fr; }
+  .youtube-video { align-items:flex-start; gap:10px; }
+  .youtube-views { font-size:12px; }
+  footer { flex-direction:column; gap:15px; }
 }
 @media(prefers-reduced-motion:reduce) {
-  *,*:before,*:after {scroll-behavior:auto!important;transition:none!important}
+  *,*:before,*:after { scroll-behavior:auto!important; transition:none!important; }
 }
 </style>
 </head>
@@ -216,10 +248,9 @@ footer {
     <h1>Track the<br><span>MONSTERS.</span></h1>
     <p>
       Sigue los streams y las estadísticas musicales de BABYMONSTER.
-      Charts, datos y fuentes en un solo lugar.
+      Spotify, YouTube, charts y fuentes en un solo lugar.
     </p>
   </div>
-
   <div class="hero-card">
     <div class="eyebrow">BABYMONSTER</div>
     <strong>Every chart.<br>Every stream.</strong>
@@ -228,7 +259,7 @@ footer {
 </section>
 
 <div class="notice" id="status" role="status" aria-live="polite">
-  Cargando datos…
+  Cargando datos de Spotify…
 </div>
 
 <div class="stats">
@@ -237,26 +268,26 @@ footer {
     <strong>BABYMONSTER</strong>
   </div>
   <div class="stat">
-    <small>Canciones detectadas</small>
+    <small>Canciones en Spotify</small>
     <strong id="track-count">—</strong>
   </div>
   <div class="stat">
-    <small>Última actualización</small>
+    <small>Actualización Spotify</small>
     <strong id="updated" style="font-size:16px">—</strong>
   </div>
 </div>
 
-<section>
+<section id="spotify">
   <div class="section-head">
     <div>
       <h2>Spotify · estadísticas de canciones</h2>
       <p>Streams totales y diarios recopilados de Kworb. No representa las posiciones del Spotify Top 200.</p>
     </div>
-    <span class="pill">DATOS RECOPILADOS</span>
+    <span class="pill">SPOTIFY DATA</span>
   </div>
 
   <div class="controls">
-    <input id="search" type="search" placeholder="⌕  Buscar canción…" aria-label="Buscar canción">
+    <input id="search" type="search" placeholder="⌕ Buscar canción…" aria-label="Buscar canción">
     <select id="sort" aria-label="Ordenar canciones">
       <option value="daily">Mayor actividad diaria</option>
       <option value="streams">Más streams totales</option>
@@ -266,15 +297,12 @@ footer {
 
   <p class="table-hint">↔ Desliza la tabla hacia los lados para ver todas las columnas.</p>
 
-  <div class="table-wrap" tabindex="0" role="region" aria-label="Tabla de estadísticas de Spotify; desplazable horizontalmente">
+  <div class="table-wrap" tabindex="0" role="region" aria-label="Tabla de estadísticas de Spotify">
     <table>
       <thead>
         <tr>
-          <th>#</th>
-          <th>Canción</th>
-          <th>Streams totales</th>
-          <th>Streams diarios</th>
-          <th>Fuente</th>
+          <th>#</th><th>Canción</th><th>Streams totales</th>
+          <th>Streams diarios</th><th>Fuente</th>
         </tr>
       </thead>
       <tbody id="rows">
@@ -284,7 +312,45 @@ footer {
   </div>
 </section>
 
-<section>
+<section id="youtube">
+  <div class="section-head">
+    <div>
+      <h2>YouTube · Music Videos</h2>
+      <p>Ranking de videos detectados en el canal oficial, ordenados por vistas.</p>
+    </div>
+    <span class="pill">YOUTUBE VIEWS</span>
+  </div>
+
+  <div class="youtube-summary">
+    <div class="stat">
+      <small>Videos detectados</small>
+      <strong id="yt-count">—</strong>
+    </div>
+    <div class="stat">
+      <small>Vistas acumuladas</small>
+      <strong id="yt-total">—</strong>
+    </div>
+  </div>
+
+  <div class="notice" id="yt-status" role="status" aria-live="polite">
+    Cargando estadísticas de YouTube…
+  </div>
+
+  <div class="controls">
+    <input id="yt-search" type="search" placeholder="⌕ Buscar videoclip…" aria-label="Buscar videoclip de YouTube">
+    <select id="yt-sort" aria-label="Ordenar videos de YouTube">
+      <option value="views">Más vistas</option>
+      <option value="name">Nombre A–Z</option>
+      <option value="date">Más recientes</option>
+    </select>
+  </div>
+
+  <div class="youtube-list" id="yt-rows">
+    <div class="youtube-empty">Cargando videos…</div>
+  </div>
+</section>
+
+<section id="sources">
   <div class="section-head">
     <div>
       <h2>Explora más charts</h2>
@@ -298,16 +364,14 @@ footer {
       <p>Estadísticas de canciones, streams diarios e históricos cuando estén disponibles.</p>
       <a class="source" href="https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html" target="_blank" rel="noopener noreferrer">Consultar fuente ↗</a>
     </div>
-
     <div class="source-card">
       <h3>iTunes · Kworb</h3>
       <p>Consulta charts de iTunes y otros rankings disponibles por país.</p>
       <a class="source" href="https://kworb.net/itunes/artist/babymonster.html" target="_blank" rel="noopener noreferrer">Consultar fuente ↗</a>
     </div>
-
     <div class="source-card">
       <h3>YouTube Charts</h3>
-      <p>Explora rankings oficiales de música y vídeos de YouTube.</p>
+      <p>Explora rankings oficiales de música y videos de YouTube.</p>
       <a class="source" href="https://charts.youtube.com/" target="_blank" rel="noopener noreferrer">Consultar fuente ↗</a>
     </div>
   </div>
@@ -319,7 +383,6 @@ footer {
     <strong>Sitio creado por Luis Sequeira</strong>
     <a href="https://x.com/cryforasa" target="_blank" rel="noopener noreferrer">𝕏 @cryforasa ↗</a>
   </div>
-
   <div class="footer-note">
     Proyecto fan no oficial. No afiliado a YG Entertainment, BABYMONSTER,
     Spotify, YouTube ni Kworb. Las marcas y los datos pertenecen a sus
@@ -330,7 +393,10 @@ footer {
 </div>
 
 <script>
+'use strict';
+
 let tracks = [];
+let youtubeTracks = [];
 
 const fmt = n => {
   if (n === null || n === undefined || n === '') return '—';
@@ -338,7 +404,27 @@ const fmt = n => {
   return Number.isFinite(value) ? value.toLocaleString('en-US') : '—';
 };
 
-function render() {
+const safeText = value => String(value ?? '')
+  .replace(/&/g, '&amp;')
+  .replace(/</g, '&lt;')
+  .replace(/>/g, '&gt;')
+  .replace(/"/g, '&quot;')
+  .replace(/'/g, '&#39;');
+
+const parseNumber = value =>
+  Number(String(value ?? 0).replace(/,/g, '')) || 0;
+
+function formatDate(value) {
+  if (!value) return 'Fecha no disponible';
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return 'Fecha no disponible';
+  return date.toLocaleString('es', {
+    dateStyle:'medium',
+    timeStyle:'short'
+  });
+}
+
+function renderSpotify() {
   const q = document.querySelector('#search').value.toLowerCase().trim();
   const sort = document.querySelector('#sort').value;
 
@@ -347,34 +433,22 @@ function render() {
   );
 
   list.sort((a, b) => {
-    const streamsA = Number(String(a.streams ?? 0).replace(/,/g, '')) || 0;
-    const streamsB = Number(String(b.streams ?? 0).replace(/,/g, '')) || 0;
-    const dailyA = Number(String(a.daily ?? 0).replace(/,/g, '')) || 0;
-    const dailyB = Number(String(b.daily ?? 0).replace(/,/g, '')) || 0;
-
     if (sort === 'name') {
       return String(a.title || '').localeCompare(String(b.title || ''));
     }
-    if (sort === 'streams') return streamsB - streamsA;
-    return dailyB - dailyA;
+    if (sort === 'streams') return parseNumber(b.streams) - parseNumber(a.streams);
+    return parseNumber(b.daily) - parseNumber(a.daily);
   });
 
   document.querySelector('#rows').innerHTML = list.map((t, i) => {
     const source = typeof t.source === 'string' &&
-      /^https:\/\/kworb\.net\//.test(t.source)
+      /^https:\/\/kworb\.net\//i.test(t.source)
       ? t.source
       : 'https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html';
 
-    const title = String(t.title || 'Sin título')
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#39;');
-
     return `<tr>
       <td class="rank">${i + 1}</td>
-      <td><strong>${title}</strong></td>
+      <td><strong>${safeText(t.title || 'Sin título')}</strong></td>
       <td class="num">${fmt(t.streams)}</td>
       <td class="num daily">${fmt(t.daily)}</td>
       <td><a class="source" href="${source}" target="_blank" rel="noopener noreferrer">Kworb ↗</a></td>
@@ -382,30 +456,120 @@ function render() {
   }).join('') || '<tr><td colspan="5">No se encontraron canciones.</td></tr>';
 }
 
-document.querySelector('#search').addEventListener('input', render);
-document.querySelector('#sort').addEventListener('change', render);
+document.querySelector('#search').addEventListener('input', renderSpotify);
+document.querySelector('#sort').addEventListener('change', renderSpotify);
 
 fetch('./data/spotify-songs.json')
-  .then(r => {
-    if (!r.ok) throw Error('No se pudo cargar el archivo de datos');
-    return r.json();
+  .then(response => {
+    if (!response.ok) throw Error('No se pudo cargar Spotify');
+    return response.json();
   })
-  .then(d => {
-    tracks = Array.isArray(d.tracks) ? d.tracks : [];
+  .then(data => {
+    tracks = Array.isArray(data.tracks) ? data.tracks : [];
 
-    document.querySelector('#track-count').textContent = tracks.length;
-    document.querySelector('#updated').textContent = d.updated_at || '—';
+    document.querySelector('#track-count').textContent = fmt(tracks.length);
+    document.querySelector('#updated').textContent = formatDate(data.updated_at);
     document.querySelector('#status').textContent =
-      `Datos de Kworb · actualización: ${d.updated_at || 'fecha no disponible'}. ${d.note || ''}`;
+      `Datos de Kworb · actualización: ${formatDate(data.updated_at)}. ${data.note || ''}`;
+    document.querySelector('#status').classList.add('ok');
 
-    render();
+    renderSpotify();
   })
   .catch(() => {
     document.querySelector('#status').textContent =
-      'No se pudieron cargar los datos. Puedes consultar la fuente original mientras revisamos la actualización.';
-
+      'No se pudieron cargar los datos de Spotify. Consulta la fuente original mientras revisamos la actualización.';
+    document.querySelector('#status').classList.add('error');
     document.querySelector('#rows').innerHTML =
-      '<tr><td colspan="5">Datos pendientes. Consulta <a href="https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html" target="_blank" rel="noopener noreferrer">Kworb ↗</a>.</td></tr>';
+      '<tr><td colspan="5">Datos temporalmente no disponibles. <a href="https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html" target="_blank" rel="noopener noreferrer">Consultar Kworb ↗</a></td></tr>';
+  });
+
+function renderYouTube() {
+  const q = document.querySelector('#yt-search').value.toLowerCase().trim();
+  const sort = document.querySelector('#yt-sort').value;
+
+  const list = youtubeTracks.filter(video =>
+    String(video.title || '').toLowerCase().includes(q)
+  );
+
+  list.sort((a, b) => {
+    if (sort === 'name') {
+      return String(a.title || '').localeCompare(String(b.title || ''));
+    }
+    if (sort === 'date') {
+      return new Date(b.published_at || 0) - new Date(a.published_at || 0);
+    }
+    return parseNumber(b.views) - parseNumber(a.views);
+  });
+
+  document.querySelector('#yt-rows').innerHTML = list.map((video, i) => {
+    const url = typeof video.url === 'string' &&
+      /^https:\/\/www\.youtube\.com\/watch\?v=[\w-]+$/i.test(video.url)
+      ? video.url
+      : null;
+
+    const title = safeText(video.title || 'Video sin título');
+    const date = safeText(
+      video.published_at ? formatDate(video.published_at) : 'Fecha no disponible'
+    );
+
+    const titleContent = url
+      ? `<a href="${url}" target="_blank" rel="noopener noreferrer">${title}</a>`
+      : title;
+
+    const linkContent = url
+      ? `<a href="${url}" target="_blank" rel="noopener noreferrer">Ver en YouTube ↗</a>`
+      : 'Enlace no disponible';
+
+    return `<div class="youtube-video">
+      <div class="rank">#${i + 1}</div>
+      <div style="flex:1;min-width:0">
+        <strong>${titleContent}</strong>
+        <small>${date}</small>
+        <small>${linkContent}</small>
+      </div>
+      <div class="youtube-views">${fmt(video.views)} vistas</div>
+    </div>`;
+  }).join('') || '<div class="youtube-empty">No se encontraron videos.</div>';
+}
+
+document.querySelector('#yt-search').addEventListener('input', renderYouTube);
+document.querySelector('#yt-sort').addEventListener('change', renderYouTube);
+
+fetch('./data/youtube-charts.json')
+  .then(response => {
+    if (!response.ok) throw Error('No se pudieron cargar los datos de YouTube');
+    return response.json();
+  })
+  .then(data => {
+    youtubeTracks = Array.isArray(data.tracks) ? data.tracks : [];
+
+    document.querySelector('#yt-count').textContent = fmt(youtubeTracks.length);
+
+    const totalViews = youtubeTracks.reduce(
+      (sum, video) => sum + parseNumber(video.views), 0
+    );
+    document.querySelector('#yt-total').textContent = fmt(totalViews);
+
+    document.querySelector('#yt-status').textContent =
+      `Última actualización: ${formatDate(data.updated_at)}. Vistas públicas de los videos detectados en el canal oficial.`;
+
+    document.querySelector('#yt-status').classList.add('ok');
+
+    if (!youtubeTracks.length) {
+      document.querySelector('#yt-status').textContent =
+        'La actualización terminó, pero todavía no se detectaron videos. Revisa el archivo de datos o el filtro del script.';
+      document.querySelector('#yt-status').classList.remove('ok');
+    }
+
+    renderYouTube();
+  })
+  .catch(() => {
+    document.querySelector('#yt-count').textContent = '—';
+    document.querySelector('#yt-total').textContent = '—';
+    
+    document.querySelector('#yt-status').textContent =
+      'No se pudieron cargar los charts de YouTube. Intenta actualizar más tarde.';
+    document.querySelector('#yt-status').classList.remove('ok');
   });
 </script>
 </body>
