@@ -1,43 +1,449 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#110d18">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0c0a10">
+<meta name="description" content="MONSTIE CHARTS: seguimiento de BABYMONSTER, streams diarios, estadísticas y charts musicales.">
 <title>MONSTIE CHARTS — BABYMONSTER</title>
+
 <style>
-:root{--bg:#0c0a10;--panel:#17131e;--panel2:#211a2a;--pink:#ff75c8;--purple:#b8a0ff;--muted:#aaa1b5;--line:#352b40;--white:#fffaff}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top right,#29142e 0,transparent 38%),var(--bg);color:var(--white);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-.wrap{max-width:1120px;margin:auto;padding:22px}header{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid var(--line);padding:10px 0 22px}
-.brand{display:flex;gap:12px;align-items:center}.logo{width:46px;height:46px;display:grid;place-items:center;border-radius:15px;background:linear-gradient(135deg,var(--pink),var(--purple));color:#180d1b;font-weight:950;font-size:20px}.brand strong{letter-spacing:.06em}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:.16em}
-.pill{border:1px solid #60415e;background:#251629;border-radius:999px;padding:7px 12px;color:#ffc4e6;font-size:11px}
-.hero{padding:42px 0 25px;display:grid;grid-template-columns:1.4fr .6fr;gap:22px;align-items:center}.eyebrow{color:var(--pink);font-size:11px;font-weight:800;letter-spacing:.2em}.hero h1{font-size:clamp(34px,6vw,64px);line-height:1.02;letter-spacing:-.05em;margin:10px 0 15px}.hero h1 span{color:var(--pink)}p{color:#c7becf}.hero p{max-width:620px}.hero-card{background:linear-gradient(145deg,#2a1b30,#17131e);border:1px solid #51344e;border-radius:22px;padding:22px}.hero-card strong{font-size:29px;line-height:1.1;display:block;margin-top:8px}
-.notice{border:1px solid #59482d;background:#211b13;color:#f3d9a7;padding:12px 14px;border-radius:12px;font-size:12px;margin:12px 0 24px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.stat,.panel,.source-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:17px}.stat small{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.1em}.stat strong{font-size:22px;display:block;margin-top:4px}
-.section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:28px 0 14px}.section-head h2{margin:0;font-size:21px}.section-head p{margin:3px 0 0;color:var(--muted);font-size:12px}
-.controls{display:flex;flex-wrap:wrap;gap:9px;margin:14px 0}.controls input,.controls select{background:var(--panel);border:1px solid var(--line);color:var(--white);border-radius:10px;padding:11px 12px;font:inherit}.controls input{flex:1;min-width:190px}
-.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:14px;background:var(--panel)}table{border-collapse:collapse;width:100%;min-width:640px;text-align:left}th,td{padding:13px 15px;border-bottom:1px solid var(--line)}th{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;background:#1c1724}td{font-size:13px}tbody tr:last-child td{border-bottom:0}.rank{font-weight:850;color:var(--pink)}a{color:#e9d8ff}.source{display:inline-block;text-decoration:none;border:1px solid #594568;border-radius:7px;padding:4px 8px;font-size:11px}
-.sources{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.source-card h3{margin:0 0 5px;font-size:15px}.source-card p{font-size:12px;color:var(--muted);margin:0 0 12px}
-footer{margin-top:34px;padding:20px 0;border-top:1px solid var(--line);color:var(--muted);font-size:11px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
-@media(max-width:720px){.wrap{padding:15px}.hero{grid-template-columns:1fr;padding-top:28px}.stats,.sources{grid-template-columns:1fr}.section-head{align-items:start;flex-direction:column}}
-</style></head><body><div class="wrap">
-<header><div class="brand"><div class="logo">M</div><div><strong>MONSTIE CHARTS</strong><small>BABYMONSTER CHART TRACKER</small></div></div><span class="pill">FAN PROJECT · GRATIS</span></header>
-<section class="hero"><div><div class="eyebrow">TU CENTRO DE CHARTS</div><h1>Track the <span>MONSTERS.</span></h1><p>Seguimiento de BABYMONSTER en charts musicales, con tablas compactas inspiradas en Kworb, filtros y fuentes verificables.</p></div><div class="hero-card"><div class="eyebrow">ESTADO DEL PROYECTO</div><strong>Gratis.<br>Independiente.</strong><p>Los datos se muestran con fecha de actualización y enlace a su fuente.</p></div></section>
-<div class="notice" id="status">Cargando datos…</div>
-<div class="stats"><div class="stat"><small>Artista</small><strong>BABYMONSTER</strong></div><div class="stat"><small>Canciones detectadas</small><strong id="track-count">—</strong></div><div class="stat"><small>Última actualización</small><strong id="updated" style="font-size:16px">—</strong></div></div>
-<section><div class="section-head"><div><h2>Spotify · estadísticas de canciones</h2><p>Reproducciones totales y diarias recopiladas de Kworb. No equivale a la posición Top 200.</p></div><span class="pill">DATOS RECOPILADOS</span></div>
-<div class="controls"><input id="search" placeholder="Buscar canción…" aria-label="Buscar canción"><select id="sort" aria-label="Ordenar"><option value="daily">Mayor actividad diaria</option><option value="streams">Más reproducciones totales</option><option value="name">Nombre A–Z</option></select></div>
-<div class="table-wrap"><table><thead><tr><th>#</th><th>Canción</th><th>Streams totales</th><th>Streams diarios</th><th>Fuente</th></tr></thead><tbody id="rows"><tr><td colspan="5">Cargando…</td></tr></tbody></table></div></section>
-<section><div class="section-head"><div><h2>Más charts</h2><p>Fuentes para ampliar el tracker. El acceso automático varía por plataforma.</p></div></div><div class="sources">
-<div class="source-card"><h3>Kworb · Spotify</h3><p>Estadísticas de canciones y chart history.</p><a class="source" href="https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html" target="_blank" rel="noopener">Abrir fuente ↗</a></div>
-<div class="source-card"><h3>Kworb · iTunes / otros</h3><p>Seguimiento multi-plataforma por país cuando está disponible.</p><a class="source" href="https://kworb.net/itunes/artist/babymonster.html" target="_blank" rel="noopener">Abrir fuente ↗</a></div>
-<div class="source-card"><h3>YouTube Charts</h3><p>Charts diarios y semanales oficiales.</p><a class="source" href="https://charts.youtube.com/" target="_blank" rel="noopener">Abrir fuente ↗</a></div>
-</div></section>
-<footer><span>MONSTIE CHARTS · Proyecto fan no oficial.</span><span>No afiliado a YG, Spotify, YouTube ni Kworb.</span></footer></div>
+:root {
+  --bg:#0c0a10;
+  --panel:#15121b;
+  --panel2:#201927;
+  --pink:#ff75c8;
+  --purple:#b8a0ff;
+  --muted:#aaa1b5;
+  --line:#352b40;
+  --white:#fffaff;
+  --green:#9ff0cb;
+}
+* {box-sizing:border-box}
+html {scroll-behavior:smooth}
+body {
+  margin:0;
+  background:
+    radial-gradient(ellipse at 85% 0%,#321635 0,transparent 34%),
+    radial-gradient(ellipse at 0% 40%,#1d1330 0,transparent 30%),
+    var(--bg);
+  color:var(--white);
+  font:15px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+}
+a {color:#e9d8ff}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible {
+  outline:2px solid var(--pink);
+  outline-offset:3px;
+}
+.wrap {max-width:1120px;margin:auto;padding:24px}
+header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  border-bottom:1px solid var(--line);
+  padding:8px 0 22px;
+}
+.brand {display:flex;gap:13px;align-items:center;min-width:0}
+.logo {
+  width:49px;height:49px;flex-shrink:0;
+  display:grid;place-items:center;
+  border-radius:16px;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  color:#180d1b;font-weight:1000;font-size:23px;
+  box-shadow:0 0 28px #ff75c82c;
+}
+.brand strong {letter-spacing:.07em;font-size:16px}
+.brand small {
+  display:block;color:var(--muted);font-size:10px;
+  letter-spacing:.15em;
+}
+.pill {
+  display:inline-flex;align-items:center;
+  border:1px solid #60415e;background:#251629;
+  border-radius:999px;padding:7px 12px;
+  color:#ffc4e6;font-size:10px;font-weight:750;
+  letter-spacing:.06em;white-space:nowrap;
+}
+.hero {
+  padding:52px 0 30px;
+  display:grid;grid-template-columns:1.4fr .6fr;
+  gap:24px;align-items:center;
+}
+.eyebrow {
+  color:var(--pink);font-size:11px;
+  font-weight:850;letter-spacing:.2em;
+}
+.hero h1 {
+  font-size:clamp(38px,7vw,70px);
+  line-height:.99;letter-spacing:-.055em;
+  margin:14px 0 20px;
+}
+.hero h1 span {
+  background:linear-gradient(100deg,var(--pink),var(--purple));
+  -webkit-background-clip:text;background-clip:text;
+  color:transparent;
+}
+p {color:#c7becf}
+.hero p {max-width:600px;font-size:15px}
+.hero-card {
+  background:linear-gradient(145deg,#2b1b32,#17131e 75%);
+  border:1px solid #60405e;border-radius:23px;
+  padding:25px;position:relative;overflow:hidden;
+  box-shadow:0 14px 50px #00000020;
+}
+.hero-card:after {
+  content:"M";position:absolute;right:-5px;bottom:-47px;
+  font-size:150px;font-weight:1000;
+  color:#ff75c80a;pointer-events:none;
+}
+.hero-card strong {
+  font-size:29px;line-height:1.15;
+  display:block;margin-top:12px;position:relative;z-index:1;
+}
+.hero-card p {font-size:12px;margin-bottom:0;position:relative;z-index:1}
+.credit-handle {
+  color:var(--pink);font-weight:750;
+  text-decoration:none;
+}
+.credit-handle:hover {text-decoration:underline}
+.notice {
+  border:1px solid #59482d;background:#211b13;
+  color:#f3d9a7;padding:13px 15px;
+  border-radius:13px;font-size:12px;margin:8px 0 24px;
+  overflow-wrap:anywhere;
+}
+.stats {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.stat,.panel,.source-card {
+  background:linear-gradient(145deg,#191520,#131018);
+  border:1px solid var(--line);border-radius:17px;padding:19px;
+}
+.stat {transition:border-color .2s,transform .2s}
+.stat:hover {border-color:#775071;transform:translateY(-2px)}
+.stat small {
+  display:block;color:var(--muted);font-size:10px;
+  text-transform:uppercase;letter-spacing:.12em;
+}
+.stat strong {font-size:22px;display:block;margin-top:7px;overflow-wrap:anywhere}
+.section-head {
+  display:flex;justify-content:space-between;align-items:end;
+  gap:12px;margin:36px 0 16px;
+}
+.section-head h2 {margin:0;font-size:21px;letter-spacing:-.025em}
+.section-head p {margin:4px 0 0;color:var(--muted);font-size:12px}
+.controls {display:flex;flex-wrap:wrap;gap:10px;margin:15px 0}
+.controls input,.controls select {
+  background:var(--panel);border:1px solid var(--line);
+  color:var(--white);border-radius:11px;
+  padding:12px;font:inherit;min-height:44px;
+}
+.controls input {flex:1;min-width:180px}
+.controls input::placeholder {color:#92889d}
+.controls select {max-width:100%}
+.table-hint {
+  display:none;color:var(--muted);font-size:11px;
+  margin:0 0 9px;
+}
+.table-wrap {
+  overflow-x:auto;overscroll-behavior-x:contain;
+  border:1px solid var(--line);border-radius:15px;
+  background:var(--panel);
+  scrollbar-color:#76506f #17131e;
+  -webkit-overflow-scrolling:touch;
+}
+table {
+  border-collapse:collapse;width:100%;
+  min-width:650px;text-align:left;
+}
+th,td {padding:14px 16px;border-bottom:1px solid var(--line)}
+th {
+  font-size:10px;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.1em;
+  background:#1c1724;white-space:nowrap;
+}
+td {font-size:13px;white-space:nowrap}
+tbody tr {transition:background .15s}
+tbody tr:hover {background:#ffffff06}
+tbody tr:last-child td {border-bottom:0}
+.rank {font-weight:900;color:var(--pink);width:42px}
+td strong {font-weight:700}
+.num {font-variant-numeric:tabular-nums;font-weight:700}
+.daily {color:var(--green)}
+.source {
+  display:inline-block;text-decoration:none;
+  border:1px solid #594568;border-radius:8px;
+  padding:5px 9px;font-size:11px;white-space:nowrap;
+  transition:background .2s,border-color .2s;
+}
+.source:hover {background:#34233c;border-color:var(--pink)}
+.sources {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.source-card {transition:border-color .2s}
+.source-card:hover {border-color:#775071}
+.source-card h3 {margin:0 0 7px;font-size:15px}
+.source-card p {font-size:12px;color:var(--muted);margin:0 0 15px}
+.source-card .source {margin-top:auto}
+footer {
+  margin-top:42px;padding:23px 0 12px;
+  border-top:1px solid var(--line);color:var(--muted);
+  font-size:11px;display:flex;justify-content:space-between;
+  gap:18px;flex-wrap:wrap;
+}
+.footer-credit {display:flex;flex-direction:column;gap:5px}
+.footer-credit strong {color:var(--white);font-size:13px}
+.footer-credit a {color:var(--pink);text-decoration:none;font-weight:750}
+.footer-credit a:hover {text-decoration:underline}
+.footer-note {max-width:440px}
+@media(max-width:720px) {
+  .wrap {padding:16px}
+  header {align-items:flex-start;flex-wrap:wrap}
+  .brand strong {font-size:14px}
+  .brand small {font-size:9px}
+  .pill {font-size:9px;padding:6px 9px}
+  .hero {grid-template-columns:1fr;padding:35px 0 24px;gap:19px}
+  .hero h1 {font-size:clamp(39px,11vw,59px)}
+  .hero-card {padding:21px}
+  .stats {grid-template-columns:1fr;gap:10px}
+  .stat {padding:15px 17px}
+  .stat strong {font-size:20px}
+  .section-head {align-items:flex-start;flex-direction:column;margin-top:31px}
+  .section-head h2 {font-size:19px}
+  .controls {display:grid;grid-template-columns:1fr}
+  .controls input,.controls select {width:100%;min-width:0}
+  .table-hint {display:block}
+  .sources {grid-template-columns:1fr}
+  .source-card {padding:18px}
+  footer {flex-direction:column;gap:15px}
+}
+@media(prefers-reduced-motion:reduce) {
+  *,*:before,*:after {scroll-behavior:auto!important;transition:none!important}
+}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+<header>
+  <div class="brand">
+    <div class="logo">M</div>
+    <div>
+      <strong>MONSTIE CHARTS</strong>
+      <small>BABYMONSTER CHART TRACKER</small>
+    </div>
+  </div>
+  <span class="pill">FAN PROJECT · GRATIS</span>
+</header>
+
+<section class="hero">
+  <div>
+    <div class="eyebrow">TU CENTRO DE CHARTS</div>
+    <h1>Track the<br><span>MONSTERS.</span></h1>
+    <p>
+      Tu espacio para seguir los streams y las estadísticas musicales
+      de BABYMONSTER. Charts, datos y fuentes en un solo lugar.
+    </p>
+  </div>
+
+  <div class="hero-card">
+    <div class="eyebrow">CREADO POR UN FAN</div>
+    <strong>Para MONSTIE.<br>Con pasión. ♡</strong>
+    <p>
+      Un proyecto independiente creado por
+      <a class="credit-handle" href="https://x.com/cryforasa"
+         target="_blank" rel="noopener noreferrer">Luis Sequeira</a>.
+    </p>
+  </div>
+</section>
+
+<div class="notice" id="status" role="status" aria-live="polite">
+  Cargando datos…
+</div>
+
+<div class="stats">
+  <div class="stat">
+    <small>Artista</small>
+    <strong>BABYMONSTER</strong>
+  </div>
+  <div class="stat">
+    <small>Canciones detectadas</small>
+    <strong id="track-count">—</strong>
+  </div>
+  <div class="stat">
+    <small>Última actualización</small>
+    <strong id="updated" style="font-size:16px">—</strong>
+  </div>
+</div>
+
+<section>
+  <div class="section-head">
+    <div>
+      <h2>Spotify · estadísticas de canciones</h2>
+      <p>Streams totales y diarios recopilados de Kworb. No representa las posiciones del Spotify Top 200.</p>
+    </div>
+    <span class="pill">DATOS RECOPILADOS</span>
+  </div>
+
+  <div class="controls">
+    <input id="search" type="search" placeholder="⌕  Buscar canción…"
+           aria-label="Buscar canción">
+    <select id="sort" aria-label="Ordenar canciones">
+      <option value="daily">Mayor actividad diaria</option>
+      <option value="streams">Más streams totales</option>
+      <option value="name">Nombre A–Z</option>
+    </select>
+  </div>
+
+  <p class="table-hint">↔ Desliza la tabla hacia los lados para ver todas las columnas.</p>
+
+  <div class="table-wrap" tabindex="0" role="region"
+       aria-label="Tabla de estadísticas de Spotify; desplazable horizontalmente">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Canción</th>
+          <th>Streams totales</th>
+          <th>Streams diarios</th>
+          <th>Fuente</th>
+        </tr>
+      </thead>
+      <tbody id="rows">
+        <tr><td colspan="5">Cargando canciones…</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="section-head">
+    <div>
+      <h2>Explora más charts</h2>
+      <p>Fuentes externas para consultar estadísticas de BABYMONSTER.</p>
+    </div>
+  </div>
+
+  <div class="sources">
+    <div class="source-card">
+      <h3>Spotify · Kworb</h3>
+      <p>Estadísticas de canciones, streams diarios e históricos cuando estén disponibles.</p>
+      <a class="source"
+         href="https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html"
+         target="_blank" rel="noopener noreferrer">Consultar fuente ↗</a>
+    </div>
+
+    <div class="source-card">
+      <h3>iTunes · Kworb</h3>
+      <p>Consulta charts de iTunes y otros rankings disponibles por país.</p>
+      <a class="source"
+         href="https://kworb.net/itunes/artist/babymonster.html"
+         target="_blank" rel="noopener noreferrer">Consultar fuente ↗</a>
+    </div>
+
+    <div class="source-card">
+      <h3>YouTube Charts</h3>
+      <p>Explora rankings oficiales de música y vídeos de YouTube.</p>
+      <a class="source"
+         href="https://charts.youtube.com/"
+         target="_blank" rel="noopener noreferrer">Consultar fuente ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-credit">
+    <span>MONSTIE CHARTS</span>
+    <strong>Sitio creado por Luis Sequeira</strong>
+    <a href="https://x.com/cryforasa"
+       target="_blank" rel="noopener noreferrer">𝕏 @cryforasa ↗</a>
+  </div>
+
+  <div class="footer-note">
+    Proyecto fan no oficial. No afiliado a YG Entertainment, BABYMONSTER,
+    Spotify, YouTube ni Kworb. Las marcas y los datos pertenecen a sus
+    respectivos propietarios y fuentes.
+  </div>
+</footer>
+
+</div>
+
 <script>
-let tracks=[];
-const fmt=n=>Number.isFinite(Number(n))?Number(n).toLocaleString('en-US'):'—';
-function render(){const q=document.querySelector('#search').value.toLowerCase();const sort=document.querySelector('#sort').value;let list=tracks.filter(t=>t.title.toLowerCase().includes(q));list.sort((a,b)=>sort==='name'?a.title.localeCompare(b.title):sort==='streams'?b.streams-a.streams:b.daily-a.daily);
-document.querySelector('#rows').innerHTML=list.map((t,i)=>`<tr><td class="rank">${i+1}</td><td><strong>${t.title}</strong></td><td>${fmt(t.streams)}</td><td>${fmt(t.daily)}</td><td><a class="source" href="${t.source}" target="_blank" rel="noopener">Kworb ↗</a></td></tr>`).join('')||'<tr><td colspan="5">No hay resultados.</td></tr>'}
-document.querySelector('#search').addEventListener('input',render);document.querySelector('#sort').addEventListener('change',render);
-fetch('./data/spotify-songs.json').then(r=>{if(!r.ok)throw Error('Aún no hay datos publicados');return r.json()}).then(d=>{tracks=d.tracks||[];document.querySelector('#track-count').textContent=tracks.length;document.querySelector('#updated').textContent=d.updated_at||'—';document.querySelector('#status').textContent=`Datos de Kworb · actualizados: ${d.updated_at||'fecha no disponible'}. ${d.note||''}`;render()}).catch(e=>{document.querySelector('#status').textContent='Todavía no se han podido cargar datos automáticos. Ejecuta el workflow de GitHub Actions o consulta la fuente original.';document.querySelector('#rows').innerHTML='<tr><td colspan="5">Datos pendientes. Consulta <a href="https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html">Kworb</a>.</td></tr>'});
-</script></body></html>
+let tracks = [];
+
+const fmt = n => {
+  if (n === null || n === undefined || n === '') return '—';
+  const value = Number(String(n).replace(/,/g, ''));
+  return Number.isFinite(value) ? value.toLocaleString('en-US') : '—';
+};
+
+function render() {
+  const q = document.querySelector('#search').value.toLowerCase().trim();
+  const sort = document.querySelector('#sort').value;
+
+  const list = tracks.filter(t =>
+    String(t.title || '').toLowerCase().includes(q)
+  );
+
+  list.sort((a, b) => {
+    const streamsA = Number(String(a.streams ?? 0).replace(/,/g, '')) || 0;
+    const streamsB = Number(String(b.streams ?? 0).replace(/,/g, '')) || 0;
+    const dailyA = Number(String(a.daily ?? 0).replace(/,/g, '')) || 0;
+    const dailyB = Number(String(b.daily ?? 0).replace(/,/g, '')) || 0;
+
+    if (sort === 'name') {
+      return String(a.title || '').localeCompare(String(b.title || ''));
+    }
+    if (sort === 'streams') return streamsB - streamsA;
+    return dailyB - dailyA;
+  });
+
+  document.querySelector('#rows').innerHTML = list.map((t, i) => {
+    const source = typeof t.source === 'string' &&
+      /^https:\/\/kworb\.net\//.test(t.source)
+      ? t.source
+      : 'https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html';
+
+    const title = String(t.title || 'Sin título')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+
+    return `<tr>
+      <td class="rank">${i + 1}</td>
+      <td><strong>${title}</strong></td>
+      <td class="num">${fmt(t.streams)}</td>
+      <td class="num daily">${fmt(t.daily)}</td>
+      <td><a class="source" href="${source}" target="_blank" rel="noopener noreferrer">Kworb ↗</a></td>
+    </tr>`;
+  }).join('') || '<tr><td colspan="5">No se encontraron canciones.</td></tr>';
+}
+
+document.querySelector('#search').addEventListener('input', render);
+document.querySelector('#sort').addEventListener('change', render);
+
+fetch('./data/spotify-songs.json')
+  .then(r => {
+    if (!r.ok) throw Error('No se pudo cargar el archivo de datos');
+    return r.json();
+  })
+  .then(d => {
+    tracks = Array.isArray(d.tracks) ? d.tracks : [];
+
+    document.querySelector('#track-count').textContent = tracks.length;
+    document.querySelector('#updated').textContent = d.updated_at || '—';
+    document.querySelector('#status').textContent =
+      `Datos de Kworb · actualización: ${d.updated_at || 'fecha no disponible'}. ${d.note || ''}`;
+
+    render();
+  })
+  .catch(() => {
+    document.querySelector('#status').textContent =
+      'No se pudieron cargar los datos. Puedes consultar la fuente original mientras revisamos la actualización.';
+
+    document.querySelector('#rows').innerHTML =
+      '<tr><td colspan="5">Datos pendientes. Consulta <a href="https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html" target="_blank" rel="noopener noreferrer">Kworb ↗</a>.</td></tr>';
+  });
+</script>
+</body>
+  </html>
