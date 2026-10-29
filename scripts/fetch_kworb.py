@@ -52,6 +52,35 @@ def number(value):
     return int(digits) if digits else 0
 
 
+def validate_tracks(tracks, previous_count=0, previous_streams=0):
+    """Reject empty, duplicate, or suspiciously truncated source responses."""
+    if not tracks:
+        raise RuntimeError("Kworb no devolvió canciones; se conservan los datos anteriores.")
+    titles = [track["title"].strip().casefold() for track in tracks]
+    if len(titles) != len(set(titles)):
+        raise RuntimeError("Kworb devolvió títulos duplicados.")
+    if previous_count >= 10 and len(tracks) < max(5, previous_count // 2):
+        raise RuntimeError("Respuesta sospechosamente corta de Kworb; se conservan los datos anteriores.")
+    if previous_streams > 0 and sum(track["streams"] for track in tracks) == 0:
+        raise RuntimeError("Kworb devolvió cero streams totales; se conservan los datos anteriores.")
+    return tracks
+
+
+def previous_metrics():
+    try:
+        previous = json.loads(OUTPUT.read_text(encoding="utf-8"))
+        tracks = previous.get("tracks", [])
+        if not isinstance(tracks, list):
+            return 0, 0
+        return len(tracks), sum(
+            t.get("streams", 0) for t in tracks if isinstance(t, dict)
+            and isinstance(t.get("streams", 0), (int, float))
+            and not isinstance(t.get("streams", 0), bool)
+        )
+    except (OSError, json.JSONDecodeError, AttributeError):
+        return 0, 0
+
+
 def main():
     request = urllib.request.Request(
         URL, headers={"User-Agent": "MONSTIE-CHARTS/1.0"}
@@ -98,8 +127,11 @@ def main():
         if tracks:
             break
 
-    if not tracks:
-        sys.exit("No se encontró la tabla esperada en Kworb.")
+    old_count, old_streams = previous_metrics()
+    try:
+        validate_tracks(tracks, old_count, old_streams)
+    except RuntimeError as exc:
+        sys.exit(str(exc))
 
     payload = {
         "artist": "BABYMONSTER",
