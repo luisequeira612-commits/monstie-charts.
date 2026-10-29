@@ -163,6 +163,25 @@ tbody tr:last-child td { border-bottom:0; }
 .source-card h3 { margin:0 0 7px; font-size:15px; }
 .source-card p { font-size:12px; color:var(--muted); margin:0 0 15px; }
 
+
+.rankings-grid {
+  display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:15px;
+}
+.ranking-panel {
+  min-width:0; padding:22px; border:1px solid #ffffff12; border-radius:19px;
+  background:linear-gradient(145deg,#17131e,#100e15);
+}
+.ranking-panel h3 { margin:0; font-size:16px; letter-spacing:-.025em; }
+.ranking-panel > p { margin:5px 0 20px; color:var(--muted); font-size:12px; }
+.ranking-item { margin:15px 0; }
+.ranking-meta { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:7px; font-size:12px; }
+.ranking-meta strong { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.ranking-meta span { flex-shrink:0; color:#f7c3e3; font-weight:800; font-variant-numeric:tabular-nums; }
+.ranking-track { height:8px; overflow:hidden; border-radius:99px; background:#ffffff0c; }
+.ranking-fill { height:100%; border-radius:99px; background:linear-gradient(90deg,var(--pink),var(--purple)); }
+.ranking-empty { color:var(--muted); font-size:13px; }
+@media(max-width:720px) { .rankings-grid { grid-template-columns:1fr; } .ranking-panel { padding:18px; } }
+
 .youtube-summary {
   display:grid; grid-template-columns:repeat(2,minmax(0,1fr));
   gap:13px; margin:16px 0;
@@ -225,6 +244,100 @@ footer {
 @media(prefers-reduced-motion:reduce) {
   *,*:before,*:after { scroll-behavior:auto!important; transition:none!important; }
 }
+
+/* Monstie Charts — visual polish v2 */
+:root {
+  --bg:#09080d;
+  --panel:#121018;
+  --pink:#ff6fbd;
+  --purple:#a78bfa;
+  --muted:#a39aaf;
+  --line:#2b2635;
+  --white:#fbf8ff;
+  --green:#9deac5;
+}
+body {
+  background:
+    radial-gradient(ellipse at 76% 0%,#3a1740 0,transparent 30%),
+    radial-gradient(ellipse at 8% 22%,#211439 0,transparent 28%),
+    var(--bg);
+  letter-spacing:.005em;
+}
+.wrap { max-width:1240px; padding:28px clamp(16px,4vw,44px); }
+header { border-bottom-color:#ffffff12; padding-bottom:20px; }
+.logo { border-radius:14px; box-shadow:0 8px 28px #ff75c82a; }
+.brand strong { letter-spacing:.09em; }
+.pill { border-color:#ffffff20; background:#ffffff08; backdrop-filter:blur(12px); }
+.hero { padding:clamp(48px,7vw,88px) 0 36px; grid-template-columns:1.25fr .75fr; gap:clamp(24px,5vw,70px); }
+.hero h1 { font-size:clamp(44px,7.4vw,88px); letter-spacing:-.07em; }
+.hero p { max-width:560px; font-size:clamp(15px,1.5vw,18px); line-height:1.8; }
+.hero-card {
+  min-height:260px; display:flex; flex-direction:column; justify-content:center;
+  border-radius:28px; padding:clamp(24px,4vw,42px);
+  background:linear-gradient(145deg,#38213f 0%,#1c1526 55%,#121018 100%);
+  box-shadow:0 28px 90px #0005,inset 0 1px #ffffff12;
+}
+.hero-card:before {
+  content:""; position:absolute; width:190px; height:190px; border-radius:50%;
+  right:-40px; top:-55px; background:#ff75c818; filter:blur(2px);
+}
+.hero-card:after { font-size:clamp(110px,15vw,180px); right:0; bottom:-54px; color:#ff75c80d; }
+.hero-card strong { font-size:clamp(30px,4vw,44px); letter-spacing:-.055em; }
+.notice { border-radius:14px; padding:15px 18px; line-height:1.65; }
+.stats { gap:15px; }
+.stat,.source-card {
+  border-radius:19px; background:linear-gradient(145deg,#17131e,#100e15);
+  border-color:#ffffff12; box-shadow:inset 0 1px #ffffff05;
+}
+.stat { padding:22px; }
+.stat small { letter-spacing:.15em; }
+.stat strong { font-size:clamp(20px,2.5vw,28px); letter-spacing:-.04em; }
+.section-head { margin-top:48px; margin-bottom:20px; }
+.section-head h2 { font-size:clamp(20px,2.4vw,26px); letter-spacing:-.045em; }
+.controls input,.controls select { border-radius:12px; border-color:#ffffff18; background:#14111b; }
+.controls input:focus,.controls select:focus { border-color:var(--purple); }
+.table-wrap { border-color:#ffffff14; border-radius:18px; box-shadow:0 18px 50px #0002; }
+th { background:#1a1522; }
+th,td { padding:16px 18px; }
+tbody tr:hover { background:#ff75c809; }
+.source { border-color:#ffffff20; border-radius:9px; }
+.source:hover { background:#ff75c812; border-color:var(--pink); }
+.source-card { padding:22px; }
+.source-card h3 { font-size:16px; }
+.youtube-list { border-color:#ffffff14; border-radius:18px; }
+.youtube-video { padding:18px; }
+footer { border-top-color:#ffffff14; padding-top:28px; }
+.footer-credit strong { letter-spacing:-.02em; }
+@media(max-width:720px) {
+  .wrap { padding:16px; }
+  .hero { padding:42px 0 26px; gap:18px; }
+  .hero-card { min-height:220px; border-radius:22px; }
+  .stats { grid-template-columns:1fr; }
+  .stat { padding:17px 18px; }
+  .section-head { margin-top:36px; }
+  th,td { padding:13px 14px; }
+}
+@media(min-width:900px) {
+  .sources { gap:16px; }
+  .source-card { padding:25px; }
+}
+
+
+.site-nav {
+  display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+  padding:13px 0; border-bottom:1px solid #ffffff0c;
+}
+.site-nav a {
+  color:#d9d0e2; text-decoration:none; font-size:12px; font-weight:750;
+  padding:8px 12px; border:1px solid transparent; border-radius:10px;
+  transition:background .2s,border-color .2s;
+}
+.site-nav a span { color:var(--pink); margin-left:5px; }
+.site-nav a:hover { background:#ffffff08; border-color:#ffffff12; }
+.nav-note { margin-left:auto; color:var(--muted); font-size:9px; letter-spacing:.13em; }
+.nav-note i { display:inline-block; width:6px; height:6px; margin-right:7px; border-radius:50%; background:var(--green); box-shadow:0 0 10px #9deac577; }
+@media(max-width:520px) { .nav-note { display:none; } .site-nav { gap:2px; } .site-nav a { padding:8px 10px; } }
+
 </style>
 </head>
 
@@ -241,6 +354,14 @@ footer {
   </div>
   <span class="pill">FAN PROJECT · GRATIS</span>
 </header>
+<nav class="site-nav" aria-label="Navegación principal">
+  <a href="#spotify">Spotify <span>↘</span></a>
+  <a href="#youtube">YouTube <span>↘</span></a>
+  <a href="#rankings">Rankings <span>↘</span></a>
+  <a href="#sources">Fuentes <span>↘</span></a>
+  <span class="nav-note"><i></i> DATOS DE SEGUIMIENTO FAN</span>
+</nav>
+
 
 <section class="hero">
   <div>
@@ -309,6 +430,29 @@ footer {
         <tr><td colspan="5">Cargando canciones…</td></tr>
       </tbody>
     </table>
+  </div>
+</section>
+
+
+<section id="rankings">
+  <div class="section-head">
+    <div>
+      <h2>Rankings visuales</h2>
+      <p>Comparativa rápida calculada con los datos cargados en esta página.</p>
+    </div>
+    <span class="pill">TOP 5</span>
+  </div>
+  <div class="rankings-grid">
+    <div class="ranking-panel">
+      <h3>Spotify · actividad diaria</h3>
+      <p>Las cinco canciones con más streams diarios reportados.</p>
+      <div id="spotify-ranking" aria-live="polite"><div class="ranking-empty">Cargando ranking…</div></div>
+    </div>
+    <div class="ranking-panel">
+      <h3>YouTube · más vistas</h3>
+      <p>Los cinco videos con más vistas según el archivo de datos.</p>
+      <div id="youtube-ranking" aria-live="polite"><div class="ranking-empty">Cargando ranking…</div></div>
+    </div>
   </div>
 </section>
 
@@ -474,6 +618,7 @@ fetch('./data/spotify-songs.json')
     document.querySelector('#status').classList.add('ok');
 
     renderSpotify();
+    renderRankings();
   })
   .catch(() => {
     document.querySelector('#status').textContent =
@@ -482,6 +627,39 @@ fetch('./data/spotify-songs.json')
     document.querySelector('#rows').innerHTML =
       '<tr><td colspan="5">Datos temporalmente no disponibles. <a href="https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html" target="_blank" rel="noopener noreferrer">Consultar Kworb ↗</a></td></tr>';
   });
+
+
+function renderBarRanking(containerSelector, items, valueKey, labelKey) {
+  const container = document.querySelector(containerSelector);
+  if (!container) return;
+  const top = [...items]
+    .filter(item => Number.isFinite(parseNumber(item[valueKey])) && parseNumber(item[valueKey]) > 0)
+    .sort((a, b) => parseNumber(b[valueKey]) - parseNumber(a[valueKey]))
+    .slice(0, 5);
+  if (!top.length) {
+    container.innerHTML = '<div class="ranking-empty">No hay datos suficientes para mostrar el ranking.</div>';
+    return;
+  }
+  const max = parseNumber(top[0][valueKey]) || 1;
+  container.innerHTML = top.map((item, index) => {
+    const value = parseNumber(item[valueKey]);
+    const width = Math.max(2, value / max * 100);
+    return `<div class="ranking-item">
+      <div class="ranking-meta">
+        <strong title="${safeText(item[labelKey] || 'Sin título')}">${index + 1}. ${safeText(item[labelKey] || 'Sin título')}</strong>
+        <span>${fmt(value)}</span>
+      </div>
+      <div class="ranking-track" role="img" aria-label="${safeText(item[labelKey] || 'Sin título')}: ${fmt(value)}">
+        <div class="ranking-fill" style="width:${width}%"></div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderRankings() {
+  renderBarRanking('#spotify-ranking', tracks, 'daily', 'title');
+  renderBarRanking('#youtube-ranking', youtubeTracks, 'views', 'title');
+}
 
 function renderYouTube() {
   const q = document.querySelector('#yt-search').value.toLowerCase().trim();
@@ -562,6 +740,7 @@ fetch('./data/youtube-charts.json')
     }
 
     renderYouTube();
+    renderRankings();
   })
   .catch(() => {
     document.querySelector('#yt-count').textContent = '—';
