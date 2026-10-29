@@ -14,7 +14,8 @@ OUTPUT = ROOT / "data" / "youtube-charts.json"
 # Evita clasificar teasers, making films y clips promocionales como videoclips oficiales.
 EXCLUDE_TERMS = (
     "teaser", "making film", "highlight clip", "out now", "hits ",
-    "behind", "magazine", "reaction", "dance practice", "performance video"
+    "behind", "magazine", "reaction", "dance practice", "performance video",
+    "비하인드", "매거진", "댄스 프랙티스", "연습실", "리액션", "메이킹 필름"
 )
 INCLUDE_TERMS = ("m/v", " mv", "music video", "official video")
 
@@ -28,6 +29,17 @@ def api_get(endpoint, params):
     if not isinstance(payload, dict) or not isinstance(payload.get("items"), list):
         raise RuntimeError(f"YouTube API devolvió una respuesta inesperada para {endpoint}.")
     return payload
+
+
+def is_official_music_video(title):
+    """Conservative title-based filter; metadata cannot prove official status."""
+    if not isinstance(title, str):
+        return False
+    normalized = title.casefold().strip()
+    return (
+        any(term in normalized for term in INCLUDE_TERMS)
+        and not any(term in normalized for term in EXCLUDE_TERMS)
+    )
 
 
 def validate_tracks(tracks, candidates_count, previous_count=0):
@@ -99,10 +111,7 @@ def main():
         if not isinstance(snippet, dict):
             continue
         title = snippet.get("title", "")
-        normalized = title.casefold() if isinstance(title, str) else ""
-        if any(term in normalized for term in EXCLUDE_TERMS):
-            continue
-        if not any(term in normalized for term in INCLUDE_TERMS):
+        if not is_official_music_video(title):
             continue
         video_id = item.get("contentDetails", {}).get("videoId")
         if video_id and video_id not in seen_ids:
@@ -113,6 +122,7 @@ def main():
         raise RuntimeError("No se detectaron videoclips oficiales; no se reemplazan los datos existentes.")
 
     tracks = []
+    requested_ids = {video["id"] for video in candidates}
     for start in range(0, len(candidates), 50):
         batch = candidates[start:start + 50]
         stats = api_get("videos", {
@@ -136,6 +146,14 @@ def main():
                 "published_at": video["snippet"].get("publishedAt", "")
             })
 
+    returned_ids = {track.get("id") for track in tracks if isinstance(track, dict)}
+    if returned_ids != requested_ids:
+        missing = len(requested_ids - returned_ids)
+        unexpected = len(returned_ids - requested_ids)
+        raise RuntimeError(
+            f"YouTube devolvió estadísticas incompletas (faltan {missing}, inesperados {unexpected}); "
+            "se conservan los datos anteriores."
+        )
     validate_tracks(tracks, len(candidates), previous_count())
     tracks.sort(key=lambda video: video["views"], reverse=True)
     data = {
