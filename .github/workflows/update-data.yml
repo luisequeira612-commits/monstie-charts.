@@ -2,6 +2,11 @@ name: Actualizar datos de charts
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/update-data.yml"
+      - "scripts/**"
   schedule:
     - cron: "17 */6 * * *"
 
@@ -33,6 +38,9 @@ jobs:
       - name: Avisar si falta la clave de YouTube
         if: ${{ env.YOUTUBE_API_KEY == '' }}
         run: echo "YOUTUBE_API_KEY no está configurada; se conservan los últimos datos de YouTube disponibles."
+
+      - name: Validar archivos y estructura de datos
+        run: python scripts/validate_data.py
 
       - name: Guardar historial central de charts
         run: python scripts/snapshot_history.py
