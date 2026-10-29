@@ -63,7 +63,7 @@ def main():
         "itunes": {
             "updated_at": itunes.get("updated_at"),
             "track_count": len(itunes_tracks),
-            "total_points": sum(num(track.get("points")) for track in itunes_tracks if isinstance(track, dict) and track.get("points") is not None) if itunes_tracks else None,
+            "total_points": sum(num(track.get("points")) for track in itunes_tracks if isinstance(track, dict) and track.get("points") is not None) if any(isinstance(track, dict) and track.get("points") is not None for track in itunes_tracks) else None,
             "top_tracks": [{"title": track.get("title", "Sin título"), "rank": track.get("rank"), "points": track.get("points")} for track in sorted((t for t in itunes_tracks if isinstance(t, dict)), key=lambda t: (t.get("rank") is None, t.get("rank") or 999999))[:50]]
         },
         "youtube": {
