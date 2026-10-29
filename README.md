@@ -31,3 +31,10 @@ No se necesita token ni contraseña para esta fuente pública. No añadas secret
 
 ## Aviso
 Proyecto fan independiente, no afiliado a BABYMONSTER, YG Entertainment, Spotify, YouTube ni Kworb. Respeta términos y límites de cada fuente; este repositorio enlaza las fuentes originales y no pretende ser una API oficial.
+
+
+## Historial centralizado (actualización)
+- `scripts/snapshot_history.py` guarda capturas compartidas de Spotify y YouTube en `data/history.json`.
+- El workflow actualiza la captura del día cada seis horas y conserva hasta 365 fechas; cada fecha contiene agregados y rankings Top 50 para comparar tendencias.
+- El historial no es retroactivo: empieza con la primera ejecución correcta. El panel muestra las últimas 14 fechas disponibles.
+- YouTube requiere el secreto opcional `YOUTUBE_API_KEY`. Si falta, el workflow conserva el último archivo de datos disponible en lugar de fallar por ese motivo.
