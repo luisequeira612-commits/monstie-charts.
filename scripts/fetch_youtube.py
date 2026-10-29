@@ -66,6 +66,35 @@ def previous_count():
         return 0
 
 
+def validate_tracks(tracks, candidates_count, previous_count=0):
+    """Reject empty, duplicated, or suspiciously incomplete API responses."""
+    if candidates_count == 0:
+        raise RuntimeError("No se detectaron videoclips; se conservan los datos anteriores.")
+    if not tracks:
+        raise RuntimeError("YouTube no devolvió estadísticas; se conservan los datos anteriores.")
+    ids = [track.get("id") for track in tracks]
+    if any(not isinstance(video_id, str) or not video_id for video_id in ids):
+        raise RuntimeError("YouTube devolvió un ID de video inválido.")
+    if len(ids) != len(set(ids)):
+        raise RuntimeError("YouTube devolvió videos duplicados.")
+    if previous_count >= 4 and len(tracks) < max(2, previous_count // 2):
+        raise RuntimeError("Respuesta sospechosamente corta de YouTube; se conservan los datos anteriores.")
+    for track in tracks:
+        views = track.get("views")
+        if isinstance(views, bool) or not isinstance(views, int) or views < 0:
+            raise RuntimeError("YouTube devolvió un contador de vistas inválido.")
+    return tracks
+
+
+def previous_count():
+    try:
+        data = json.loads(OUTPUT.read_text(encoding="utf-8"))
+        tracks = data.get("tracks", [])
+        return len(tracks) if isinstance(tracks, list) else 0
+    except (OSError, json.JSONDecodeError, AttributeError):
+        return 0
+
+
 def main():
     if not API_KEY:
         print("YOUTUBE_API_KEY no configurada; se conservan los datos existentes.")
