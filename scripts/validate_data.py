@@ -13,7 +13,7 @@ FILES = {
     "youtube": ROOT / "data" / "youtube-charts.json",
     "history": ROOT / "data" / "history.json",
 }
-YOUTUBE_URL = re.compile(r"^https://www\\.youtube\\.com/watch\\?v=[A-Za-z0-9_-]{11}$")
+YOUTUBE_URL = re.compile(r"^https://www\.youtube\.com/watch\?v=[A-Za-z0-9_-]{11}$")
 
 
 def fail(message):
