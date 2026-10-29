@@ -64,6 +64,8 @@ def validate_history(history):
         dates.append(entry["date"])
         for platform in ("spotify", "youtube", "itunes"):
             section = entry.get(platform)
+            if platform == "itunes" and section is None:
+                continue
             if not isinstance(section, dict):
                 fail(f"{context}: falta el objeto {platform}.")
             for key in ("daily_streams", "total_streams", "total_views", "total_points"):
