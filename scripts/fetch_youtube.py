@@ -89,10 +89,11 @@ def main():
     except (KeyError, TypeError):
         raise RuntimeError("La respuesta del canal no contiene la lista de subidas esperada.")
 
+    # Recorrer todas las páginas de subidas, no solo las 250 más recientes.
+    # De lo contrario, videoclips clásicos como BATTER UP y SHEESH quedan fuera.
     videos = []
     page_token = None
-
-    for _ in range(5):
+    while True:
         params = {"part": "snippet,contentDetails", "playlistId": uploads_id, "maxResults": 50}
         if page_token:
             params["pageToken"] = page_token
@@ -104,6 +105,18 @@ def main():
 
     candidates = []
     seen_ids = set()
+    # Conservar también los videos previamente seguidos si ya no aparecen en la
+    # playlist de subidas, siempre que YouTube aún permita consultar sus datos.
+    try:
+        previous = json.loads(OUTPUT.read_text(encoding="utf-8"))
+        for old in previous.get("tracks", []):
+            video_id = old.get("id")
+            title = old.get("title", "")
+            if video_id and video_id not in seen_ids and is_official_music_video(title):
+                candidates.append({"id": video_id, "title": title})
+                seen_ids.add(video_id)
+    except (OSError, json.JSONDecodeError, AttributeError, TypeError):
+        pass
     for item in videos:
         if not isinstance(item, dict):
             continue
