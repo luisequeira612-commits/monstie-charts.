@@ -20,6 +20,14 @@ class SpotifyGuardTests(unittest.TestCase):
             fetch_kworb.validate_tracks(tracks, 20, 100)
 
 class YouTubeGuardTests(unittest.TestCase):
+    def test_accepts_official_music_video(self):
+        self.assertTrue(fetch_youtube.is_official_music_video("BABYMONSTER - CHOOM M/V"))
+    def test_rejects_korean_behind_the_scenes(self):
+        self.assertFalse(fetch_youtube.is_official_music_video("베몬 매거진 EP.1 로라의 춤 M/V 비하인드"))
+    def test_rejects_english_dance_practice(self):
+        self.assertFalse(fetch_youtube.is_official_music_video("BABYMONSTER - DANCE PRACTICE"))
+    def test_rejects_non_video_title(self):
+        self.assertFalse(fetch_youtube.is_official_music_video("BABYMONSTER interview"))
     def test_empty_candidates_rejected(self):
         with self.assertRaises(RuntimeError):
             fetch_youtube.validate_tracks([], 0, 6)
