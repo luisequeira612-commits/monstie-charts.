@@ -45,3 +45,7 @@ Proyecto fan independiente, no afiliado a BABYMONSTER, YG Entertainment, Spotify
 - La página muestra el movimiento de posición frente a la última captura de un día anterior solo si la fuente tiene una marca de actualización distinta. Si no hay histórico o la fuente no se ha actualizado, lo indica en lugar de inventar una variación.
 - El historial compartido conserva hasta 365 fechas UTC; la tabla de la página muestra las 14 más recientes. No existe histórico retroactivo anterior a la primera captura correcta.
 - Spotify muestra estadísticas de canciones reportadas por Kworb; YouTube muestra videos detectados por título en el canal oficial. Ninguno debe interpretarse como una clasificación oficial de charts de plataforma.
+
+
+## Tendencias históricas
+El dashboard grafica las últimas 14 capturas válidas para dos métricas separadas: streams diarios sumados de Spotify y vistas acumuladas de los videoclips detectados en YouTube. Las gráficas requieren al menos dos capturas reales; con una sola fecha muestran un mensaje de espera en lugar de inventar una tendencia.
