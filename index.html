@@ -287,6 +287,29 @@ footer {
   *,*:before,*:after { scroll-behavior:auto!important; transition:none!important; }
 }
 
+/* Compact, data-first dashboard header */
+.hero.hero-compact {
+  display:block;
+  padding:clamp(26px,4vw,46px) 0 18px;
+}
+.hero-compact h1 {
+  max-width:900px;
+  font-size:clamp(34px,5.5vw,62px);
+  line-height:1.02;
+  letter-spacing:-.06em;
+  margin:10px 0 12px;
+}
+.hero-compact p {
+  max-width:680px;
+  margin:0;
+  font-size:14px;
+  line-height:1.65;
+}
+@media(max-width:720px) {
+  .hero.hero-compact { padding:24px 0 16px; }
+  .hero-compact h1 { font-size:clamp(30px,8.5vw,44px); }
+}
+
 /* Monstie Charts — visual polish v2 */
 :root {
   --bg:#09080d;
@@ -407,19 +430,11 @@ footer { border-top-color:#ffffff14; padding-top:28px; }
 </nav>
 
 
-<section class="hero">
+<section class="hero hero-compact">
   <div>
-    <div class="eyebrow">TU CENTRO DE CHARTS</div>
-    <h1>Track the<br><span>MONSTERS.</span></h1>
-    <p>
-      Sigue los streams y las estadísticas musicales de BABYMONSTER.
-      Spotify, YouTube, charts y fuentes en un solo lugar.
-    </p>
-  </div>
-  <div class="hero-card">
-    <div class="eyebrow">BABYMONSTER</div>
-    <strong>Every chart.<br>Every stream.</strong>
-    <p>Estadísticas y seguimiento musical de BABYMONSTER.</p>
+    <div class="eyebrow">MUSIC PERFORMANCE DASHBOARD</div>
+    <h1>BABYMONSTER<br><span>CHART TRACKER</span></h1>
+    <p>Streams, charts y evolución musical en un solo lugar.</p>
   </div>
 </section>
 
