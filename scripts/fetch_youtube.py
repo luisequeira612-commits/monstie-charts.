@@ -109,7 +109,10 @@ def main():
         raise RuntimeError("No se encontró el canal oficial; comprueba @BABYMONSTER.")
 
     try:
+        try:
         uploads_id = channels[0]["contentDetails"]["relatedPlaylists"]["uploads"]
+    except (KeyError, TypeError):
+        raise RuntimeError("La respuesta del canal no contiene la lista de subidas esperada.")
     except (KeyError, TypeError):
         raise RuntimeError("La respuesta del canal no contiene la lista de subidas esperada.")
 
@@ -150,6 +153,9 @@ def main():
             "No se detectaron videoclips oficiales; no se reemplazan los datos existentes."
         )
 
+    if not candidates:
+        raise RuntimeError("No se detectaron videoclips oficiales; no se reemplazan los datos existentes.")
+
     tracks = []
     for start in range(0, len(candidates), 50):
         batch = candidates[start:start + 50]
@@ -174,6 +180,7 @@ def main():
                 "published_at": video["snippet"].get("publishedAt", "")
             })
 
+    validate_tracks(tracks, len(candidates), previous_count())
     validate_tracks(tracks, len(candidates), previous_count())
     tracks.sort(key=lambda video: video["views"], reverse=True)
     data = {
