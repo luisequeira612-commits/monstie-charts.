@@ -20,10 +20,43 @@ INCLUDE_TERMS = ("m/v", " mv", "music video", "official video")
 
 
 def api_get(endpoint, params):
-    params["key"] = API_KEY
-    url = f"{BASE_URL}/{endpoint}?{urllib.parse.urlencode(params)}"
+    request_params = dict(params)
+    request_params["key"] = API_KEY
+    url = f"{BASE_URL}/{endpoint}?{urllib.parse.urlencode(request_params)}"
     with urllib.request.urlopen(url, timeout=30) as response:
-        return json.load(response)
+        payload = json.load(response)
+    if not isinstance(payload, dict) or not isinstance(payload.get("items"), list):
+        raise RuntimeError(f"YouTube API devolvió una respuesta inesperada para {endpoint}.")
+    return payload
+
+
+def validate_tracks(tracks, candidates_count, previous_count=0):
+    """Reject empty, duplicated, or suspiciously incomplete API responses."""
+    if candidates_count == 0:
+        raise RuntimeError("No se detectaron videoclips; se conservan los datos anteriores.")
+    if not tracks:
+        raise RuntimeError("YouTube no devolvió estadísticas; se conservan los datos anteriores.")
+    ids = [track.get("id") for track in tracks]
+    if any(not isinstance(video_id, str) or not video_id for video_id in ids):
+        raise RuntimeError("YouTube devolvió un ID de video inválido.")
+    if len(ids) != len(set(ids)):
+        raise RuntimeError("YouTube devolvió videos duplicados.")
+    if previous_count >= 4 and len(tracks) < max(2, previous_count // 2):
+        raise RuntimeError("Respuesta sospechosamente corta de YouTube; se conservan los datos anteriores.")
+    for track in tracks:
+        views = track.get("views")
+        if isinstance(views, bool) or not isinstance(views, int) or views < 0:
+            raise RuntimeError("YouTube devolvió un contador de vistas inválido.")
+    return tracks
+
+
+def previous_count():
+    try:
+        data = json.loads(OUTPUT.read_text(encoding="utf-8"))
+        tracks = data.get("tracks", [])
+        return len(tracks) if isinstance(tracks, list) else 0
+    except (OSError, json.JSONDecodeError, AttributeError):
+        return 0
 
 
 def main():
@@ -35,11 +68,15 @@ def main():
         "part": "contentDetails",
         "forHandle": CHANNEL_HANDLE
     })
-    channels = channel_data.get("items", [])
-    if not channels:
+    channels = channel_data["items"]
+    if not channels or not isinstance(channels[0], dict):
         raise RuntimeError("No se encontró el canal oficial; comprueba @BABYMONSTER.")
 
-    uploads_id = channels[0]["contentDetails"]["relatedPlaylists"]["uploads"]
+    try:
+        uploads_id = channels[0]["contentDetails"]["relatedPlaylists"]["uploads"]
+    except (KeyError, TypeError):
+        raise RuntimeError("La respuesta del canal no contiene la lista de subidas esperada.")
+
     videos = []
     page_token = None
 
@@ -48,23 +85,32 @@ def main():
         if page_token:
             params["pageToken"] = page_token
         page = api_get("playlistItems", params)
-        videos.extend(page.get("items", []))
+        videos.extend(page["items"])
         page_token = page.get("nextPageToken")
         if not page_token:
             break
 
     candidates = []
+    seen_ids = set()
     for item in videos:
+        if not isinstance(item, dict):
+            continue
         snippet = item.get("snippet", {})
+        if not isinstance(snippet, dict):
+            continue
         title = snippet.get("title", "")
-        normalized = title.casefold()
+        normalized = title.casefold() if isinstance(title, str) else ""
         if any(term in normalized for term in EXCLUDE_TERMS):
             continue
         if not any(term in normalized for term in INCLUDE_TERMS):
             continue
         video_id = item.get("contentDetails", {}).get("videoId")
-        if video_id:
+        if video_id and video_id not in seen_ids:
             candidates.append({"id": video_id, "title": title})
+            seen_ids.add(video_id)
+
+    if not candidates:
+        raise RuntimeError("No se detectaron videoclips oficiales; no se reemplazan los datos existentes.")
 
     tracks = []
     for start in range(0, len(candidates), 50):
@@ -73,15 +119,24 @@ def main():
             "part": "statistics,snippet",
             "id": ",".join(video["id"] for video in batch)
         })
-        for video in stats.get("items", []):
+        for video in stats["items"]:
+            if not isinstance(video, dict) or not isinstance(video.get("snippet"), dict):
+                raise RuntimeError("YouTube devolvió un registro de video incompleto.")
+            try:
+                views = int(video.get("statistics", {})["viewCount"])
+                video_id = video["id"]
+                title = video["snippet"]["title"]
+            except (KeyError, TypeError, ValueError):
+                raise RuntimeError("YouTube devolvió estadísticas incompletas; se conserva el chart anterior.")
             tracks.append({
-                "id": video["id"],
-                "title": video["snippet"]["title"],
-                "views": int(video.get("statistics", {}).get("viewCount", 0)),
-                "url": f"https://www.youtube.com/watch?v={video['id']}",
+                "id": video_id,
+                "title": title,
+                "views": views,
+                "url": f"https://www.youtube.com/watch?v={video_id}",
                 "published_at": video["snippet"].get("publishedAt", "")
             })
 
+    validate_tracks(tracks, len(candidates), previous_count())
     tracks.sort(key=lambda video: video["views"], reverse=True)
     data = {
         "tracks": tracks,
