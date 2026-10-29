@@ -1,9 +1,9 @@
 [
   {
     "date": "2026-10-29",
-    "captured_at": "2026-10-29T09:09:26.024612+00:00",
+    "captured_at": "2026-10-29T09:23:12.553907+00:00",
     "spotify": {
-      "updated_at": "2026-10-29 09:09 UTC",
+      "updated_at": "2026-10-29 09:23 UTC",
       "track_count": 43,
       "daily_streams": 3009275,
       "total_streams": 2535096843,
@@ -226,44 +226,44 @@
       ]
     },
     "youtube": {
-      "updated_at": "2026-10-29T09:09:25.945338+00:00",
+      "updated_at": "2026-10-29T09:23:12.488657+00:00",
       "video_count": 6,
-      "total_views": 614772916,
+      "total_views": 614869425,
       "top_videos": [
         {
           "id": "x3eqqoZPV_E",
           "title": "BABYMONSTER - '춤 (CHOOM)' M/V",
-          "views": 205684296,
+          "views": 205685860,
           "url": "https://www.youtube.com/watch?v=x3eqqoZPV_E"
         },
         {
           "id": "naoGk-Zjc1s",
           "title": "BABYMONSTER - 'SUGAR HONEY ICE TEA' M/V",
-          "views": 148141340,
+          "views": 148143474,
           "url": "https://www.youtube.com/watch?v=naoGk-Zjc1s"
         },
         {
           "id": "9cS2wv6AfHk",
           "title": "BABYMONSTER - 'I LIKE IT' M/V",
-          "views": 102689109,
+          "views": 102690760,
           "url": "https://www.youtube.com/watch?v=9cS2wv6AfHk"
         },
         {
           "id": "xXZwZ0DolJc",
           "title": "BABYMONSTER - 'MOON' M/V",
-          "views": 90019838,
+          "views": 90021245,
           "url": "https://www.youtube.com/watch?v=xXZwZ0DolJc"
         },
         {
           "id": "oC6brLXQe4I",
           "title": "BABYMONSTER - 'DESERVE' M/V",
-          "views": 67307394,
+          "views": 67397146,
           "url": "https://www.youtube.com/watch?v=oC6brLXQe4I"
         },
         {
           "id": "8ZAwr530ftw",
           "title": "베몬 매거진 EP.1 로라의 '춤 (CHOOM)' M/V 비하인드 ₊˚⊹",
-          "views": 930939,
+          "views": 930940,
           "url": "https://www.youtube.com/watch?v=8ZAwr530ftw"
         }
       ]
