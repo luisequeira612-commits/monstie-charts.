@@ -1,0 +1,65 @@
+name: Quality checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "index.html"
+      - "data/**"
+      - "scripts/**"
+      - ".github/workflows/quality-checks.yml"
+      - ".github/workflows/update-data.yml"
+  pull_request:
+    paths:
+      - "index.html"
+      - "data/**"
+      - "scripts/**"
+      - ".github/workflows/quality-checks.yml"
+      - ".github/workflows/update-data.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate data and application code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Validate published data
+        run: python scripts/validate_data.py
+
+      - name: Check Python syntax
+        run: python -m py_compile scripts/*.py
+
+      - name: Check inline JavaScript syntax
+        run: |
+          python - <<'PY'
+          import re
+          from pathlib import Path
+
+          html = Path("index.html").read_text(encoding="utf-8")
+          scripts = re.findall(
+              r"<script\b(?![^>]*\bsrc\s*=)[^>]*>(.*?)</script\s*>",
+              html,
+              flags=re.IGNORECASE | re.DOTALL,
+          )
+          if not scripts:
+              raise SystemExit("No se encontró JavaScript inline para validar.")
+          Path("/tmp/index-inline.js").write_text("\n;\n".join(scripts), encoding="utf-8")
+          print(f"Validando {len(scripts)} bloque(s) de JavaScript inline.")
+          PY
+          node --check /tmp/index-inline.js
