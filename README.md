@@ -38,3 +38,10 @@ Proyecto fan independiente, no afiliado a BABYMONSTER, YG Entertainment, Spotify
 - El workflow actualiza la captura del día cada seis horas y conserva hasta 365 fechas; cada fecha contiene agregados y rankings Top 50 para comparar tendencias.
 - El historial no es retroactivo: empieza con la primera ejecución correcta. El panel muestra las últimas 14 fechas disponibles.
 - YouTube requiere el secreto opcional `YOUTUBE_API_KEY`. Si falta, el workflow conserva el último archivo de datos disponible en lugar de fallar por ese motivo.
+
+
+## Calidad de datos y movimientos de ranking
+- El workflow valida los JSON de Spotify, YouTube e historial antes de publicar una captura.
+- La página muestra el movimiento de posición frente a la última captura de un día anterior solo si la fuente tiene una marca de actualización distinta. Si no hay histórico o la fuente no se ha actualizado, lo indica en lugar de inventar una variación.
+- El historial compartido conserva hasta 365 fechas UTC; la tabla de la página muestra las 14 más recientes. No existe histórico retroactivo anterior a la primera captura correcta.
+- Spotify muestra estadísticas de canciones reportadas por Kworb; YouTube muestra videos detectados por título en el canal oficial. Ninguno debe interpretarse como una clasificación oficial de charts de plataforma.
