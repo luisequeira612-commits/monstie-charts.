@@ -1,13 +1,18 @@
 [
   {
     "date": "2026-10-29",
-    "captured_at": "2026-10-29T10:21:29.920083+00:00",
+    "captured_at": "2026-10-29T10:26:13.332183+00:00",
     "spotify": {
-      "updated_at": "2026-10-29 10:21 UTC",
+      "updated_at": "2026-10-29 10:26 UTC",
       "track_count": 43,
-      "daily_streams": 3009275,
+      "daily_streams": 3906147,
       "total_streams": 2535096843,
       "top_tracks": [
+        {
+          "title": "DESERVE",
+          "daily": 896872,
+          "streams": 4633806
+        },
         {
           "title": "CHOOM",
           "daily": 323536,
@@ -217,16 +222,11 @@
           "title": "Love, Maybe - Live Version",
           "daily": 2491,
           "streams": 1189566
-        },
-        {
-          "title": "DESERVE",
-          "daily": 0,
-          "streams": 4633806
         }
       ]
     },
     "itunes": {
-      "updated_at": "2026-10-29 10:21 UTC",
+      "updated_at": "2026-10-29 10:26 UTC",
       "track_count": 1,
       "total_points": null,
       "top_tracks": [
@@ -238,128 +238,128 @@
       ]
     },
     "youtube": {
-      "updated_at": "2026-10-29T10:21:28.712391+00:00",
+      "updated_at": "2026-10-29T10:26:12.428292+00:00",
       "video_count": 23,
-      "total_views": 3314472786,
+      "total_views": 3314516670,
       "top_videos": [
         {
           "id": "2wA_b6YHjqQ",
           "title": "BABYMONSTER - ‘SHEESH’ M/V",
-          "views": 424429126,
+          "views": 424429439,
           "url": "https://www.youtube.com/watch?v=2wA_b6YHjqQ"
         },
         {
           "id": "Zp-Jhuhq0bQ",
           "title": "BABYMONSTER - 'DRIP' M/V",
-          "views": 417554282,
+          "views": 417555527,
           "url": "https://www.youtube.com/watch?v=Zp-Jhuhq0bQ"
         },
         {
           "id": "olDWm2veCrM",
           "title": "BABYMONSTER - 'BATTER UP' M/V",
-          "views": 353371991,
+          "views": 353372328,
           "url": "https://www.youtube.com/watch?v=olDWm2veCrM"
         },
         {
           "id": "eJCHKjt0MPw",
           "title": "BABYMONSTER - ‘FOREVER’ M/V",
-          "views": 270340304,
+          "views": 270340698,
           "url": "https://www.youtube.com/watch?v=eJCHKjt0MPw"
         },
         {
           "id": "yd_uG3TtREs",
           "title": "BABYMONSTER - ‘PSYCHO’ M/V",
-          "views": 230741244,
+          "views": 230742235,
           "url": "https://www.youtube.com/watch?v=yd_uG3TtREs"
         },
         {
           "id": "wlHwjkYpSr0",
           "title": "BABYMONSTER - ‘WE GO UP’ M/V",
-          "views": 228266382,
+          "views": 228266761,
           "url": "https://www.youtube.com/watch?v=wlHwjkYpSr0"
         },
         {
           "id": "x3eqqoZPV_E",
           "title": "BABYMONSTER - '춤 (CHOOM)' M/V",
-          "views": 205701067,
+          "views": 205702772,
           "url": "https://www.youtube.com/watch?v=x3eqqoZPV_E"
         },
         {
           "id": "xn8mQqz2xmM",
           "title": "BABYMONSTER - ‘HOT SAUCE’ M/V",
-          "views": 179333984,
+          "views": 179334280,
           "url": "https://www.youtube.com/watch?v=xn8mQqz2xmM"
         },
         {
           "id": "naoGk-Zjc1s",
           "title": "BABYMONSTER - 'SUGAR HONEY ICE TEA' M/V",
-          "views": 148153962,
+          "views": 148155080,
           "url": "https://www.youtube.com/watch?v=naoGk-Zjc1s"
         },
         {
           "id": "GsV1i0QHi-o",
           "title": "BABYMONSTER - 'Stuck In The Middle' M/V",
-          "views": 141978703,
+          "views": 141978837,
           "url": "https://www.youtube.com/watch?v=GsV1i0QHi-o"
         },
         {
           "id": "o0oW3lPoOXM",
           "title": "BABYMONSTER - 'CLIK CLAK' M/V",
-          "views": 137971546,
+          "views": 137971698,
           "url": "https://www.youtube.com/watch?v=o0oW3lPoOXM"
         },
         {
           "id": "XShaIZs7J7M",
           "title": "BABYMONSTER - ‘Really Like You’ M/V",
-          "views": 134084387,
+          "views": 134084814,
           "url": "https://www.youtube.com/watch?v=XShaIZs7J7M"
         },
         {
           "id": "9cS2wv6AfHk",
           "title": "BABYMONSTER - 'I LIKE IT' M/V",
-          "views": 102699677,
+          "views": 102700392,
           "url": "https://www.youtube.com/watch?v=9cS2wv6AfHk"
         },
         {
           "id": "xXZwZ0DolJc",
           "title": "BABYMONSTER - 'MOON' M/V",
-          "views": 90027943,
+          "views": 90028721,
           "url": "https://www.youtube.com/watch?v=xXZwZ0DolJc"
         },
         {
           "id": "1kXLsrun51s",
           "title": "BABYMONSTER - 'Love In My Heart' M/V",
-          "views": 89506801,
+          "views": 89506996,
           "url": "https://www.youtube.com/watch?v=1kXLsrun51s"
         },
         {
           "id": "SbdOIdg2McI",
           "title": "BABYMONSTER - ‘SUPA DUPA LUV’ M/V",
-          "views": 85201410,
+          "views": 85201666,
           "url": "https://www.youtube.com/watch?v=SbdOIdg2McI"
         },
         {
           "id": "oC6brLXQe4I",
           "title": "BABYMONSTER - 'DESERVE' M/V",
-          "views": 67780470,
+          "views": 67814924,
           "url": "https://www.youtube.com/watch?v=oC6brLXQe4I"
         },
         {
           "id": "2kggJShvtUU",
           "title": "[HELLO MONSTERS] ‘Really Like You’ M/V SPOILER MESSAGE",
-          "views": 3509774,
+          "views": 3509776,
           "url": "https://www.youtube.com/watch?v=2kggJShvtUU"
         },
         {
           "id": "wvqmq7xLQ6U",
           "title": "BABYMONSTER – ‘PSYCHO’ M/V SPOILER — ASA Freestyle Take #BABYMONSTER #2ndMINIALBUM #WEGOUP #PSYCHO",
-          "views": 1626299,
+          "views": 1626286,
           "url": "https://www.youtube.com/watch?v=wvqmq7xLQ6U"
         },
         {
           "id": "hA6qJscXq6g",
           "title": "BABYMONSTER – ‘PSYCHO’ M/V SPOILER — ASA Freestyle Take",
-          "views": 987563,
+          "views": 987569,
           "url": "https://www.youtube.com/watch?v=hA6qJscXq6g"
         },
         {
