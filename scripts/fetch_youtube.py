@@ -31,42 +31,6 @@ def api_get(endpoint, params):
 
 
 def validate_tracks(tracks, candidates_count, previous_count=0):
-    """Keep empty or truncated API responses from erasing a usable chart."""
-    if candidates_count == 0:
-        raise RuntimeError(
-            "No se detectaron videoclips con los filtros actuales; se conservan los datos anteriores."
-        )
-    if not tracks:
-        raise RuntimeError(
-            "YouTube no devolvió estadísticas para los videos candidatos; se conservan los datos anteriores."
-        )
-    ids = [track.get("id") for track in tracks]
-    if any(not isinstance(video_id, str) or not video_id for video_id in ids):
-        raise RuntimeError("YouTube devolvió un ID de video inválido.")
-    if len(ids) != len(set(ids)):
-        raise RuntimeError("YouTube devolvió videos duplicados; se rechaza la actualización.")
-    if previous_count >= 4 and len(tracks) < max(2, previous_count // 2):
-        raise RuntimeError(
-            f"Respuesta sospechosamente corta de YouTube ({len(tracks)} videos frente a "
-            f"{previous_count} anteriores); se conservan los datos anteriores."
-        )
-    for track in tracks:
-        views = track.get("views")
-        if isinstance(views, bool) or not isinstance(views, int) or views < 0:
-            raise RuntimeError("YouTube devolvió un contador de vistas inválido.")
-    return tracks
-
-
-def previous_count():
-    try:
-        data = json.loads(OUTPUT.read_text(encoding="utf-8"))
-        tracks = data.get("tracks", [])
-        return len(tracks) if isinstance(tracks, list) else 0
-    except (OSError, json.JSONDecodeError, AttributeError):
-        return 0
-
-
-def validate_tracks(tracks, candidates_count, previous_count=0):
     """Reject empty, duplicated, or suspiciously incomplete API responses."""
     if candidates_count == 0:
         raise RuntimeError("No se detectaron videoclips; se conservan los datos anteriores.")
@@ -109,10 +73,7 @@ def main():
         raise RuntimeError("No se encontró el canal oficial; comprueba @BABYMONSTER.")
 
     try:
-        try:
         uploads_id = channels[0]["contentDetails"]["relatedPlaylists"]["uploads"]
-    except (KeyError, TypeError):
-        raise RuntimeError("La respuesta del canal no contiene la lista de subidas esperada.")
     except (KeyError, TypeError):
         raise RuntimeError("La respuesta del canal no contiene la lista de subidas esperada.")
 
@@ -149,11 +110,6 @@ def main():
             seen_ids.add(video_id)
 
     if not candidates:
-        raise RuntimeError(
-            "No se detectaron videoclips oficiales; no se reemplazan los datos existentes."
-        )
-
-    if not candidates:
         raise RuntimeError("No se detectaron videoclips oficiales; no se reemplazan los datos existentes.")
 
     tracks = []
@@ -180,7 +136,6 @@ def main():
                 "published_at": video["snippet"].get("publishedAt", "")
             })
 
-    validate_tracks(tracks, len(candidates), previous_count())
     validate_tracks(tracks, len(candidates), previous_count())
     tracks.sort(key=lambda video: video["views"], reverse=True)
     data = {
