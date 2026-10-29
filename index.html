@@ -164,6 +164,16 @@ tbody tr:last-child td { border-bottom:0; }
 .source-card p { font-size:12px; color:var(--muted); margin:0 0 15px; }
 
 
+
+.history-panel {
+  padding:22px; border:1px solid #ffffff12; border-radius:19px;
+  background:linear-gradient(145deg,#17131e,#100e15); overflow-x:auto;
+}
+.history-note { color:var(--muted); font-size:12px; margin:6px 0 18px; }
+.history-table { min-width:560px; }
+.history-empty { color:var(--muted); font-size:13px; padding:12px 0; }
+.history-value { color:#f7c3e3; font-weight:800; font-variant-numeric:tabular-nums; }
+
 .rankings-grid {
   display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:15px;
 }
@@ -358,6 +368,7 @@ footer { border-top-color:#ffffff14; padding-top:28px; }
   <a href="#spotify">Spotify <span>↘</span></a>
   <a href="#youtube">YouTube <span>↘</span></a>
   <a href="#rankings">Rankings <span>↘</span></a>
+  <a href="#history">Historial <span>↘</span></a>
   <a href="#sources">Fuentes <span>↘</span></a>
   <span class="nav-note"><i></i> DATOS DE SEGUIMIENTO FAN</span>
 </nav>
@@ -494,6 +505,26 @@ footer { border-top-color:#ffffff14; padding-top:28px; }
   </div>
 </section>
 
+
+<section id="history">
+  <div class="section-head">
+    <div>
+      <h2>Historial de estadísticas</h2>
+      <p>Registro de las cifras observadas cuando visitas esta página.</p>
+    </div>
+    <span class="pill">ÚLTIMAS 14 FECHAS</span>
+  </div>
+  <div class="history-panel">
+    <p class="history-note">Este historial se guarda solo en este navegador y dispositivo. Se actualiza al abrir la página; no es un archivo histórico global ni recupera datos anteriores a la primera visita.</p>
+    <div class="table-wrap">
+      <table class="history-table">
+        <thead><tr><th>Fecha</th><th>Streams diarios Spotify</th><th>Streams totales Spotify</th><th>Vistas YouTube</th></tr></thead>
+        <tbody id="history-rows"><tr><td colspan="4">Preparando historial…</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
 <section id="sources">
   <div class="section-head">
     <div>
@@ -619,6 +650,7 @@ fetch('./data/spotify-songs.json')
 
     renderSpotify();
     renderRankings();
+    saveHistorySnapshot();
   })
   .catch(() => {
     document.querySelector('#status').textContent =
@@ -628,6 +660,46 @@ fetch('./data/spotify-songs.json')
       '<tr><td colspan="5">Datos temporalmente no disponibles. <a href="https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html" target="_blank" rel="noopener noreferrer">Consultar Kworb ↗</a></td></tr>';
   });
 
+
+
+const HISTORY_KEY = 'monstie-charts-history-v1';
+function renderHistory() {
+  const tbody = document.querySelector('#history-rows');
+  if (!tbody) return;
+  let history = [];
+  try {
+    const saved = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+    history = Array.isArray(saved) ? saved : [];
+  } catch (_) {
+    history = [];
+  }
+  tbody.innerHTML = history.slice().sort((a,b) => b.date.localeCompare(a.date)).map(item => `<tr>
+    <td>${safeText(item.date)}</td>
+    <td class="num">${fmt(item.spotifyDaily)}</td>
+    <td class="num">${fmt(item.spotifyTotal)}</td>
+    <td class="history-value">${fmt(item.youtubeViews)}</td>
+  </tr>`).join('') || '<tr><td colspan="4" class="history-empty">Todavía no hay registros. Se guardará una captura al cargar los datos.</td></tr>';
+}
+function saveHistorySnapshot() {
+  if (!tracks.length && !youtubeTracks.length) { renderHistory(); return; }
+  const date = new Date().toLocaleDateString('en-CA');
+  const snapshot = {
+    date,
+    spotifyDaily: tracks.reduce((sum,t) => sum + parseNumber(t.daily), 0),
+    spotifyTotal: tracks.reduce((sum,t) => sum + parseNumber(t.streams), 0),
+    youtubeViews: youtubeTracks.reduce((sum,v) => sum + parseNumber(v.views), 0)
+  };
+  try {
+    const saved = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+    const history = Array.isArray(saved) ? saved.filter(item => item && item.date !== date) : [];
+    history.push(snapshot);
+    history.sort((a,b) => a.date.localeCompare(b.date));
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(history.slice(-14)));
+  } catch (_) {
+    // The dashboard remains usable if local storage is blocked or full.
+  }
+  renderHistory();
+}
 
 function renderBarRanking(containerSelector, items, valueKey, labelKey) {
   const container = document.querySelector(containerSelector);
@@ -741,6 +813,7 @@ fetch('./data/youtube-charts.json')
 
     renderYouTube();
     renderRankings();
+    saveHistorySnapshot();
   })
   .catch(() => {
     document.querySelector('#yt-count').textContent = '—';
