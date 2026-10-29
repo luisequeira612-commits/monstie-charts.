@@ -122,6 +122,11 @@ p { color:#c7becf; }
 }
 .section-head h2 { margin:0; font-size:21px; letter-spacing:-.025em; }
 .section-head p { margin:4px 0 0; color:var(--muted); font-size:12px; }
+.table-toolbar { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:4px 0 8px; }
+.table-toolbar .table-hint { margin:0; }
+.secondary-button { border:1px solid var(--line); border-radius:999px; background:var(--surface); color:var(--text); padding:9px 14px; font:inherit; font-size:12px; font-weight:700; cursor:pointer; white-space:nowrap; }
+.secondary-button:hover { border-color:var(--pink); }
+@media(max-width:520px) { .table-toolbar { align-items:flex-start; flex-direction:column; } }
 .controls { display:flex; flex-wrap:wrap; gap:10px; margin:15px 0; }
 .controls input,.controls select {
   background:var(--panel); border:1px solid var(--line);
@@ -455,6 +460,7 @@ footer { border-top-color:#ffffff14; padding-top:28px; }
     </select>
   </div>
 
+  <div class="table-toolbar"><p class="table-hint" id="spotify-count-hint">Mostrando las 10 canciones con mayor actividad diaria.</p><button id="toggle-all-tracks" class="secondary-button" type="button" aria-expanded="false">Ver las 43 canciones</button></div>
   <p class="table-hint">↔ Desliza la tabla hacia los lados para ver todas las columnas.</p>
 
   <div class="table-wrap" tabindex="0" role="region" aria-label="Tabla de estadísticas de Spotify">
@@ -620,6 +626,7 @@ footer { border-top-color:#ffffff14; padding-top:28px; }
 'use strict';
 
 let tracks = [];
+let showAllSpotifyTracks = false;
 let youtubeTracks = [];
 let itunesTracks = [];
 let itunesUpdatedAt = null;
@@ -675,7 +682,20 @@ function renderSpotify() {
     return parseNumber(b.daily) - parseNumber(a.daily);
   });
 
-  document.querySelector('#rows').innerHTML = list.map((t, i) => {
+  const visibleList = showAllSpotifyTracks || q ? list : list.slice(0, 10);
+  const countHint = document.querySelector('#spotify-count-hint');
+  const toggleButton = document.querySelector('#toggle-all-tracks');
+  if (countHint) countHint.textContent = q
+    ? `Resultados: ${visibleList.length} de ${tracks.length} canciones.`
+    : showAllSpotifyTracks
+      ? `Mostrando las ${list.length} canciones ordenadas según tu selección.`
+      : `Mostrando ${Math.min(10, list.length)} de ${list.length} canciones; el resto sigue disponible.`;
+  if (toggleButton) {
+    toggleButton.hidden = Boolean(q) || list.length <= 10;
+    toggleButton.textContent = showAllSpotifyTracks ? 'Mostrar solo Top 10' : `Ver las ${list.length} canciones`;
+    toggleButton.setAttribute('aria-expanded', String(showAllSpotifyTracks));
+  }
+  document.querySelector('#rows').innerHTML = visibleList.map((t, i) => {
     const source = typeof t.source === 'string' &&
       /^https:\/\/kworb\.net\//i.test(t.source)
       ? t.source
@@ -694,6 +714,10 @@ function renderSpotify() {
 
 document.querySelector('#search').addEventListener('input', renderSpotify);
 document.querySelector('#sort').addEventListener('change', renderSpotify);
+document.querySelector('#toggle-all-tracks').addEventListener('click', () => {
+  showAllSpotifyTracks = !showAllSpotifyTracks;
+  renderSpotify();
+});
 
 fetch('./data/spotify-songs.json')
   .then(response => {
