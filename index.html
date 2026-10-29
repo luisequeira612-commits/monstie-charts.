@@ -407,6 +407,26 @@ footer { border-top-color:#ffffff14; padding-top:28px; }
 .source-disclosure summary { cursor:pointer; width:fit-content; }
 .source-disclosure p { max-width:760px; margin:8px 0 0; line-height:1.6; }
 .source-disclosure a { color:inherit; text-decoration:underline; text-underline-offset:3px; }
+
+/* Milestones and growth */
+.milestone-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+.milestone-card { min-width:0; padding:20px; border:1px solid #ffffff14; border-radius:17px; background:linear-gradient(145deg,#191420,#100e15); }
+.milestone-card .milestone-kicker { display:block; color:var(--pink); font-size:10px; font-weight:850; letter-spacing:.13em; text-transform:uppercase; }
+.milestone-card strong { display:block; margin:9px 0 5px; font-size:clamp(18px,2.4vw,25px); letter-spacing:-.04em; overflow-wrap:anywhere; }
+.milestone-card p { margin:0; color:var(--muted); font-size:12px; }
+.growth-toolbar { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 16px; }
+.growth-range { border:1px solid var(--line); border-radius:999px; background:#14111b; color:#d9d0e2; padding:8px 13px; font:inherit; font-size:11px; font-weight:750; cursor:pointer; }
+.growth-range[aria-pressed="true"] { border-color:var(--pink); background:#ff75c814; color:#ffc4e6; }
+.growth-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
+.growth-card { padding:18px; border:1px solid #ffffff14; border-radius:16px; background:linear-gradient(145deg,#17131e,#100e15); min-width:0; }
+.growth-card small { display:block; color:var(--muted); font-size:10px; text-transform:uppercase; letter-spacing:.09em; }
+.growth-card strong { display:block; font-size:clamp(18px,2vw,24px); margin:8px 0 3px; overflow-wrap:anywhere; font-variant-numeric:tabular-nums; }
+.growth-card span { color:var(--muted); font-size:11px; }
+.growth-up { color:var(--green)!important; } .growth-down { color:#ff9db6!important; }
+.growth-empty { color:var(--muted); font-size:13px; padding:12px 0; }
+@media(max-width:850px) { .milestone-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .growth-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-width:460px) { .milestone-grid,.growth-grid { grid-template-columns:1fr; } .milestone-card,.growth-card { padding:16px; } }
+
 </style>
 </head>
 
@@ -428,6 +448,8 @@ footer { border-top-color:#ffffff14; padding-top:28px; }
   <a href="#youtube">YouTube <span>↘</span></a>
   <a href="#itunes">iTunes <span>↘</span></a>
   <a href="#rankings">Rankings <span>↘</span></a>
+  <a href="#milestones">Hitos <span>↘</span></a>
+  <a href="#growth">Crecimiento <span>↘</span></a>
   <a href="#history">Historial <span>↘</span></a>
   <span class="nav-note"><i></i> DATOS DE SEGUIMIENTO FAN</span>
 </nav>
@@ -459,6 +481,19 @@ footer { border-top-color:#ffffff14; padding-top:28px; }
     <strong id="updated" style="font-size:16px">—</strong>
   </div>
 </div>
+
+<section id="milestones">
+  <div class="section-head">
+    <div>
+      <h2>Récords e hitos</h2>
+      <p>Logros calculados con las canciones y videoclips que sigue este dashboard; no representan todo el catálogo de las plataformas.</p>
+    </div>
+    <span class="pill">MILESTONES</span>
+  </div>
+  <div id="milestone-grid" class="milestone-grid" aria-live="polite">
+    <div class="milestone-card"><span class="milestone-kicker">Preparando datos</span><strong>Calculando hitos…</strong><p>Se actualizarán al cargar los charts.</p></div>
+  </div>
+</section>
 
 <section id="spotify">
   <div class="section-head">
@@ -561,6 +596,24 @@ footer { border-top-color:#ffffff14; padding-top:28px; }
   <div class="section-head"><div><h2>iTunes Worldwide · canciones en chart</h2><p>Canciones de BABYMONSTER detectadas en el chart mundial; no es un ranking oficial de Apple.</p></div><span class="pill">ITUNES WORLDWIDE</span></div>
   <div class="notice" id="itunes-status" role="status" aria-live="polite">Cargando chart de iTunes…</div>
   <div class="youtube-list" id="itunes-rows"><div class="youtube-empty">Cargando canciones…</div></div>
+</section>
+
+<section id="growth">
+  <div class="section-head">
+    <div>
+      <h2>Crecimiento de BABYMONSTER</h2>
+      <p>Comparación entre capturas históricas reales. No se interpolan fechas sin datos.</p>
+    </div>
+    <span class="pill">PERFORMANCE</span>
+  </div>
+  <div class="history-panel">
+    <div class="growth-toolbar" role="group" aria-label="Período de comparación">
+      <button class="growth-range" type="button" data-growth-days="7" aria-pressed="true">7 días</button>
+      <button class="growth-range" type="button" data-growth-days="30" aria-pressed="false">30 días</button>
+      <button class="growth-range" type="button" data-growth-days="365" aria-pressed="false">Todo el historial</button>
+    </div>
+    <div id="growth-grid" class="growth-grid" aria-live="polite"><div class="growth-empty">Cargando capturas históricas…</div></div>
+  </div>
 </section>
 
 <section id="history">
@@ -727,6 +780,7 @@ fetch('./data/spotify-songs.json')
     renderSpotify();
     renderRankings();
     renderHistory();
+    renderAchievements();
   })
   .catch(() => {
     document.querySelector('#status').textContent =
@@ -760,6 +814,7 @@ fetch('./data/itunes-charts.json')
     status.classList.add('ok');
     renderITunes();
     renderHistory();
+    renderAchievements();
   })
   .catch(() => {
     document.querySelector('#itunes-status').textContent = 'No se pudo cargar el chart de iTunes. Estamos revisando la actualización; vuelve a intentarlo más tarde.';
@@ -844,6 +899,81 @@ function renderTrendChart(containerId, platform, valueKey, strokeColor) {
     '</svg>';
 }
 
+
+let growthDays = 7;
+
+function renderAchievements() {
+  const container = document.querySelector('#milestone-grid');
+  if (!container) return;
+  const spotifyTotal = tracks.length ? tracks.reduce((sum, track) => sum + parseNumber(track.streams), 0) : null;
+  const youtubeTotal = youtubeTracks.length ? youtubeTracks.reduce((sum, video) => sum + parseNumber(video.views), 0) : null;
+  const bestDaily = [...tracks].sort((a,b) => parseNumber(b.daily) - parseNumber(a.daily))[0];
+  const bestVideo = [...youtubeTracks].sort((a,b) => parseNumber(b.views) - parseNumber(a.views))[0];
+  const cards = [];
+  const thresholdCard = (kicker, current, target, unit, description) => {
+    if (current === null) return;
+    const reached = current >= target;
+    const next = reached ? target * (Math.floor(current / target) + 1) : target;
+    cards.push({kicker, value: reached ? fmt(current) + ' ' + unit : fmt(target) + ' ' + unit, detail: reached ? description + ' · próximo hito: ' + fmt(next) : 'Progreso actual: ' + fmt(current) + ' ' + unit + ' de ' + fmt(target) + ' ' + unit});
+  };
+  thresholdCard('Spotify · catálogo seguido', spotifyTotal, 2500000000, 'streams', 'Hito de 2.500 millones superado');
+  thresholdCard('YouTube · videos seguidos', youtubeTotal, 600000000, 'vistas', 'Hito de 600 millones superado');
+  if (bestDaily && parseNumber(bestDaily.daily) > 0) cards.push({kicker:'Mayor actividad diaria', value:safeText(bestDaily.title), detail:fmt(bestDaily.daily) + ' streams diarios en la captura actual'});
+  if (bestVideo) cards.push({kicker:'Videoclip más visto', value:safeText(bestVideo.title.replace(/^BABYMONSTER\s*-\s*/i,'')), detail:fmt(bestVideo.views) + ' vistas · solo videos rastreados'});
+  const thresholdVideos = youtubeTracks.filter(video => parseNumber(video.views) >= 100000000).sort((a,b)=>parseNumber(b.views)-parseNumber(a.views));
+  thresholdVideos.slice(0,3).forEach(video => cards.push({kicker:'Hito de 100 M de vistas', value:safeText(video.title.replace(/^BABYMONSTER\s*-\s*/i,'')), detail:fmt(video.views) + ' vistas registradas'}));
+  const bestItunes = [...itunesTracks].filter(track => Number.isFinite(Number(track.rank))).sort((a,b)=>Number(a.rank)-Number(b.rank))[0];
+  if (bestItunes) cards.push({kicker:'iTunes Worldwide', value:'#' + fmt(bestItunes.rank), detail:safeText(bestItunes.title) + ' · fuente de terceros, no chart oficial de Apple'});
+  container.innerHTML = cards.map(card => '<article class="milestone-card"><span class="milestone-kicker">' + card.kicker + '</span><strong>' + card.value + '</strong><p>' + card.detail + '</p></article>').join('') || '<div class="growth-empty">Los hitos aparecerán cuando se carguen datos válidos.</div>';
+}
+
+function renderGrowth() {
+  const container = document.querySelector('#growth-grid');
+  if (!container) return;
+  const snapshots = historyData.filter(item => item && typeof item.date === 'string').sort((a,b)=>String(a.date).localeCompare(String(b.date)));
+  if (snapshots.length < 2) {
+    container.innerHTML = '<div class="growth-empty">Aún no hay suficientes capturas históricas para calcular crecimiento. Se necesitan al menos dos fechas distintas; los datos anteriores a la activación del historial no se pueden reconstruir.</div>';
+    return;
+  }
+  const latest = snapshots[snapshots.length - 1];
+  const cutoff = new Date(latest.date + 'T00:00:00Z');
+  cutoff.setUTCDate(cutoff.getUTCDate() - (growthDays === 365 ? 364 : growthDays - 1));
+  const candidates = snapshots.filter(item => new Date(item.date + 'T00:00:00Z') >= cutoff && item.date < latest.date);
+  const baseline = candidates[0];
+  if (!baseline) {
+    container.innerHTML = '<div class="growth-empty">No hay una captura anterior dentro de este período. Elige otro rango o espera a las próximas actualizaciones automáticas.</div>';
+    return;
+  }
+  const metrics = [
+    {label:'Streams diarios Spotify', platform:'spotify', key:'daily_streams'},
+    {label:'Streams acumulados Spotify', platform:'spotify', key:'total_streams'},
+    {label:'Vistas de videos seguidos', platform:'youtube', key:'total_views'},
+    {label:'Puntos iTunes Worldwide', platform:'itunes', key:'total_points'}
+  ];
+  container.innerHTML = metrics.map(metric => {
+    const start = baseline[metric.platform]?.[metric.key];
+    const end = latest[metric.platform]?.[metric.key];
+    if (typeof start !== 'number' || typeof end !== 'number' || !Number.isFinite(start) || !Number.isFinite(end)) {
+      return '<article class="growth-card"><small>' + metric.label + '</small><strong>Sin datos</strong><span>No disponible en ambas capturas</span></article>';
+    }
+    const delta = end - start;
+    const pct = start === 0 ? null : delta / Math.abs(start) * 100;
+    const cls = delta > 0 ? 'growth-up' : delta < 0 ? 'growth-down' : '';
+    const sign = delta > 0 ? '+' : '';
+    const change = sign + fmt(delta);
+    const percent = pct === null ? '' : ' (' + sign + pct.toLocaleString('es', {maximumFractionDigits:1}) + '%)';
+    return '<article class="growth-card"><small>' + metric.label + '</small><strong>' + fmt(end) + '</strong><span class="' + cls + '">' + change + percent + '</span><span> ' + safeText(baseline.date) + ' → ' + safeText(latest.date) + '</span></article>';
+  }).join('');
+}
+
+document.querySelectorAll('[data-growth-days]').forEach(button => {
+  button.addEventListener('click', () => {
+    growthDays = Number(button.dataset.growthDays) || 7;
+    document.querySelectorAll('[data-growth-days]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+    renderGrowth();
+  });
+});
+
 function renderHistory() {
   if (historyRequestStarted) return;
   historyRequestStarted = true;
@@ -870,6 +1000,8 @@ function renderHistory() {
       renderYouTube();
       renderRankings();
       renderTrendCharts();
+      renderGrowth();
+      renderAchievements();
     })
     .catch(() => {
       historyLoaded = true;
@@ -878,6 +1010,8 @@ function renderHistory() {
       renderYouTube();
       renderRankings();
       renderTrendCharts();
+      renderGrowth();
+      renderAchievements();
     });
 }
 
@@ -1007,6 +1141,7 @@ fetch('./data/youtube-charts.json')
     renderYouTube();
     renderRankings();
     renderHistory();
+    renderAchievements();
   })
   .catch(() => {
     document.querySelector('#yt-count').textContent = '—';
