@@ -1,4 +1,3 @@
-
 name: Actualizar datos de charts
 
 on:
@@ -26,19 +25,26 @@ jobs:
         run: python scripts/fetch_kworb.py
 
       - name: Actualizar vistas de YouTube
+        if: ${{ secrets.YOUTUBE_API_KEY != '' }}
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: python scripts/fetch_youtube.py
+
+      - name: Avisar si falta la clave de YouTube
+        if: ${{ secrets.YOUTUBE_API_KEY == '' }}
+        run: echo "YOUTUBE_API_KEY no está configurada; se conservan los últimos datos de YouTube disponibles."
+
+      - name: Guardar historial central de charts
+        run: python scripts/snapshot_history.py
 
       - name: Guardar cambios de datos
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/spotify-songs.json data/youtube-charts.json
+          git add data/spotify-songs.json data/youtube-charts.json data/history.json
           if ! git diff --cached --quiet; then
-            git commit -m "Actualizar datos de Spotify y YouTube"
+            git commit -m "Actualizar charts e historial diario"
             git push
           else
             echo "No hay cambios en los datos."
           fi
-          
