@@ -1,9 +1,9 @@
 [
   {
     "date": "2026-10-29",
-    "captured_at": "2026-10-29T09:48:31.273122+00:00",
+    "captured_at": "2026-10-29T09:49:45.801428+00:00",
     "spotify": {
-      "updated_at": "2026-10-29 09:48 UTC",
+      "updated_at": "2026-10-29 09:49 UTC",
       "track_count": 43,
       "daily_streams": 3009275,
       "total_streams": 2535096843,
@@ -226,9 +226,9 @@
       ]
     },
     "itunes": {
-      "updated_at": "2026-10-29 09:48 UTC",
+      "updated_at": "2026-10-29 09:49 UTC",
       "track_count": 1,
-      "total_points": 0,
+      "total_points": null,
       "top_tracks": [
         {
           "title": "BABYMONSTER - DESERVE",
@@ -238,14 +238,14 @@
       ]
     },
     "youtube": {
-      "updated_at": "2026-10-29T09:48:30.407039+00:00",
+      "updated_at": "2026-10-29T09:49:44.982207+00:00",
       "video_count": 5,
-      "total_views": 614134737,
+      "total_views": 614136747,
       "top_videos": [
         {
           "id": "x3eqqoZPV_E",
           "title": "BABYMONSTER - '춤 (CHOOM)' M/V",
-          "views": 205692216,
+          "views": 205694226,
           "url": "https://www.youtube.com/watch?v=x3eqqoZPV_E"
         },
         {
