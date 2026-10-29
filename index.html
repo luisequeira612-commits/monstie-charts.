@@ -163,6 +163,25 @@ tbody tr:last-child td { border-bottom:0; }
 .source-card h3 { margin:0 0 7px; font-size:15px; }
 .source-card p { font-size:12px; color:var(--muted); margin:0 0 15px; }
 
+
+.rankings-grid {
+  display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:15px;
+}
+.ranking-panel {
+  min-width:0; padding:22px; border:1px solid #ffffff12; border-radius:19px;
+  background:linear-gradient(145deg,#17131e,#100e15);
+}
+.ranking-panel h3 { margin:0; font-size:16px; letter-spacing:-.025em; }
+.ranking-panel > p { margin:5px 0 20px; color:var(--muted); font-size:12px; }
+.ranking-item { margin:15px 0; }
+.ranking-meta { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:7px; font-size:12px; }
+.ranking-meta strong { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.ranking-meta span { flex-shrink:0; color:#f7c3e3; font-weight:800; font-variant-numeric:tabular-nums; }
+.ranking-track { height:8px; overflow:hidden; border-radius:99px; background:#ffffff0c; }
+.ranking-fill { height:100%; border-radius:99px; background:linear-gradient(90deg,var(--pink),var(--purple)); }
+.ranking-empty { color:var(--muted); font-size:13px; }
+@media(max-width:720px) { .rankings-grid { grid-template-columns:1fr; } .ranking-panel { padding:18px; } }
+
 .youtube-summary {
   display:grid; grid-template-columns:repeat(2,minmax(0,1fr));
   gap:13px; margin:16px 0;
@@ -338,6 +357,7 @@ footer { border-top-color:#ffffff14; padding-top:28px; }
 <nav class="site-nav" aria-label="Navegación principal">
   <a href="#spotify">Spotify <span>↘</span></a>
   <a href="#youtube">YouTube <span>↘</span></a>
+  <a href="#rankings">Rankings <span>↘</span></a>
   <a href="#sources">Fuentes <span>↘</span></a>
   <span class="nav-note"><i></i> DATOS DE SEGUIMIENTO FAN</span>
 </nav>
@@ -410,6 +430,29 @@ footer { border-top-color:#ffffff14; padding-top:28px; }
         <tr><td colspan="5">Cargando canciones…</td></tr>
       </tbody>
     </table>
+  </div>
+</section>
+
+
+<section id="rankings">
+  <div class="section-head">
+    <div>
+      <h2>Rankings visuales</h2>
+      <p>Comparativa rápida calculada con los datos cargados en esta página.</p>
+    </div>
+    <span class="pill">TOP 5</span>
+  </div>
+  <div class="rankings-grid">
+    <div class="ranking-panel">
+      <h3>Spotify · actividad diaria</h3>
+      <p>Las cinco canciones con más streams diarios reportados.</p>
+      <div id="spotify-ranking" aria-live="polite"><div class="ranking-empty">Cargando ranking…</div></div>
+    </div>
+    <div class="ranking-panel">
+      <h3>YouTube · más vistas</h3>
+      <p>Los cinco videos con más vistas según el archivo de datos.</p>
+      <div id="youtube-ranking" aria-live="polite"><div class="ranking-empty">Cargando ranking…</div></div>
+    </div>
   </div>
 </section>
 
@@ -575,6 +618,7 @@ fetch('./data/spotify-songs.json')
     document.querySelector('#status').classList.add('ok');
 
     renderSpotify();
+    renderRankings();
   })
   .catch(() => {
     document.querySelector('#status').textContent =
@@ -583,6 +627,39 @@ fetch('./data/spotify-songs.json')
     document.querySelector('#rows').innerHTML =
       '<tr><td colspan="5">Datos temporalmente no disponibles. <a href="https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html" target="_blank" rel="noopener noreferrer">Consultar Kworb ↗</a></td></tr>';
   });
+
+
+function renderBarRanking(containerSelector, items, valueKey, labelKey) {
+  const container = document.querySelector(containerSelector);
+  if (!container) return;
+  const top = [...items]
+    .filter(item => Number.isFinite(parseNumber(item[valueKey])) && parseNumber(item[valueKey]) > 0)
+    .sort((a, b) => parseNumber(b[valueKey]) - parseNumber(a[valueKey]))
+    .slice(0, 5);
+  if (!top.length) {
+    container.innerHTML = '<div class="ranking-empty">No hay datos suficientes para mostrar el ranking.</div>';
+    return;
+  }
+  const max = parseNumber(top[0][valueKey]) || 1;
+  container.innerHTML = top.map((item, index) => {
+    const value = parseNumber(item[valueKey]);
+    const width = Math.max(2, value / max * 100);
+    return `<div class="ranking-item">
+      <div class="ranking-meta">
+        <strong title="${safeText(item[labelKey] || 'Sin título')}">${index + 1}. ${safeText(item[labelKey] || 'Sin título')}</strong>
+        <span>${fmt(value)}</span>
+      </div>
+      <div class="ranking-track" role="img" aria-label="${safeText(item[labelKey] || 'Sin título')}: ${fmt(value)}">
+        <div class="ranking-fill" style="width:${width}%"></div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderRankings() {
+  renderBarRanking('#spotify-ranking', tracks, 'daily', 'title');
+  renderBarRanking('#youtube-ranking', youtubeTracks, 'views', 'title');
+}
 
 function renderYouTube() {
   const q = document.querySelector('#yt-search').value.toLowerCase().trim();
@@ -663,6 +740,7 @@ fetch('./data/youtube-charts.json')
     }
 
     renderYouTube();
+    renderRankings();
   })
   .catch(() => {
     document.querySelector('#yt-count').textContent = '—';
