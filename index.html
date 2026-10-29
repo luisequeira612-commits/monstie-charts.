@@ -160,6 +160,11 @@ tbody tr:last-child td { border-bottom:0; }
 .movement-flat { color:#c8b4df; }
 .movement-new { color:var(--pink); }
 .movement-muted { color:var(--muted); font-weight:600; }
+.youtube-video small .movement-up { color:var(--green); }
+.youtube-video small .movement-down { color:#ff9db6; }
+.youtube-video small .movement-flat { color:#c8b4df; }
+.youtube-video small .movement-new { color:var(--pink); }
+.youtube-video small .movement-muted { color:var(--muted); }
 .source {
   display:inline-block; text-decoration:none; border:1px solid #594568;
   border-radius:8px; padding:5px 9px; font-size:11px; white-space:nowrap;
@@ -443,7 +448,7 @@ footer { border-top-color:#ffffff14; padding-top:28px; }
       <thead>
         <tr>
           <th>#</th><th>Canción</th><th>Streams totales</th>
-          <th>Streams diarios</th><th>Movimiento</th><th>Fuente</th>
+          <th>Streams diarios</th><th title="Cambio de posición según streams diarios, frente a una captura anterior con datos nuevos">Mov. ranking</th><th>Fuente</th>
         </tr>
       </thead>
       <tbody id="rows">
@@ -827,7 +832,7 @@ function renderYouTube() {
       <div style="flex:1;min-width:0">
         <strong>${titleContent}</strong>
         <small>${date}</small>
-        <small>Movimiento: ${movementMarkup('youtube', video.title, chartRanks.get(normalizeTitle(video.title)))}</small>
+        <small>Mov. por vistas: ${movementMarkup('youtube', video.title, chartRanks.get(normalizeTitle(video.title)))}</small>
         <small>${linkContent}</small>
       </div>
       <div class="youtube-views">${fmt(video.views)} vistas</div>
