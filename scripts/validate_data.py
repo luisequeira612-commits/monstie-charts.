@@ -12,6 +12,7 @@ FILES = {
     "spotify": ROOT / "data" / "spotify-songs.json",
     "youtube": ROOT / "data" / "youtube-charts.json",
     "history": ROOT / "data" / "history.json",
+    "itunes": ROOT / "data" / "itunes-charts.json",
 }
 YOUTUBE_URL = re.compile(r"^https://www\.youtube\.com/watch\?v=[A-Za-z0-9_-]{11}$")
 
@@ -61,11 +62,11 @@ def validate_history(history):
             fail(f"{context}: se esperaba un objeto.")
         valid_date(entry.get("date"), context)
         dates.append(entry["date"])
-        for platform in ("spotify", "youtube"):
+        for platform in ("spotify", "youtube", "itunes"):
             section = entry.get(platform)
             if not isinstance(section, dict):
                 fail(f"{context}: falta el objeto {platform}.")
-            for key in ("daily_streams", "total_streams", "total_views"):
+            for key in ("daily_streams", "total_streams", "total_views", "total_points"):
                 if key in section and section[key] is not None:
                     nonnegative(section[key], f"{context}, {platform}.{key}")
             for key in ("track_count", "video_count"):
@@ -82,6 +83,7 @@ def main():
     spotify = read_json("Spotify", FILES["spotify"])
     youtube = read_json("YouTube", FILES["youtube"])
     history = read_json("Historial", FILES["history"])
+    itunes = read_json("iTunes", FILES["itunes"])
 
     if not isinstance(spotify, dict) or not isinstance(spotify.get("tracks"), list) or not spotify["tracks"]:
         fail("Spotify: se requiere una lista de canciones no vacía.")
@@ -100,6 +102,15 @@ def main():
         url = video.get("url")
         if url and (not isinstance(url, str) or not YOUTUBE_URL.fullmatch(url)):
             fail(f"YouTube fila {index}: URL de video inesperada o ID inválido.")
+
+    if not isinstance(itunes, dict) or not isinstance(itunes.get("tracks"), list):
+        fail("iTunes: se requiere un objeto con una lista tracks.")
+    for index, track in enumerate(itunes["tracks"], start=1):
+        if not isinstance(track, dict) or not isinstance(track.get("title"), str) or not track["title"].strip():
+            fail(f"iTunes: título ausente en la fila {index}.")
+        for key in ("rank", "points"):
+            if track.get(key) is not None:
+                nonnegative(track[key], f"iTunes fila {index}, {key}")
 
     validate_history(history)
     print(
