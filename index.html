@@ -394,6 +394,7 @@ footer { border-top-color:#ffffff14; padding-top:28px; }
 <nav class="site-nav" aria-label="Navegación principal">
   <a href="#spotify">Spotify <span>↘</span></a>
   <a href="#youtube">YouTube <span>↘</span></a>
+  <a href="#itunes">iTunes <span>↘</span></a>
   <a href="#rankings">Rankings <span>↘</span></a>
   <a href="#history">Historial <span>↘</span></a>
   <a href="#sources">Fuentes <span>↘</span></a>
@@ -532,6 +533,11 @@ footer { border-top-color:#ffffff14; padding-top:28px; }
   </div>
 </section>
 
+<section id="itunes">
+  <div class="section-head"><div><h2>iTunes Worldwide · canciones en chart</h2><p>Canciones de BABYMONSTER detectadas en el chart mundial de Kworb; no es un ranking oficial de Apple.</p></div><span class="pill">ITUNES WORLDWIDE</span></div>
+  <div class="notice" id="itunes-status" role="status" aria-live="polite">Cargando chart de iTunes…</div>
+  <div class="youtube-list" id="itunes-rows"><div class="youtube-empty">Cargando canciones…</div></div>
+</section>
 
 <section id="history">
   <div class="section-head">
@@ -545,8 +551,8 @@ footer { border-top-color:#ffffff14; padding-top:28px; }
     <p class="history-note">El historial central se actualiza automáticamente con GitHub Actions. Se conserva hasta un año de capturas UTC; las fechas anteriores a la activación no se pueden reconstruir. Las vistas corresponden a los videoclips detectados, no a todas las vistas del canal.</p>
     <div class="table-wrap">
       <table class="history-table">
-        <thead><tr><th>Fecha UTC</th><th>Streams diarios Spotify</th><th>Streams totales Spotify</th><th>Vistas de videoclips</th></tr></thead>
-        <tbody id="history-rows"><tr><td colspan="4">Cargando historial central…</td></tr></tbody>
+        <thead><tr><th>Fecha UTC</th><th>Streams diarios Spotify</th><th>Streams totales Spotify</th><th>Vistas de videoclips</th><th>Canciones en iTunes WW</th><th>Puntos iTunes WW</th></tr></thead>
+        <tbody id="history-rows"><tr><td colspan="6">Cargando historial central…</td></tr></tbody>
       </table>
     </div>
     <div class="trend-grid">
@@ -559,6 +565,10 @@ footer { border-top-color:#ffffff14; padding-top:28px; }
         <h3>YouTube · vistas acumuladas</h3>
         <p>Suma de vistas de los videoclips detectados, no del canal completo.</p>
         <div id="youtube-trend" class="trend-chart"><div class="trend-empty">Cargando historial…</div></div>
+      </article>
+      <article class="trend-panel">
+        <h3>iTunes Worldwide · puntos</h3><p>Suma de puntos reportados por Kworb para canciones de BABYMONSTER que aparecen en el chart mundial.</p>
+        <div id="itunes-trend" class="trend-chart"><div class="trend-empty">Cargando historial…</div></div>
       </article>
     </div>
   </div>
@@ -611,6 +621,8 @@ footer { border-top-color:#ffffff14; padding-top:28px; }
 
 let tracks = [];
 let youtubeTracks = [];
+let itunesTracks = [];
+let itunesUpdatedAt = null;
 let spotifyUpdatedAt = null;
 let youtubeUpdatedAt = null;
 let historyData = [];
@@ -712,6 +724,34 @@ fetch('./data/spotify-songs.json')
 
 
 
+
+function renderITunes() {
+  const container = document.querySelector('#itunes-rows');
+  if (!container) return;
+  if (!itunesTracks.length) {
+    container.innerHTML = '<div class="youtube-empty">No se detectaron canciones de BABYMONSTER en el chart mundial de iTunes en esta captura. Se seguirá comprobando en la próxima actualización.</div>';
+    return;
+  }
+  container.innerHTML = [...itunesTracks].sort((a,b) => (a.rank ?? 999999) - (b.rank ?? 999999)).map((track, index) =>
+    '<div class="youtube-video"><div class="rank">#' + (track.rank ?? index + 1) + '</div><div style="flex:1;min-width:0"><strong>' + safeText(track.title) + '</strong><small>Chart mundial de Kworb · puntos: ' + fmt(track.points) + '</small></div><div class="youtube-views">iTunes WW</div></div>'
+  ).join('');
+}
+fetch('./data/itunes-charts.json')
+  .then(response => { if (!response.ok) throw Error('iTunes no disponible'); return response.json(); })
+  .then(data => {
+    itunesTracks = Array.isArray(data.tracks) ? data.tracks : [];
+    itunesUpdatedAt = data.updated_at || null;
+    const status = document.querySelector('#itunes-status');
+    status.textContent = 'Actualización: ' + formatDate(data.updated_at) + '. ' + (data.note || '');
+    status.classList.add('ok');
+    renderITunes();
+    renderHistory();
+  })
+  .catch(() => {
+    document.querySelector('#itunes-status').textContent = 'No se pudo cargar el chart de iTunes. Consulta la fuente original mientras revisamos la actualización.';
+    document.querySelector('#itunes-status').classList.add('error');
+  });
+
 function normalizeTitle(value) {
   return String(value || '').trim().toLocaleLowerCase();
 }
@@ -728,13 +768,13 @@ function movementMarkup(platform, title, currentRank) {
   const snapshot = previousSnapshot();
   if (!snapshot) return '<span class="movement-muted" title="Aún no hay una captura de un día anterior">Sin histórico</span>';
 
-  const sourceNow = platform === 'spotify' ? spotifyUpdatedAt : youtubeUpdatedAt;
-  const sourceBefore = platform === 'spotify' ? snapshot.spotify : snapshot.youtube;
+  const sourceNow = platform === 'spotify' ? spotifyUpdatedAt : platform === 'youtube' ? youtubeUpdatedAt : itunesUpdatedAt;
+  const sourceBefore = platform === 'spotify' ? snapshot.spotify : platform === 'youtube' ? snapshot.youtube : snapshot.itunes;
   if (!sourceNow || !sourceBefore?.updated_at || sourceNow === sourceBefore.updated_at) {
     return '<span class="movement-muted" title="La fuente no tiene una actualización nueva respecto a la captura anterior">Sin dato nuevo</span>';
   }
 
-  const rows = platform === 'spotify' ? sourceBefore.top_tracks : sourceBefore.top_videos;
+  const rows = platform === 'spotify' ? sourceBefore.top_tracks : platform === 'youtube' ? sourceBefore.top_videos : sourceBefore.top_tracks;
   if (!Array.isArray(rows)) return '<span class="movement-muted">Sin histórico</span>';
   const priorIndex = rows.findIndex(item => normalizeTitle(item.title) === normalizeTitle(title));
   if (priorIndex < 0) return '<span class="movement-new">Nueva en Top 50</span>';
@@ -781,7 +821,7 @@ function renderTrendChart(containerId, platform, valueKey, strokeColor) {
   ).join('');
   const last = points[points.length - 1];
   container.innerHTML = '<div class="trend-latest"><strong>' + fmt(last.value) + '</strong><span>Última captura · ' + safeText(last.date) + ' UTC</span></div>' +
-    '<svg class="trend-svg" viewBox="0 0 ' + width + ' ' + height + '" role="img" aria-label="Tendencia de ' + safeText(containerId === '#spotify-trend' ? 'streams diarios de Spotify' : 'vistas acumuladas de YouTube') + ' en las últimas ' + points.length + ' capturas">' +
+    '<svg class="trend-svg" viewBox="0 0 ' + width + ' ' + height + '" role="img" aria-label="Tendencia de ' + safeText(containerId === '#spotify-trend' ? 'streams diarios de Spotify' : containerId === '#youtube-trend' ? 'vistas acumuladas de YouTube' : 'puntos de iTunes Worldwide') + ' en las últimas ' + points.length + ' capturas">' +
     grid +
     '<path d="' + path + '" fill="none" stroke="' + strokeColor + '" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>' +
     dots +
@@ -809,7 +849,9 @@ function renderHistory() {
         <td class="num">${fmt(item.spotify?.daily_streams)}</td>
         <td class="num">${fmt(item.spotify?.total_streams)}</td>
         <td class="history-value">${fmt(item.youtube?.total_views)}</td>
-      </tr>`).join('') || '<tr><td colspan="4" class="history-empty">Todavía no hay capturas centrales. Se crearán cuando se ejecute la actualización automática.</td></tr>';
+        <td class="num">${fmt(item.itunes?.track_count)}</td>
+        <td class="num">${fmt(item.itunes?.total_points)}</td>
+      </tr>`).join('') || '<tr><td colspan="6" class="history-empty">Todavía no hay capturas centrales. Se crearán cuando se ejecute la actualización automática.</td></tr>';
       renderSpotify();
       renderYouTube();
       renderRankings();
@@ -828,6 +870,7 @@ function renderHistory() {
 function renderTrendCharts() {
   renderTrendChart('#spotify-trend', 'spotify', 'daily_streams', 'var(--pink)');
   renderTrendChart('#youtube-trend', 'youtube', 'total_views', 'var(--purple)');
+  renderTrendChart('#itunes-trend', 'itunes', 'total_points', 'var(--green)');
 }
 renderHistory();
 

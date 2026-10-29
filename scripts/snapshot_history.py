@@ -8,6 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SPOTIFY_FILE = ROOT / "data" / "spotify-songs.json"
 YOUTUBE_FILE = ROOT / "data" / "youtube-charts.json"
+ITUNES_FILE = ROOT / "data" / "itunes-charts.json"
 HISTORY_FILE = ROOT / "data" / "history.json"
 MAX_DAYS = 365
 
@@ -31,15 +32,19 @@ def main():
     day = now.strftime("%Y-%m-%d")
     spotify = load_json(SPOTIFY_FILE, {})
     youtube = load_json(YOUTUBE_FILE, {})
+    itunes = load_json(ITUNES_FILE, {})
     songs = spotify.get("tracks", [])
     videos = youtube.get("tracks", [])
+    itunes_tracks = itunes.get("tracks", [])
 
     if not isinstance(songs, list):
         songs = []
     if not isinstance(videos, list):
         videos = []
+    if not isinstance(itunes_tracks, list):
+        itunes_tracks = []
 
-    if not songs and not videos:
+    if not songs and not videos and not itunes_tracks:
         sys.exit("No hay canciones ni videos disponibles; se omite la captura para no registrar datos vacíos como cero.")
 
     snapshot = {
@@ -54,6 +59,12 @@ def main():
                 {"title": track.get("title", "Sin título"), "daily": num(track.get("daily")), "streams": num(track.get("streams"))}
                 for track in sorted((t for t in songs if isinstance(t, dict)), key=lambda t: num(t.get("daily")), reverse=True)[:50]
             ]
+        },
+        "itunes": {
+            "updated_at": itunes.get("updated_at"),
+            "track_count": len(itunes_tracks),
+            "total_points": sum(num(track.get("points")) for track in itunes_tracks if isinstance(track, dict) and track.get("points") is not None) if itunes_tracks else None,
+            "top_tracks": [{"title": track.get("title", "Sin título"), "rank": track.get("rank"), "points": track.get("points")} for track in sorted((t for t in itunes_tracks if isinstance(t, dict)), key=lambda t: (t.get("rank") is None, t.get("rank") or 999999))[:50]]
         },
         "youtube": {
             "updated_at": youtube.get("updated_at"),

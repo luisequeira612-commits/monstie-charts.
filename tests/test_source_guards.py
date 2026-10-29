@@ -5,6 +5,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 import fetch_kworb
 import fetch_youtube
+import fetch_itunes
 
 class SpotifyGuardTests(unittest.TestCase):
     def test_empty_tracks_rejected(self):
@@ -18,6 +19,11 @@ class SpotifyGuardTests(unittest.TestCase):
         tracks = [{"title": str(i), "streams": 1} for i in range(5)]
         with self.assertRaises(RuntimeError):
             fetch_kworb.validate_tracks(tracks, 20, 100)
+
+class ITunesParserTests(unittest.TestCase):
+    def test_extracts_babymonster_rows_from_chart_table(self):
+        html = """<table><tr><th>Pos</th><th>Song</th><th>Points</th></tr><tr><td>17</td><td>BABYMONSTER - DESERVE</td><td>12</td></tr><tr><td>18</td><td>Other Artist - Track</td><td>9</td></tr></table>"""
+        self.assertEqual(fetch_itunes.parse_chart(html), [{"title": "BABYMONSTER - DESERVE", "rank": 17, "points": 12, "source": fetch_itunes.URL}])
 
 class YouTubeGuardTests(unittest.TestCase):
     def test_accepts_official_music_video(self):
