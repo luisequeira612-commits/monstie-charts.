@@ -403,6 +403,10 @@ footer { border-top-color:#ffffff14; padding-top:28px; }
 .nav-note i { display:inline-block; width:6px; height:6px; margin-right:7px; border-radius:50%; background:var(--green); box-shadow:0 0 10px #9deac577; }
 @media(max-width:520px) { .nav-note { display:none; } .site-nav { gap:2px; } .site-nav a { padding:8px 10px; } }
 
+ .source-disclosure { margin-top:10px; font-size:11px; opacity:.82; }
+.source-disclosure summary { cursor:pointer; width:fit-content; }
+.source-disclosure p { max-width:760px; margin:8px 0 0; line-height:1.6; }
+.source-disclosure a { color:inherit; text-decoration:underline; text-underline-offset:3px; }
 </style>
 </head>
 
@@ -425,7 +429,6 @@ footer { border-top-color:#ffffff14; padding-top:28px; }
   <a href="#itunes">iTunes <span>↘</span></a>
   <a href="#rankings">Rankings <span>↘</span></a>
   <a href="#history">Historial <span>↘</span></a>
-  <a href="#sources">Fuentes <span>↘</span></a>
   <span class="nav-note"><i></i> DATOS DE SEGUIMIENTO FAN</span>
 </nav>
 
@@ -461,7 +464,7 @@ footer { border-top-color:#ffffff14; padding-top:28px; }
   <div class="section-head">
     <div>
       <h2>Spotify · estadísticas de canciones</h2>
-      <p>Streams totales y diarios recopilados de Kworb. No representa las posiciones del Spotify Top 200.</p>
+      <p>Streams totales y diarios de las canciones seguidas. No representa las posiciones del Spotify Top 200.</p>
     </div>
     <span class="pill">SPOTIFY DATA</span>
   </div>
@@ -483,7 +486,7 @@ footer { border-top-color:#ffffff14; padding-top:28px; }
       <thead>
         <tr>
           <th>#</th><th>Canción</th><th>Streams totales</th>
-          <th>Streams diarios</th><th title="Cambio de posición según streams diarios, frente a una captura anterior con datos nuevos">Mov. ranking</th><th>Fuente</th>
+          <th>Streams diarios</th><th title="Cambio de posición según streams diarios, frente a una captura anterior con datos nuevos">Mov. ranking</th>
         </tr>
       </thead>
       <tbody id="rows">
@@ -555,7 +558,7 @@ footer { border-top-color:#ffffff14; padding-top:28px; }
 </section>
 
 <section id="itunes">
-  <div class="section-head"><div><h2>iTunes Worldwide · canciones en chart</h2><p>Canciones de BABYMONSTER detectadas en el chart mundial de Kworb; no es un ranking oficial de Apple.</p></div><span class="pill">ITUNES WORLDWIDE</span></div>
+  <div class="section-head"><div><h2>iTunes Worldwide · canciones en chart</h2><p>Canciones de BABYMONSTER detectadas en el chart mundial; no es un ranking oficial de Apple.</p></div><span class="pill">ITUNES WORLDWIDE</span></div>
   <div class="notice" id="itunes-status" role="status" aria-live="polite">Cargando chart de iTunes…</div>
   <div class="youtube-list" id="itunes-rows"><div class="youtube-empty">Cargando canciones…</div></div>
 </section>
@@ -579,7 +582,7 @@ footer { border-top-color:#ffffff14; padding-top:28px; }
     <div class="trend-grid">
       <article class="trend-panel">
         <h3>Spotify · streams diarios</h3>
-        <p>Suma de streams diarios reportados por Kworb en las canciones seguidas.</p>
+        <p>Suma de streams diarios registrados para las canciones seguidas.</p>
         <div id="spotify-trend" class="trend-chart"><div class="trend-empty">Cargando historial…</div></div>
       </article>
       <article class="trend-panel">
@@ -588,7 +591,7 @@ footer { border-top-color:#ffffff14; padding-top:28px; }
         <div id="youtube-trend" class="trend-chart"><div class="trend-empty">Cargando historial…</div></div>
       </article>
       <article class="trend-panel">
-        <h3>iTunes Worldwide · puntos</h3><p>Suma de puntos reportados por Kworb para canciones de BABYMONSTER que aparecen en el chart mundial.</p>
+        <h3>iTunes Worldwide · puntos</h3><p>Suma de puntos de las canciones de BABYMONSTER detectadas en el chart mundial.</p>
         <div id="itunes-trend" class="trend-chart"><div class="trend-empty">Cargando historial…</div></div>
       </article>
     </div>
@@ -605,8 +608,11 @@ footer { border-top-color:#ffffff14; padding-top:28px; }
   </div>
   <div class="footer-note">
     Proyecto fan no oficial. No afiliado a YG Entertainment, BABYMONSTER,
-    Spotify, YouTube ni Kworb. Las marcas y los datos pertenecen a sus
-    respectivos propietarios y fuentes.
+    Spotify ni YouTube. Las marcas pertenecen a sus respectivos propietarios.
+    <details class="source-disclosure">
+      <summary>Fuentes y metodología</summary>
+      <p>Las estadísticas de Spotify e iTunes se recopilan de fuentes públicas de terceros, incluida <a href="https://kworb.net/" target="_blank" rel="noopener noreferrer">Kworb</a>. Los datos pueden diferir de los mostrados por las plataformas y este sitio no representa rankings oficiales.</p>
+    </details>
   </div>
 </footer>
 
@@ -686,18 +692,12 @@ function renderSpotify() {
     toggleButton.setAttribute('aria-expanded', String(showAllSpotifyTracks));
   }
   document.querySelector('#rows').innerHTML = visibleList.map((t, i) => {
-    const source = typeof t.source === 'string' &&
-      /^https:\/\/kworb\.net\//i.test(t.source)
-      ? t.source
-      : 'https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html';
-
     return `<tr>
       <td class="rank">${i + 1}</td>
       <td><strong>${safeText(t.title || 'Sin título')}</strong></td>
       <td class="num">${fmt(t.streams)}</td>
       <td class="num daily">${fmt(t.daily)}</td>
       <td>${movementMarkup('spotify', t.title, chartRanks.get(normalizeTitle(t.title)))}</td>
-      <td><a class="source" href="${source}" target="_blank" rel="noopener noreferrer">Kworb ↗</a></td>
     </tr>`;
   }).join('') || '<tr><td colspan="5">No se encontraron canciones.</td></tr>';
 }
@@ -721,7 +721,7 @@ fetch('./data/spotify-songs.json')
     document.querySelector('#track-count').textContent = fmt(tracks.length);
     document.querySelector('#updated').textContent = formatDate(data.updated_at);
     document.querySelector('#status').textContent =
-      `Datos de Kworb · actualización: ${formatDate(data.updated_at)}. ${data.note || ''}`;
+      `Actualización: ${formatDate(data.updated_at)}. ${data.note || ''}`;
     document.querySelector('#status').classList.add('ok');
 
     renderSpotify();
@@ -730,10 +730,10 @@ fetch('./data/spotify-songs.json')
   })
   .catch(() => {
     document.querySelector('#status').textContent =
-      'No se pudieron cargar los datos de Spotify. Consulta la fuente original mientras revisamos la actualización.';
+      'No se pudieron cargar los datos de Spotify. Estamos revisando la actualización; vuelve a intentarlo más tarde.';
     document.querySelector('#status').classList.add('error');
     document.querySelector('#rows').innerHTML =
-      '<tr><td colspan="6">Datos temporalmente no disponibles. <a href="https://kworb.net/spotify/artist/1SIocsqdEefUTE6XKGUiVS_songs.html" target="_blank" rel="noopener noreferrer">Consultar Kworb ↗</a></td></tr>';
+      '<tr><td colspan="5">Datos temporalmente no disponibles. Vuelve a intentarlo más tarde.</td></tr>';
   });
 
 
@@ -747,7 +747,7 @@ function renderITunes() {
     return;
   }
   container.innerHTML = [...itunesTracks].sort((a,b) => (a.rank ?? 999999) - (b.rank ?? 999999)).map((track, index) =>
-    '<div class="youtube-video"><div class="rank">#' + (track.rank ?? index + 1) + '</div><div style="flex:1;min-width:0"><strong>' + safeText(track.title) + '</strong><small>Chart mundial de Kworb · puntos: ' + fmt(track.points) + '</small></div><div class="youtube-views">iTunes WW</div></div>'
+    '<div class="youtube-video"><div class="rank">#' + (track.rank ?? index + 1) + '</div><div style="flex:1;min-width:0"><strong>' + safeText(track.title) + '</strong><small>Posición en el chart mundial · puntos: ' + fmt(track.points) + '</small></div><div class="youtube-views">iTunes WW</div></div>'
   ).join('');
 }
 fetch('./data/itunes-charts.json')
@@ -762,7 +762,7 @@ fetch('./data/itunes-charts.json')
     renderHistory();
   })
   .catch(() => {
-    document.querySelector('#itunes-status').textContent = 'No se pudo cargar el chart de iTunes. Consulta la fuente original mientras revisamos la actualización.';
+    document.querySelector('#itunes-status').textContent = 'No se pudo cargar el chart de iTunes. Estamos revisando la actualización; vuelve a intentarlo más tarde.';
     document.querySelector('#itunes-status').classList.add('error');
   });
 
