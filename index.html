@@ -187,6 +187,19 @@ tbody tr:last-child td { border-bottom:0; }
 .history-table { min-width:560px; }
 .history-empty { color:var(--muted); font-size:13px; padding:12px 0; }
 .history-value { color:#f7c3e3; font-weight:800; font-variant-numeric:tabular-nums; }
+.trend-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-top:18px; }
+.trend-panel { min-width:0; padding:18px; border:1px solid var(--line); border-radius:15px; background:#0f0c14; }
+.trend-panel h3 { margin:0; font-size:14px; }
+.trend-panel > p { margin:5px 0 14px; color:var(--muted); font-size:11px; }
+.trend-chart { min-width:0; }
+.trend-latest { display:flex; align-items:baseline; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+.trend-latest strong { font-size:20px; font-variant-numeric:tabular-nums; }
+.trend-latest span { color:var(--muted); font-size:10px; }
+.trend-svg { display:block; width:100%; height:auto; margin-top:8px; overflow:visible; }
+.trend-gridline { stroke:#ffffff12; stroke-width:1; }
+.trend-axis-label { fill:var(--muted); font-size:10px; }
+.trend-empty { padding:18px 0; color:var(--muted); font-size:12px; }
+@media(max-width:720px) { .trend-grid { grid-template-columns:1fr; } }
 
 .rankings-grid {
   display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:15px;
@@ -536,6 +549,18 @@ footer { border-top-color:#ffffff14; padding-top:28px; }
         <tbody id="history-rows"><tr><td colspan="4">Cargando historial central…</td></tr></tbody>
       </table>
     </div>
+    <div class="trend-grid">
+      <article class="trend-panel">
+        <h3>Spotify · streams diarios</h3>
+        <p>Suma de streams diarios reportados por Kworb en las canciones seguidas.</p>
+        <div id="spotify-trend" class="trend-chart"><div class="trend-empty">Cargando historial…</div></div>
+      </article>
+      <article class="trend-panel">
+        <h3>YouTube · vistas acumuladas</h3>
+        <p>Suma de vistas de los videoclips detectados, no del canal completo.</p>
+        <div id="youtube-trend" class="trend-chart"><div class="trend-empty">Cargando historial…</div></div>
+      </article>
+    </div>
   </div>
 </section>
 
@@ -720,6 +745,51 @@ function movementMarkup(platform, title, currentRank) {
   return '<span class="movement-flat">—</span>';
 }
 
+function renderTrendChart(containerId, platform, valueKey, strokeColor) {
+  const container = document.querySelector(containerId);
+  if (!container) return;
+  const points = historyData
+    .filter(item => item && typeof item.date === 'string' && typeof item[platform]?.[valueKey] === 'number' && Number.isFinite(item[platform][valueKey]))
+    .sort((a, b) => String(a.date).localeCompare(String(b.date)))
+    .slice(-14)
+    .map(item => ({ date: item.date, value: item[platform][valueKey] }));
+
+  if (points.length < 2) {
+    container.innerHTML = '<div class="trend-empty">La tendencia estará disponible cuando existan al menos dos capturas diarias válidas para esta fuente.</div>';
+    return;
+  }
+
+  const width = 600, height = 180;
+  const left = 12, right = 12, top = 12, bottom = 28;
+  const values = points.map(point => point.value);
+  const min = Math.min(...values), max = Math.max(...values);
+  const range = Math.max(1, max - min);
+  const plotWidth = width - left - right;
+  const plotHeight = height - top - bottom;
+  const coords = points.map((point, index) => ({
+    ...point,
+    x: left + index * plotWidth / (points.length - 1),
+    y: top + (max - point.value) / range * plotHeight
+  }));
+  const path = coords.map((point, index) => (index ? 'L' : 'M') + point.x.toFixed(1) + ',' + point.y.toFixed(1)).join(' ');
+  const grid = [0, 1, 2, 3].map(index => {
+    const y = top + index * plotHeight / 3;
+    return '<line class="trend-gridline" x1="' + left + '" y1="' + y.toFixed(1) + '" x2="' + (width - right) + '" y2="' + y.toFixed(1) + '"></line>';
+  }).join('');
+  const dots = coords.map(point =>
+    '<circle cx="' + point.x.toFixed(1) + '" cy="' + point.y.toFixed(1) + '" r="3.5" fill="' + strokeColor + '" stroke="#0f0c14" stroke-width="2"><title>' + safeText(point.date) + ': ' + fmt(point.value) + '</title></circle>'
+  ).join('');
+  const last = points[points.length - 1];
+  container.innerHTML = '<div class="trend-latest"><strong>' + fmt(last.value) + '</strong><span>Última captura · ' + safeText(last.date) + ' UTC</span></div>' +
+    '<svg class="trend-svg" viewBox="0 0 ' + width + ' ' + height + '" role="img" aria-label="Tendencia de ' + safeText(containerId === '#spotify-trend' ? 'streams diarios de Spotify' : 'vistas acumuladas de YouTube') + ' en las últimas ' + points.length + ' capturas">' +
+    grid +
+    '<path d="' + path + '" fill="none" stroke="' + strokeColor + '" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>' +
+    dots +
+    '<text class="trend-axis-label" x="' + left + '" y="' + (height - 6) + '">' + safeText(points[0].date.slice(5)) + '</text>' +
+    '<text class="trend-axis-label" x="' + (width - right) + '" y="' + (height - 6) + '" text-anchor="end">' + safeText(last.date.slice(5)) + '</text>' +
+    '</svg>';
+}
+
 function renderHistory() {
   if (historyRequestStarted) return;
   historyRequestStarted = true;
@@ -743,6 +813,7 @@ function renderHistory() {
       renderSpotify();
       renderYouTube();
       renderRankings();
+      renderTrendCharts();
     })
     .catch(() => {
       historyLoaded = true;
@@ -750,7 +821,13 @@ function renderHistory() {
       renderSpotify();
       renderYouTube();
       renderRankings();
+      renderTrendCharts();
     });
+}
+
+function renderTrendCharts() {
+  renderTrendChart('#spotify-trend', 'spotify', 'daily_streams', 'var(--pink)');
+  renderTrendChart('#youtube-trend', 'youtube', 'total_views', 'var(--purple)');
 }
 renderHistory();
 
