@@ -66,19 +66,25 @@ def validate_tracks(tracks, previous_count=0, previous_streams=0):
     return tracks
 
 
-def previous_metrics():
+def previous_data():
     try:
         previous = json.loads(OUTPUT.read_text(encoding="utf-8"))
         tracks = previous.get("tracks", [])
         if not isinstance(tracks, list):
-            return 0, 0
-        return len(tracks), sum(
+            return {}, 0, 0, None
+        by_title = {
+            t["title"].strip().casefold(): t
+            for t in tracks
+            if isinstance(t, dict) and isinstance(t.get("title"), str)
+        }
+        total_streams = sum(
             t.get("streams", 0) for t in tracks if isinstance(t, dict)
             and isinstance(t.get("streams", 0), (int, float))
             and not isinstance(t.get("streams", 0), bool)
         )
-    except (OSError, json.JSONDecodeError, AttributeError):
-        return 0, 0
+        return by_title, len(tracks), total_streams, previous.get("updated_at")
+    except (OSError, json.JSONDecodeError, AttributeError, TypeError):
+        return {}, 0, 0, None
 
 
 def main():
@@ -94,6 +100,9 @@ def main():
     parser = TableParser()
     parser.feed(html)
     tracks = []
+    previous_tracks, old_count, old_streams, previous_updated_at = previous_data()
+    today_utc = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    previous_date = previous_updated_at[:10] if isinstance(previous_updated_at, str) else None
 
     for table in parser.tables:
         if not table:
@@ -118,16 +127,38 @@ def main():
             title = row[title_col].strip()
             if not title or title.lower() == "total":
                 continue
+            total = number(row[streams_col])
+            daily_text = row[daily_col].strip()
+            if daily_text:
+                daily = number(daily_text)
+            else:
+                # Some newly released songs temporarily have no Daily value on Kworb.
+                # Estimate from cumulative-stream deltas when a prior snapshot exists.
+                previous_track = previous_tracks.get(title.casefold())
+                if previous_track and isinstance(previous_track.get("streams"), (int, float)):
+                    previous_total = previous_track["streams"]
+                    if total > previous_total:
+                        daily = total - previous_total
+                    elif (
+                        total == previous_total
+                        and previous_date == today_utc
+                        and isinstance(previous_track.get("daily"), (int, float))
+                    ):
+                        # Keep a same-day fallback when the source omits Daily.
+                        daily = previous_track["daily"]
+                    else:
+                        daily = 0
+                else:
+                    daily = 0
             tracks.append({
                 "title": title,
-                "streams": number(row[streams_col]),
-                "daily": number(row[daily_col]),
+                "streams": total,
+                "daily": daily,
                 "source": URL
             })
         if tracks:
             break
 
-    old_count, old_streams = previous_metrics()
     try:
         validate_tracks(tracks, old_count, old_streams)
     except RuntimeError as exc:
