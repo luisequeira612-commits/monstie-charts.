@@ -382,5 +382,389 @@
         }
       ]
     }
+  },
+  {
+    "date": "2026-10-30",
+    "captured_at": "2026-10-30T05:51:48.446759+00:00",
+    "spotify": {
+      "updated_at": "2026-10-30 05:51 UTC",
+      "track_count": 43,
+      "daily_streams": 3009275,
+      "total_streams": 2535096843,
+      "top_tracks": [
+        {
+          "title": "CHOOM",
+          "daily": 323536,
+          "streams": 94536234
+        },
+        {
+          "title": "DRIP",
+          "daily": 271543,
+          "streams": 322980297
+        },
+        {
+          "title": "SUGAR HONEY ICE TEA",
+          "daily": 227131,
+          "streams": 47154736
+        },
+        {
+          "title": "SHEESH",
+          "daily": 201601,
+          "streams": 434699634
+        },
+        {
+          "title": "PSYCHO",
+          "daily": 199194,
+          "streams": 112532210
+        },
+        {
+          "title": "WE GO UP",
+          "daily": 180081,
+          "streams": 122770298
+        },
+        {
+          "title": "LIKE THAT",
+          "daily": 173288,
+          "streams": 227788053
+        },
+        {
+          "title": "MOON",
+          "daily": 165622,
+          "streams": 30263409
+        },
+        {
+          "title": "FOREVER",
+          "daily": 138041,
+          "streams": 239875428
+        },
+        {
+          "title": "BILLIONAIRE",
+          "daily": 113715,
+          "streams": 97911722
+        },
+        {
+          "title": "I LIKE IT",
+          "daily": 112636,
+          "streams": 25321777
+        },
+        {
+          "title": "Really Like You",
+          "daily": 99549,
+          "streams": 83413522
+        },
+        {
+          "title": "DREAM",
+          "daily": 94574,
+          "streams": 69141195
+        },
+        {
+          "title": "HOT SAUCE",
+          "daily": 94419,
+          "streams": 84777106
+        },
+        {
+          "title": "CLIK CLAK",
+          "daily": 74049,
+          "streams": 91390207
+        },
+        {
+          "title": "Love In My Heart",
+          "daily": 65696,
+          "streams": 54164232
+        },
+        {
+          "title": "SUPA DUPA LUV",
+          "daily": 59229,
+          "streams": 39371972
+        },
+        {
+          "title": "WILD",
+          "daily": 57776,
+          "streams": 21771758
+        },
+        {
+          "title": "LOCKED IN",
+          "daily": 48028,
+          "streams": 13757800
+        },
+        {
+          "title": "Ghost",
+          "daily": 39697,
+          "streams": 25238985
+        },
+        {
+          "title": "Stuck In The Middle",
+          "daily": 36845,
+          "streams": 62216452
+        },
+        {
+          "title": "Love, Maybe",
+          "daily": 34160,
+          "streams": 32517241
+        },
+        {
+          "title": "MONSTERS (Intro)",
+          "daily": 32570,
+          "streams": 37889324
+        },
+        {
+          "title": "Woke Up In Tokyo (RUKA & ASA)",
+          "daily": 25766,
+          "streams": 33778477
+        },
+        {
+          "title": "BATTER UP (7 ver.)",
+          "daily": 20909,
+          "streams": 30919570
+        },
+        {
+          "title": "BATTER UP -JP Ver.",
+          "daily": 20871,
+          "streams": 11513570
+        },
+        {
+          "title": "BATTER UP (Remix) - Bonus Track",
+          "daily": 15877,
+          "streams": 14385450
+        },
+        {
+          "title": "Stuck In The Middle (7 ver.)",
+          "daily": 15788,
+          "streams": 21674890
+        },
+        {
+          "title": "Stuck In The Middle (Remix)",
+          "daily": 13534,
+          "streams": 24143119
+        },
+        {
+          "title": "CLAP YOUR HANDS ～ Go Away (2NE1 Cover) - Live Version",
+          "daily": 8575,
+          "streams": 2260601
+        },
+        {
+          "title": "DRIP (Remix) - Live Version",
+          "daily": 5092,
+          "streams": 2652104
+        },
+        {
+          "title": "SHEESH - Live Version",
+          "daily": 4702,
+          "streams": 1920431
+        },
+        {
+          "title": "Love In My Heart - Live Version",
+          "daily": 4530,
+          "streams": 1480266
+        },
+        {
+          "title": "LIKE THAT - Live Version",
+          "daily": 4245,
+          "streams": 1785087
+        },
+        {
+          "title": "BATTER UP - Live Version",
+          "daily": 4220,
+          "streams": 2100496
+        },
+        {
+          "title": "DREAM - Live Version",
+          "daily": 3530,
+          "streams": 1433051
+        },
+        {
+          "title": "CLIK CLAK - Live Version",
+          "daily": 3426,
+          "streams": 1872335
+        },
+        {
+          "title": "BILLIONAIRE - Live Version",
+          "daily": 3416,
+          "streams": 1578043
+        },
+        {
+          "title": "FOREVER - Live Version",
+          "daily": 3389,
+          "streams": 1444964
+        },
+        {
+          "title": "Really Like You - Live Version",
+          "daily": 3372,
+          "streams": 1524683
+        },
+        {
+          "title": "Woke Up In Tokyo (RUKA & ASA) - Live Version",
+          "daily": 2562,
+          "streams": 1322742
+        },
+        {
+          "title": "Love, Maybe - Live Version",
+          "daily": 2491,
+          "streams": 1189566
+        },
+        {
+          "title": "DESERVE",
+          "daily": 0,
+          "streams": 4633806
+        }
+      ]
+    },
+    "itunes": {
+      "updated_at": "2026-10-30 05:51 UTC",
+      "track_count": 1,
+      "total_points": null,
+      "top_tracks": [
+        {
+          "title": "BABYMONSTER - DESERVE",
+          "rank": 67,
+          "points": null
+        }
+      ]
+    },
+    "youtube": {
+      "updated_at": "2026-10-30T05:51:47.522959+00:00",
+      "video_count": 23,
+      "total_views": 3323865907,
+      "top_videos": [
+        {
+          "id": "2wA_b6YHjqQ",
+          "title": "BABYMONSTER - ‘SHEESH’ M/V",
+          "views": 424516946,
+          "url": "https://www.youtube.com/watch?v=2wA_b6YHjqQ"
+        },
+        {
+          "id": "Zp-Jhuhq0bQ",
+          "title": "BABYMONSTER - 'DRIP' M/V",
+          "views": 417764268,
+          "url": "https://www.youtube.com/watch?v=Zp-Jhuhq0bQ"
+        },
+        {
+          "id": "olDWm2veCrM",
+          "title": "BABYMONSTER - 'BATTER UP' M/V",
+          "views": 353411707,
+          "url": "https://www.youtube.com/watch?v=olDWm2veCrM"
+        },
+        {
+          "id": "eJCHKjt0MPw",
+          "title": "BABYMONSTER - ‘FOREVER’ M/V",
+          "views": 270422485,
+          "url": "https://www.youtube.com/watch?v=eJCHKjt0MPw"
+        },
+        {
+          "id": "yd_uG3TtREs",
+          "title": "BABYMONSTER - ‘PSYCHO’ M/V",
+          "views": 230953221,
+          "url": "https://www.youtube.com/watch?v=yd_uG3TtREs"
+        },
+        {
+          "id": "wlHwjkYpSr0",
+          "title": "BABYMONSTER - ‘WE GO UP’ M/V",
+          "views": 228341093,
+          "url": "https://www.youtube.com/watch?v=wlHwjkYpSr0"
+        },
+        {
+          "id": "x3eqqoZPV_E",
+          "title": "BABYMONSTER - '춤 (CHOOM)' M/V",
+          "views": 205966776,
+          "url": "https://www.youtube.com/watch?v=x3eqqoZPV_E"
+        },
+        {
+          "id": "xn8mQqz2xmM",
+          "title": "BABYMONSTER - ‘HOT SAUCE’ M/V",
+          "views": 179390709,
+          "url": "https://www.youtube.com/watch?v=xn8mQqz2xmM"
+        },
+        {
+          "id": "naoGk-Zjc1s",
+          "title": "BABYMONSTER - 'SUGAR HONEY ICE TEA' M/V",
+          "views": 148359825,
+          "url": "https://www.youtube.com/watch?v=naoGk-Zjc1s"
+        },
+        {
+          "id": "GsV1i0QHi-o",
+          "title": "BABYMONSTER - 'Stuck In The Middle' M/V",
+          "views": 141994400,
+          "url": "https://www.youtube.com/watch?v=GsV1i0QHi-o"
+        },
+        {
+          "id": "o0oW3lPoOXM",
+          "title": "BABYMONSTER - 'CLIK CLAK' M/V",
+          "views": 137993707,
+          "url": "https://www.youtube.com/watch?v=o0oW3lPoOXM"
+        },
+        {
+          "id": "XShaIZs7J7M",
+          "title": "BABYMONSTER - ‘Really Like You’ M/V",
+          "views": 134141002,
+          "url": "https://www.youtube.com/watch?v=XShaIZs7J7M"
+        },
+        {
+          "id": "9cS2wv6AfHk",
+          "title": "BABYMONSTER - 'I LIKE IT' M/V",
+          "views": 102829622,
+          "url": "https://www.youtube.com/watch?v=9cS2wv6AfHk"
+        },
+        {
+          "id": "xXZwZ0DolJc",
+          "title": "BABYMONSTER - 'MOON' M/V",
+          "views": 90160378,
+          "url": "https://www.youtube.com/watch?v=xXZwZ0DolJc"
+        },
+        {
+          "id": "1kXLsrun51s",
+          "title": "BABYMONSTER - 'Love In My Heart' M/V",
+          "views": 89541803,
+          "url": "https://www.youtube.com/watch?v=1kXLsrun51s"
+        },
+        {
+          "id": "SbdOIdg2McI",
+          "title": "BABYMONSTER - ‘SUPA DUPA LUV’ M/V",
+          "views": 85238382,
+          "url": "https://www.youtube.com/watch?v=SbdOIdg2McI"
+        },
+        {
+          "id": "oC6brLXQe4I",
+          "title": "BABYMONSTER - 'DESERVE' M/V",
+          "views": 75509546,
+          "url": "https://www.youtube.com/watch?v=oC6brLXQe4I"
+        },
+        {
+          "id": "2kggJShvtUU",
+          "title": "[HELLO MONSTERS] ‘Really Like You’ M/V SPOILER MESSAGE",
+          "views": 3509835,
+          "url": "https://www.youtube.com/watch?v=2kggJShvtUU"
+        },
+        {
+          "id": "wvqmq7xLQ6U",
+          "title": "BABYMONSTER – ‘PSYCHO’ M/V SPOILER — ASA Freestyle Take #BABYMONSTER #2ndMINIALBUM #WEGOUP #PSYCHO",
+          "views": 1626400,
+          "url": "https://www.youtube.com/watch?v=wvqmq7xLQ6U"
+        },
+        {
+          "id": "hA6qJscXq6g",
+          "title": "BABYMONSTER – ‘PSYCHO’ M/V SPOILER — ASA Freestyle Take",
+          "views": 987688,
+          "url": "https://www.youtube.com/watch?v=hA6qJscXq6g"
+        },
+        {
+          "id": "rdHnCORVWkk",
+          "title": "#SITM M/V CLOSE-UP | CHIQUITA X ASA #BABYMONSTER #ASA #CHIQUITA #StuckInTheMiddle #Shorts",
+          "views": 525068,
+          "url": "https://www.youtube.com/watch?v=rdHnCORVWkk"
+        },
+        {
+          "id": "oXiGLSspMGc",
+          "title": "#SITM M/V CLOSE-UP | RUKA X RAMI #BABYMONSTER #RUKA #RAMI #StuckInTheMiddle #Shorts",
+          "views": 353554,
+          "url": "https://www.youtube.com/watch?v=oXiGLSspMGc"
+        },
+        {
+          "id": "kFZdjrn8_SM",
+          "title": "#SITM M/V CLOSE-UP | RORA X PHARITA #BABYMONSTER #PHARITA #RORA #StuckInTheMiddle #Shorts",
+          "views": 327492,
+          "url": "https://www.youtube.com/watch?v=kFZdjrn8_SM"
+        }
+      ]
+    }
   }
 ]
