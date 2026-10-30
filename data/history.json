@@ -385,9 +385,9 @@
   },
   {
     "date": "2026-10-30",
-    "captured_at": "2026-10-30T12:58:12.639336+00:00",
+    "captured_at": "2026-10-30T22:23:04.677774+00:00",
     "spotify": {
-      "updated_at": "2026-10-30 12:58 UTC",
+      "updated_at": "2026-10-30 22:22 UTC",
       "track_count": 43,
       "daily_streams": 3009275,
       "total_streams": 2535096843,
@@ -610,158 +610,158 @@
       ]
     },
     "itunes": {
-      "updated_at": "2026-10-30 12:58 UTC",
+      "updated_at": "2026-10-30 22:23 UTC",
       "track_count": 1,
       "total_points": null,
       "top_tracks": [
         {
           "title": "BABYMONSTER - DESERVE",
-          "rank": 67,
+          "rank": 53,
           "points": null
         }
       ]
     },
     "youtube": {
-      "updated_at": "2026-10-30T12:58:11.352020+00:00",
+      "updated_at": "2026-10-30T22:23:03.714362+00:00",
       "video_count": 23,
-      "total_views": 3326415527,
+      "total_views": 3330142921,
       "top_videos": [
         {
           "id": "2wA_b6YHjqQ",
           "title": "BABYMONSTER - ‘SHEESH’ M/V",
-          "views": 424550472,
+          "views": 424603148,
           "url": "https://www.youtube.com/watch?v=2wA_b6YHjqQ"
         },
         {
           "id": "Zp-Jhuhq0bQ",
           "title": "BABYMONSTER - 'DRIP' M/V",
-          "views": 417845630,
+          "views": 417958788,
           "url": "https://www.youtube.com/watch?v=Zp-Jhuhq0bQ"
         },
         {
           "id": "olDWm2veCrM",
           "title": "BABYMONSTER - 'BATTER UP' M/V",
-          "views": 353427528,
+          "views": 353451176,
           "url": "https://www.youtube.com/watch?v=olDWm2veCrM"
         },
         {
           "id": "eJCHKjt0MPw",
           "title": "BABYMONSTER - ‘FOREVER’ M/V",
-          "views": 270458108,
+          "views": 270501841,
           "url": "https://www.youtube.com/watch?v=eJCHKjt0MPw"
         },
         {
           "id": "yd_uG3TtREs",
           "title": "BABYMONSTER - ‘PSYCHO’ M/V",
-          "views": 231029534,
+          "views": 231153508,
           "url": "https://www.youtube.com/watch?v=yd_uG3TtREs"
         },
         {
           "id": "wlHwjkYpSr0",
           "title": "BABYMONSTER - ‘WE GO UP’ M/V",
-          "views": 228370763,
+          "views": 228414094,
           "url": "https://www.youtube.com/watch?v=wlHwjkYpSr0"
         },
         {
           "id": "x3eqqoZPV_E",
           "title": "BABYMONSTER - '춤 (CHOOM)' M/V",
-          "views": 206068700,
+          "views": 206220347,
           "url": "https://www.youtube.com/watch?v=x3eqqoZPV_E"
         },
         {
           "id": "xn8mQqz2xmM",
           "title": "BABYMONSTER - ‘HOT SAUCE’ M/V",
-          "views": 179410176,
+          "views": 179444260,
           "url": "https://www.youtube.com/watch?v=xn8mQqz2xmM"
         },
         {
           "id": "naoGk-Zjc1s",
           "title": "BABYMONSTER - 'SUGAR HONEY ICE TEA' M/V",
-          "views": 148434502,
+          "views": 148546640,
           "url": "https://www.youtube.com/watch?v=naoGk-Zjc1s"
         },
         {
           "id": "GsV1i0QHi-o",
           "title": "BABYMONSTER - 'Stuck In The Middle' M/V",
-          "views": 142000929,
+          "views": 142009464,
           "url": "https://www.youtube.com/watch?v=GsV1i0QHi-o"
         },
         {
           "id": "o0oW3lPoOXM",
           "title": "BABYMONSTER - 'CLIK CLAK' M/V",
-          "views": 138001485,
+          "views": 138014557,
           "url": "https://www.youtube.com/watch?v=o0oW3lPoOXM"
         },
         {
           "id": "XShaIZs7J7M",
           "title": "BABYMONSTER - ‘Really Like You’ M/V",
-          "views": 134166792,
+          "views": 134195640,
           "url": "https://www.youtube.com/watch?v=XShaIZs7J7M"
         },
         {
           "id": "9cS2wv6AfHk",
           "title": "BABYMONSTER - 'I LIKE IT' M/V",
-          "views": 102884080,
+          "views": 102948988,
           "url": "https://www.youtube.com/watch?v=9cS2wv6AfHk"
         },
         {
           "id": "xXZwZ0DolJc",
           "title": "BABYMONSTER - 'MOON' M/V",
-          "views": 90209255,
+          "views": 90281756,
           "url": "https://www.youtube.com/watch?v=xXZwZ0DolJc"
         },
         {
           "id": "1kXLsrun51s",
           "title": "BABYMONSTER - 'Love In My Heart' M/V",
-          "views": 89556993,
+          "views": 89574741,
           "url": "https://www.youtube.com/watch?v=1kXLsrun51s"
         },
         {
           "id": "SbdOIdg2McI",
           "title": "BABYMONSTER - ‘SUPA DUPA LUV’ M/V",
-          "views": 85253910,
+          "views": 85272529,
           "url": "https://www.youtube.com/watch?v=SbdOIdg2McI"
         },
         {
           "id": "oC6brLXQe4I",
           "title": "BABYMONSTER - 'DESERVE' M/V",
-          "views": 77416478,
+          "views": 80221013,
           "url": "https://www.youtube.com/watch?v=oC6brLXQe4I"
         },
         {
           "id": "2kggJShvtUU",
           "title": "[HELLO MONSTERS] ‘Really Like You’ M/V SPOILER MESSAGE",
-          "views": 3509841,
+          "views": 3509867,
           "url": "https://www.youtube.com/watch?v=2kggJShvtUU"
         },
         {
           "id": "wvqmq7xLQ6U",
           "title": "BABYMONSTER – ‘PSYCHO’ M/V SPOILER — ASA Freestyle Take #BABYMONSTER #2ndMINIALBUM #WEGOUP #PSYCHO",
-          "views": 1626430,
+          "views": 1626469,
           "url": "https://www.youtube.com/watch?v=wvqmq7xLQ6U"
         },
         {
           "id": "hA6qJscXq6g",
           "title": "BABYMONSTER – ‘PSYCHO’ M/V SPOILER — ASA Freestyle Take",
-          "views": 987733,
+          "views": 987773,
           "url": "https://www.youtube.com/watch?v=hA6qJscXq6g"
         },
         {
           "id": "rdHnCORVWkk",
           "title": "#SITM M/V CLOSE-UP | CHIQUITA X ASA #BABYMONSTER #ASA #CHIQUITA #StuckInTheMiddle #Shorts",
-          "views": 525095,
+          "views": 525148,
           "url": "https://www.youtube.com/watch?v=rdHnCORVWkk"
         },
         {
           "id": "oXiGLSspMGc",
           "title": "#SITM M/V CLOSE-UP | RUKA X RAMI #BABYMONSTER #RUKA #RAMI #StuckInTheMiddle #Shorts",
-          "views": 353581,
+          "views": 353626,
           "url": "https://www.youtube.com/watch?v=oXiGLSspMGc"
         },
         {
           "id": "kFZdjrn8_SM",
           "title": "#SITM M/V CLOSE-UP | RORA X PHARITA #BABYMONSTER #PHARITA #RORA #StuckInTheMiddle #Shorts",
-          "views": 327512,
+          "views": 327548,
           "url": "https://www.youtube.com/watch?v=kFZdjrn8_SM"
         }
       ]
