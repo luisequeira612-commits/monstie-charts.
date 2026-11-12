@@ -427,6 +427,164 @@ footer { border-top-color:#ffffff14; padding-top:28px; }
 @media(max-width:850px) { .milestone-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .growth-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 @media(max-width:460px) { .milestone-grid,.growth-grid { grid-template-columns:1fr; } .milestone-card,.growth-card { padding:16px; } }
 
+
+/* Premium dashboard refresh — November 2026 */
+:root {
+  --pink:#ff72c6;
+  --purple:#ad91ff;
+  --bg:#08070c;
+  --panel:#121019;
+  --line:#30283a;
+  --muted:#aaa0b5;
+}
+html { scroll-padding-top:90px; }
+body {
+  background:
+    radial-gradient(ellipse at 76% 2%,#45143d55 0,transparent 32%),
+    radial-gradient(ellipse at 12% 28%,#2a185055 0,transparent 30%),
+    linear-gradient(180deg,#0a080f 0%,#09080d 55%,#0b0910 100%);
+}
+.skip-link {
+  position:absolute; left:14px; top:-60px; z-index:100;
+  padding:10px 14px; border-radius:10px; background:var(--pink);
+  color:#170b18; font-weight:850; text-decoration:none;
+}
+.skip-link:focus { top:12px; }
+.site-nav {
+  position:sticky; top:0; z-index:30;
+  margin:0 -8px; padding:10px 8px;
+  background:#0b0910eF; border:1px solid #ffffff12;
+  border-top:0; border-radius:0 0 16px 16px;
+  backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
+  box-shadow:0 12px 28px #0003;
+  flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none;
+  overscroll-behavior-x:contain;
+}
+.site-nav::-webkit-scrollbar { display:none; }
+.site-nav a { flex:0 0 auto; }
+.site-nav a:focus-visible { outline:2px solid var(--pink); outline-offset:2px; }
+.nav-note { flex:0 0 auto; white-space:nowrap; }
+.hero.hero-compact { padding:clamp(34px,5vw,64px) 0 28px; }
+.hero-compact-layout {
+  display:grid; grid-template-columns:minmax(0,1.25fr) minmax(250px,.75fr);
+  align-items:center; gap:clamp(22px,5vw,68px);
+}
+.hero-copy { min-width:0; }
+.hero-compact h1 {
+  font-size:clamp(42px,7vw,82px); line-height:.98;
+  margin:16px 0 18px; letter-spacing:-.075em;
+}
+.hero-compact p {
+  max-width:620px; font-size:clamp(14px,1.4vw,17px);
+  line-height:1.8; color:#c9c0d2;
+}
+.eyebrow { display:flex; align-items:center; gap:9px; }
+.eyebrow-dot {
+  width:7px; height:7px; border-radius:50%; background:var(--pink);
+  box-shadow:0 0 14px #ff72c6aa;
+}
+.hero-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:24px; }
+.hero-tags span {
+  padding:7px 10px; border:1px solid #ffffff18; border-radius:8px;
+  color:#d7cadd; background:#ffffff06; font-size:9px;
+  font-weight:850; letter-spacing:.12em;
+}
+.hero-art {
+  min-height:290px; position:relative; isolation:isolate; overflow:hidden;
+  display:flex; flex-direction:column; justify-content:space-between;
+  padding:24px; border:1px solid #ffffff20; border-radius:26px;
+  background:
+    linear-gradient(145deg,#39142f 0%,#20142d 46%,#100e18 100%);
+  box-shadow:0 28px 80px #0006,inset 0 1px #ffffff20;
+}
+.hero-art:before {
+  content:""; position:absolute; inset:0; z-index:-1; opacity:.2;
+  background-image:linear-gradient(#ffffff12 1px,transparent 1px),linear-gradient(90deg,#ffffff12 1px,transparent 1px);
+  background-size:28px 28px;
+  mask-image:linear-gradient(135deg,#000,transparent 80%);
+}
+.hero-art-glow {
+  position:absolute; z-index:-1; width:230px; height:230px; right:-35px; top:25px;
+  border-radius:50%; background:#ff59bd40; filter:blur(48px);
+}
+.hero-art-orbit {
+  position:absolute; z-index:-1; border:1px solid #ffb4e52b; border-radius:50%;
+  transform:rotate(-28deg);
+}
+.orbit-one { width:330px; height:120px; right:-100px; top:70px; }
+.orbit-two { width:300px; height:190px; right:-65px; top:30px; transform:rotate(48deg); }
+.hero-art-kicker,.hero-art-number {
+  color:#e7b8d8; font-size:9px; font-weight:850; letter-spacing:.2em;
+}
+.hero-art-mark {
+  display:block; position:relative; font-size:clamp(86px,12vw,142px);
+  line-height:.85; letter-spacing:-.12em; color:#fff7fc;
+  text-shadow:0 12px 45px #ff72c655;
+}
+.hero-art-mark span {
+  display:inline-block; vertical-align:top; margin:8px 0 0 10px;
+  color:var(--pink); font-size:.28em; letter-spacing:0;
+}
+.hero-art-caption {
+  align-self:flex-end; color:#f4d9eb; text-align:right;
+  font-size:10px; font-weight:900; letter-spacing:.2em; line-height:1.5;
+}
+.stats { gap:12px; }
+.stats .stat {
+  position:relative; overflow:hidden; min-width:0;
+  background:linear-gradient(145deg,#1b1522,#100e16);
+  border-color:#ffffff16; box-shadow:inset 0 1px #ffffff09;
+}
+.stats .stat:after {
+  content:""; position:absolute; width:90px; height:90px; right:-42px; top:-48px;
+  border-radius:50%; background:#ff72c619; filter:blur(8px);
+}
+.section-head { scroll-margin-top:90px; }
+section[id] { scroll-margin-top:88px; }
+.section-head .pill { flex:0 0 auto; }
+.stat,.ranking-panel,.history-panel,.source-card,.milestone-card,.growth-card {
+  box-shadow:inset 0 1px #ffffff08,0 14px 38px #0002;
+}
+.stat:hover,.milestone-card:hover,.growth-card:hover,.ranking-panel:hover {
+  border-color:#ff72c64a;
+}
+.controls input,.controls select { min-height:46px; }
+.controls input:focus-visible,.controls select:focus-visible {
+  outline:2px solid var(--purple); outline-offset:2px;
+}
+.table-wrap { scrollbar-width:thin; }
+.table-wrap:focus-visible { outline:2px solid var(--purple); outline-offset:3px; }
+th { position:sticky; top:0; z-index:1; }
+.youtube-video { transition:background .18s; }
+.youtube-video:hover { background:#ff72c608; }
+.youtube-views { font-size:14px; }
+footer { gap:24px; }
+@media(max-width:760px) {
+  .site-nav { margin:0 -4px; border-radius:0 0 13px 13px; }
+  .nav-note { display:none; }
+  .hero.hero-compact { padding:34px 0 22px; }
+  .hero-compact-layout { grid-template-columns:1fr; gap:22px; }
+  .hero-compact h1 { font-size:clamp(39px,10vw,60px); }
+  .hero-art { min-height:210px; padding:20px; border-radius:21px; }
+  .hero-art-mark { font-size:100px; }
+  .hero-tags { margin-top:18px; }
+}
+@media(max-width:520px) {
+  .site-nav a { padding:8px 10px; font-size:11px; }
+  .hero-art { min-height:190px; }
+  .hero-art-mark { font-size:88px; }
+  .stats { gap:8px; }
+  .stats .stat { padding:13px 15px; }
+  .stats .stat strong { font-size:18px!important; }
+  .stats .stat small { font-size:9px; }
+  .section-head { gap:9px; }
+  .section-head .pill { white-space:normal; text-align:center; }
+  .history-panel { padding:15px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .site-nav,.youtube-video,.stat,.milestone-card,.growth-card,.ranking-panel { transition:none!important; }
+}
+
 </style>
 </head>
 
@@ -455,11 +613,28 @@ footer { border-top-color:#ffffff14; padding-top:28px; }
 </nav>
 
 
+<a class="skip-link" href="#main-content">Saltar al contenido</a>
+
+<main id="main-content">
 <section class="hero hero-compact">
-  <div>
-    <div class="eyebrow">MUSIC PERFORMANCE DASHBOARD</div>
-    <h1>BABYMONSTER<br><span>CHART TRACKER</span></h1>
-    <p>Streams, charts y evolución musical en un solo lugar.</p>
+  <div class="hero-compact-layout">
+    <div class="hero-copy">
+      <div class="eyebrow"><span class="eyebrow-dot"></span> MUSIC PERFORMANCE DASHBOARD</div>
+      <h1>BABYMONSTER<br><span>CHART TRACKER</span></h1>
+      <p>Todo el movimiento de BABYMONSTER, reunido en un solo lugar. Sigue sus canciones, videoclips, posiciones y evolución con datos actualizados.</p>
+      <div class="hero-tags" aria-label="Plataformas seguidas">
+        <span>01 · SPOTIFY</span><span>02 · YOUTUBE</span><span>03 · ITUNES</span>
+      </div>
+    </div>
+    <aside class="hero-art" aria-label="Identidad visual de BABYMONSTER Charts">
+      <div class="hero-art-orbit orbit-one"></div>
+      <div class="hero-art-orbit orbit-two"></div>
+      <div class="hero-art-glow"></div>
+      <span class="hero-art-kicker">THE MONSTER INDEX</span>
+      <strong class="hero-art-mark">BM<span>★</span></strong>
+      <span class="hero-art-caption">GLOBAL MUSIC<br>TRACKER</span>
+      <span class="hero-art-number">BABYMONSTER · 2026</span>
+    </aside>
   </div>
 </section>
 
@@ -650,7 +825,7 @@ footer { border-top-color:#ffffff14; padding-top:28px; }
     </div>
   </div>
 </section>
-
+</main>
 
 
 <footer>
